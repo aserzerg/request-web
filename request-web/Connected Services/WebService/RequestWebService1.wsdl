@@ -91,17 +91,23 @@
   <wsdl:message name="IRequestWebService_GetRequestByWorkersInto_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRequestByWorkersIntoResponse" />
   </wsdl:message>
-  <wsdl:message name="IRequestWebService_SaveFile_InputMessage">
-    <wsdl:part name="parameters" element="tns:SaveFile" />
-  </wsdl:message>
-  <wsdl:message name="IRequestWebService_SaveFile_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SaveFileResponse" />
-  </wsdl:message>
   <wsdl:message name="IRequestWebService_GetStatusesAllowedInWeb_InputMessage">
     <wsdl:part name="parameters" element="tns:GetStatusesAllowedInWeb" />
   </wsdl:message>
   <wsdl:message name="IRequestWebService_GetStatusesAllowedInWeb_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetStatusesAllowedInWebResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_DownloadFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:DownloadFile" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_DownloadFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DownloadFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetAttachmentList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAttachmentList" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetAttachmentList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAttachmentListResponse" />
   </wsdl:message>
   <wsdl:message name="IRequestWebService_ChangeState_InputMessage">
     <wsdl:part name="parameters" element="tns:ChangeState" />
@@ -172,13 +178,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersInto" message="tns:IRequestWebService_GetRequestByWorkersInto_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersIntoResponse" message="tns:IRequestWebService_GetRequestByWorkersInto_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SaveFile">
-      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/SaveFile" message="tns:IRequestWebService_SaveFile_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/SaveFileResponse" message="tns:IRequestWebService_SaveFile_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetStatusesAllowedInWeb">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWeb" message="tns:IRequestWebService_GetStatusesAllowedInWeb_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWebResponse" message="tns:IRequestWebService_GetStatusesAllowedInWeb_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DownloadFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/DownloadFile" message="tns:IRequestWebService_DownloadFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/DownloadFileResponse" message="tns:IRequestWebService_DownloadFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAttachmentList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetAttachmentList" message="tns:IRequestWebService_GetAttachmentList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetAttachmentListResponse" message="tns:IRequestWebService_GetAttachmentList_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ChangeState">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/ChangeState" message="tns:IRequestWebService_ChangeState_InputMessage" />
@@ -317,8 +327,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SaveFile">
-      <soap:operation soapAction="http://tempuri.org/IRequestWebService/SaveFile" style="document" />
+    <wsdl:operation name="GetStatusesAllowedInWeb">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWeb" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -326,8 +336,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetStatusesAllowedInWeb">
-      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWeb" style="document" />
+    <wsdl:operation name="DownloadFile">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/DownloadFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAttachmentList">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetAttachmentList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

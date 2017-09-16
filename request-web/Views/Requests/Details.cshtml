@@ -93,6 +93,31 @@
     </tbody>
 </table>
 
+<div>
+    <h3>Документы</h3>
+</div>
+<table id="attachmentTable" class="table table-bordered table-services hover" style="width: 100%;">
+    <thead>
+    <tr>
+        <th style="vertical-align: middle;">Дата</th>
+        <th style="vertical-align: middle;">Название</th>
+        <th style="vertical-align: middle;">Создатель</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var attachment in Model.Attachments)
+    {
+        <tr>
+            <td>@attachment.CreateDate.ToString("dd.MM.yyyy HH:mm")</td>
+            <td>
+                <a href="/Requests/DownloadDocument?requestId=@attachment.RequestId&fileName=@attachment.FileName&defaultName=@attachment.Name">@attachment.Name</a>
+            </td>
+            <td>@attachment.User.SurName @attachment.User.FirstName @attachment.User.PatrName</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
 
 
 

@@ -200,22 +200,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SaveFile">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="requestId" type="xs:int" />
-        <xs:element minOccurs="0" name="fileExtension" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="fileStream" nillable="true" type="xs:base64Binary" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SaveFileResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="SaveFileResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="GetStatusesAllowedInWeb">
     <xs:complexType>
       <xs:sequence />
@@ -225,6 +209,35 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetStatusesAllowedInWebResult" nillable="true" type="q14:ArrayOfStatusDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DownloadFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requestId" type="xs:int" />
+        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DownloadFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DownloadFileResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAttachmentList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requestId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAttachmentListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetAttachmentListResult" nillable="true" type="q15:ArrayOfAttachmentDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

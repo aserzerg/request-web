@@ -44,6 +44,7 @@
       <xs:element minOccurs="0" name="ExecuteTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Flat" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FromTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="HasAttachment" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="ParentService" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Rating" nillable="true" type="xs:string" />
@@ -208,4 +209,45 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="StatusDto" nillable="true" type="tns:StatusDto" />
+  <xs:complexType name="ArrayOfAttachmentDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AttachmentDto" nillable="true" type="tns:AttachmentDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAttachmentDto" nillable="true" type="tns:ArrayOfAttachmentDto" />
+  <xs:complexType name="AttachmentDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RequestId" type="xs:int" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:UserDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AttachmentDto" nillable="true" type="tns:AttachmentDto" />
+  <xs:complexType name="UserDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PatrName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Roles" nillable="true" type="tns:ArrayOfRoleDto" />
+      <xs:element minOccurs="0" name="SurName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserDto" nillable="true" type="tns:UserDto" />
+  <xs:complexType name="ArrayOfRoleDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RoleDto" nillable="true" type="tns:RoleDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRoleDto" nillable="true" type="tns:ArrayOfRoleDto" />
+  <xs:complexType name="RoleDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RoleDto" nillable="true" type="tns:RoleDto" />
 </xs:schema>

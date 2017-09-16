@@ -258,6 +258,9 @@ namespace request_web.WebService {
         private System.Nullable<System.DateTime> FromTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool HasAttachmentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -439,6 +442,19 @@ namespace request_web.WebService {
                 if ((this.FromTimeField.Equals(value) != true)) {
                     this.FromTimeField = value;
                     this.RaisePropertyChanged("FromTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool HasAttachment {
+            get {
+                return this.HasAttachmentField;
+            }
+            set {
+                if ((this.HasAttachmentField.Equals(value) != true)) {
+                    this.HasAttachmentField = value;
+                    this.RaisePropertyChanged("HasAttachment");
                 }
             }
         }
@@ -1571,6 +1587,317 @@ namespace request_web.WebService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AttachmentDto", Namespace="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto")]
+    [System.SerializableAttribute()]
+    public partial class AttachmentDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RequestIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private request_web.WebService.UserDto UserField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateDate {
+            get {
+                return this.CreateDateField;
+            }
+            set {
+                if ((this.CreateDateField.Equals(value) != true)) {
+                    this.CreateDateField = value;
+                    this.RaisePropertyChanged("CreateDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FileName {
+            get {
+                return this.FileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
+                    this.FileNameField = value;
+                    this.RaisePropertyChanged("FileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int RequestId {
+            get {
+                return this.RequestIdField;
+            }
+            set {
+                if ((this.RequestIdField.Equals(value) != true)) {
+                    this.RequestIdField = value;
+                    this.RaisePropertyChanged("RequestId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public request_web.WebService.UserDto User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UserDto", Namespace="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto")]
+    [System.SerializableAttribute()]
+    public partial class UserDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FirstNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LoginField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PatrNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private request_web.WebService.RoleDto[] RolesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FirstName {
+            get {
+                return this.FirstNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
+                    this.FirstNameField = value;
+                    this.RaisePropertyChanged("FirstName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login {
+            get {
+                return this.LoginField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LoginField, value) != true)) {
+                    this.LoginField = value;
+                    this.RaisePropertyChanged("Login");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PatrName {
+            get {
+                return this.PatrNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PatrNameField, value) != true)) {
+                    this.PatrNameField = value;
+                    this.RaisePropertyChanged("PatrName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public request_web.WebService.RoleDto[] Roles {
+            get {
+                return this.RolesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RolesField, value) != true)) {
+                    this.RolesField = value;
+                    this.RaisePropertyChanged("Roles");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SurName {
+            get {
+                return this.SurNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurNameField, value) != true)) {
+                    this.SurNameField = value;
+                    this.RaisePropertyChanged("SurName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RoleDto", Namespace="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto")]
+    [System.SerializableAttribute()]
+    public partial class RoleDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WebService.IRequestWebService")]
     public interface IRequestWebService {
@@ -1659,17 +1986,23 @@ namespace request_web.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersInto", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByWorkersIntoResponse")]
         System.Threading.Tasks.Task<request_web.WebService.StatInfoDto[]> GetRequestByWorkersIntoAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/SaveFile", ReplyAction="http://tempuri.org/IRequestWebService/SaveFileResponse")]
-        string SaveFile(int requestId, string fileExtension, byte[] fileStream);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/SaveFile", ReplyAction="http://tempuri.org/IRequestWebService/SaveFileResponse")]
-        System.Threading.Tasks.Task<string> SaveFileAsync(int requestId, string fileExtension, byte[] fileStream);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWeb", ReplyAction="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWebResponse")]
         request_web.WebService.StatusDto[] GetStatusesAllowedInWeb();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWeb", ReplyAction="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWebResponse")]
         System.Threading.Tasks.Task<request_web.WebService.StatusDto[]> GetStatusesAllowedInWebAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/DownloadFile", ReplyAction="http://tempuri.org/IRequestWebService/DownloadFileResponse")]
+        byte[] DownloadFile(int requestId, string fileName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/DownloadFile", ReplyAction="http://tempuri.org/IRequestWebService/DownloadFileResponse")]
+        System.Threading.Tasks.Task<byte[]> DownloadFileAsync(int requestId, string fileName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetAttachmentList", ReplyAction="http://tempuri.org/IRequestWebService/GetAttachmentListResponse")]
+        request_web.WebService.AttachmentDto[] GetAttachmentList(int requestId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetAttachmentList", ReplyAction="http://tempuri.org/IRequestWebService/GetAttachmentListResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.AttachmentDto[]> GetAttachmentListAsync(int requestId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/ChangeState", ReplyAction="http://tempuri.org/IRequestWebService/ChangeStateResponse")]
         void ChangeState(int requestId, int stateId, int userId);
@@ -1823,20 +2156,28 @@ namespace request_web.WebService {
             return base.Channel.GetRequestByWorkersIntoAsync();
         }
         
-        public string SaveFile(int requestId, string fileExtension, byte[] fileStream) {
-            return base.Channel.SaveFile(requestId, fileExtension, fileStream);
-        }
-        
-        public System.Threading.Tasks.Task<string> SaveFileAsync(int requestId, string fileExtension, byte[] fileStream) {
-            return base.Channel.SaveFileAsync(requestId, fileExtension, fileStream);
-        }
-        
         public request_web.WebService.StatusDto[] GetStatusesAllowedInWeb() {
             return base.Channel.GetStatusesAllowedInWeb();
         }
         
         public System.Threading.Tasks.Task<request_web.WebService.StatusDto[]> GetStatusesAllowedInWebAsync() {
             return base.Channel.GetStatusesAllowedInWebAsync();
+        }
+        
+        public byte[] DownloadFile(int requestId, string fileName) {
+            return base.Channel.DownloadFile(requestId, fileName);
+        }
+        
+        public System.Threading.Tasks.Task<byte[]> DownloadFileAsync(int requestId, string fileName) {
+            return base.Channel.DownloadFileAsync(requestId, fileName);
+        }
+        
+        public request_web.WebService.AttachmentDto[] GetAttachmentList(int requestId) {
+            return base.Channel.GetAttachmentList(requestId);
+        }
+        
+        public System.Threading.Tasks.Task<request_web.WebService.AttachmentDto[]> GetAttachmentListAsync(int requestId) {
+            return base.Channel.GetAttachmentListAsync(requestId);
         }
         
         public void ChangeState(int requestId, int stateId, int userId) {

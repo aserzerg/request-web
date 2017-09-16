@@ -16,5 +16,6 @@ namespace request_web.Models
         public string State { get; set; }
         public string Contacts { get; set; }
         public WebCallsDto[] CallList { get; set; }
+        public AttachmentDto[] Attachments { get; set; }
     }
 }

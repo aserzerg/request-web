@@ -246,7 +246,7 @@ namespace request_web.Controllers
                 var request = requestService.GetRequestById(Convert.ToInt32(requestId));
                 var worker = $"{request.Worker?.SurName} {request.Worker?.FirstName} {request.Worker?.PatrName}";
                 var contactList = request.ContactPhones;
-
+                var attachments = requestService.GetAttachmentList(request.Id);
                 var callList = requestService.GetWebCallsByRequestId(request.Id);
 
                 return View(new RequestDetailModel()
@@ -260,7 +260,8 @@ namespace request_web.Controllers
                     State = request.Status,
                     WorkDate = request.ExecuteTime,
                     Contacts = contactList,
-                    CallList = callList
+                    CallList = callList,
+                    Attachments = attachments
                 });
             }
         }
@@ -315,11 +316,19 @@ namespace request_web.Controllers
         [Authorize]
         public ActionResult GetMediaByRequestId(int requestId)
         {
-            var requestId2 = Request.Params["RequestId"];
             using (var requestService = new RequestWebServiceClient())
             {
                 var t = requestService.GetMediaByRequestId(requestId);
                 return File(t, "audio/wav");
+            }
+        }
+        [Authorize]
+        public ActionResult DownloadDocument(int requestId,string fileName,string defaultName)
+        {
+            using (var requestService = new RequestWebServiceClient())
+            {
+                var t = requestService.DownloadFile(requestId, fileName);
+                return File(t, "application/octet-stream", defaultName);
             }
         }
         [HttpPost]
