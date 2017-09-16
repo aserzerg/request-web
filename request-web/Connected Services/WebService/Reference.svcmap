@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1acbce57-ffe0-4ff1-95db-c894933944b4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://178.46.158.29:8001/RequestWebService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="RequestWebService1.disco" MetadataType="Disco" ID="41039b1a-23c8-4c5a-878b-5e53675f1d12" SourceId="1" SourceUrl="http://178.46.158.29:8001/RequestWebService.svc?disco" />
+    <MetadataFile FileName="RequestWebService3.xsd" MetadataType="Schema" ID="8c822e7e-f976-4246-a05a-f8ff6be09ca6" SourceId="1" SourceUrl="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd2" />
+    <MetadataFile FileName="RequestWebService31.xsd" MetadataType="Schema" ID="a73287ef-0f5d-4dbe-8d2d-3f23e4c932dd" SourceId="1" SourceUrl="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd0" />
+    <MetadataFile FileName="RequestWebService32.xsd" MetadataType="Schema" ID="f410d91c-b4ff-4fdc-958e-d64748fb6807" SourceId="1" SourceUrl="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd1" />
+    <MetadataFile FileName="RequestWebService1.wsdl" MetadataType="Wsdl" ID="18d95f89-6a7f-411f-8f90-70cf4a44e1dd" SourceId="1" SourceUrl="http://178.46.158.29:8001/RequestWebService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

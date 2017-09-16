@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RequestWebService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IRequestWebService_GetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_RequestList_InputMessage">
+    <wsdl:part name="parameters" element="tns:RequestList" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_RequestList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RequestListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetRequestById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestById" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetRequestById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetWorkers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkers" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetWorkers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetStreetListByWorker_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStreetListByWorker" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetStreetListByWorker_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStreetListByWorkerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetWebStatuses_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWebStatuses" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetWebStatuses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWebStatusesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetHousesByStreetAndWorkerId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHousesByStreetAndWorkerId" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetHousesByStreetAndWorkerId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHousesByStreetAndWorkerIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetFlatByHouseId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFlatByHouseId" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetFlatByHouseId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFlatByHouseIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetServices_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServices" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetServices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetMediaByRequestId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMediaByRequestId" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetMediaByRequestId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMediaByRequestIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetRequestByUsersInto_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestByUsersInto" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetRequestByUsersInto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestByUsersIntoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetWebCallsByRequestId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWebCallsByRequestId" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetWebCallsByRequestId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWebCallsByRequestIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetRequestByWorkersInto_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestByWorkersInto" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetRequestByWorkersInto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestByWorkersIntoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_SaveFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveFile" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_SaveFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetStatusesAllowedInWeb_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStatusesAllowedInWeb" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetStatusesAllowedInWeb_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStatusesAllowedInWebResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_ChangeState_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeState" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_ChangeState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetRequestActs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestActs" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetRequestActs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestActsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IRequestWebService">
+    <wsdl:operation name="GetData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetData" message="tns:IRequestWebService_GetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetDataResponse" message="tns:IRequestWebService_GetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/Login" message="tns:IRequestWebService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/LoginResponse" message="tns:IRequestWebService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/RequestList" message="tns:IRequestWebService_RequestList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/RequestListResponse" message="tns:IRequestWebService_RequestList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestById" message="tns:IRequestWebService_GetRequestById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByIdResponse" message="tns:IRequestWebService_GetRequestById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetWorkers" message="tns:IRequestWebService_GetWorkers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetWorkersResponse" message="tns:IRequestWebService_GetWorkers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStreetListByWorker">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetStreetListByWorker" message="tns:IRequestWebService_GetStreetListByWorker_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetStreetListByWorkerResponse" message="tns:IRequestWebService_GetStreetListByWorker_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWebStatuses">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetWebStatuses" message="tns:IRequestWebService_GetWebStatuses_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetWebStatusesResponse" message="tns:IRequestWebService_GetWebStatuses_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHousesByStreetAndWorkerId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetHousesByStreetAndWorkerId" message="tns:IRequestWebService_GetHousesByStreetAndWorkerId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetHousesByStreetAndWorkerIdResponse" message="tns:IRequestWebService_GetHousesByStreetAndWorkerId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFlatByHouseId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetFlatByHouseId" message="tns:IRequestWebService_GetFlatByHouseId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetFlatByHouseIdResponse" message="tns:IRequestWebService_GetFlatByHouseId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServices">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetServices" message="tns:IRequestWebService_GetServices_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetServicesResponse" message="tns:IRequestWebService_GetServices_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMediaByRequestId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetMediaByRequestId" message="tns:IRequestWebService_GetMediaByRequestId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetMediaByRequestIdResponse" message="tns:IRequestWebService_GetMediaByRequestId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestByUsersInto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByUsersInto" message="tns:IRequestWebService_GetRequestByUsersInto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByUsersIntoResponse" message="tns:IRequestWebService_GetRequestByUsersInto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWebCallsByRequestId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetWebCallsByRequestId" message="tns:IRequestWebService_GetWebCallsByRequestId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetWebCallsByRequestIdResponse" message="tns:IRequestWebService_GetWebCallsByRequestId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestByWorkersInto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersInto" message="tns:IRequestWebService_GetRequestByWorkersInto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersIntoResponse" message="tns:IRequestWebService_GetRequestByWorkersInto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/SaveFile" message="tns:IRequestWebService_SaveFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/SaveFileResponse" message="tns:IRequestWebService_SaveFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusesAllowedInWeb">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWeb" message="tns:IRequestWebService_GetStatusesAllowedInWeb_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWebResponse" message="tns:IRequestWebService_GetStatusesAllowedInWeb_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeState">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/ChangeState" message="tns:IRequestWebService_ChangeState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/ChangeStateResponse" message="tns:IRequestWebService_ChangeState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestActs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestActs" message="tns:IRequestWebService_GetRequestActs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestActsResponse" message="tns:IRequestWebService_GetRequestActs_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IRequestWebService" type="tns:IRequestWebService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetData">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestList">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/RequestList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestById">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetRequestById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkers">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetWorkers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStreetListByWorker">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetStreetListByWorker" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWebStatuses">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetWebStatuses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHousesByStreetAndWorkerId">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetHousesByStreetAndWorkerId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFlatByHouseId">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetFlatByHouseId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetServices">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetServices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMediaByRequestId">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetMediaByRequestId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestByUsersInto">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetRequestByUsersInto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWebCallsByRequestId">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetWebCallsByRequestId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestByWorkersInto">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetRequestByWorkersInto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveFile">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/SaveFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatusesAllowedInWeb">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWeb" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeState">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/ChangeState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRequestActs">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetRequestActs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RequestWebService">
+    <wsdl:port name="BasicHttpBinding_IRequestWebService" binding="tns:BasicHttpBinding_IRequestWebService">
+      <soap:address location="http://178.46.158.29:8001/RequestWebService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

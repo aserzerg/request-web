@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" />
+  <xs:element name="GetData">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetDataResult" nillable="true" type="q1:ArrayOfCityDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Login">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="LoginResult" nillable="true" type="q2:WebUserDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="workerId" type="xs:int" />
+        <xs:element minOccurs="0" name="fromDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="toDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="FirlerWorkerId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="FilterStreetId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="FilterHouseId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="FilterAddressId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="FilterStatusId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="FilterParrentServiceId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="FilterServiceId" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="RequestListResult" nillable="true" type="q3:ArrayOfRequestForListDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRequestById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requestId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRequestByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestByIdResult" nillable="true" type="q4:RequestForListDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorkers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="workerId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorkersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWorkersResult" nillable="true" type="q5:ArrayOfWorkerDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStreetListByWorker">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="workerId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStreetListByWorkerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetStreetListByWorkerResult" nillable="true" type="q6:ArrayOfStreetDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWebStatuses">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWebStatusesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWebStatusesResult" nillable="true" type="q7:ArrayOfWebStatusDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetHousesByStreetAndWorkerId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="streetId" type="xs:int" />
+        <xs:element minOccurs="0" name="workerId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetHousesByStreetAndWorkerIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetHousesByStreetAndWorkerIdResult" nillable="true" type="q8:ArrayOfWebHouseDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFlatByHouseId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="houseId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFlatByHouseIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetFlatByHouseIdResult" nillable="true" type="q9:ArrayOfWebFlatDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetServices">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="parentId" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetServicesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetServicesResult" nillable="true" type="q10:ArrayOfServiceDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMediaByRequestId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requestId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMediaByRequestIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetMediaByRequestIdResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRequestByUsersInto">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRequestByUsersIntoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestByUsersIntoResult" nillable="true" type="q11:ArrayOfStatInfoDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWebCallsByRequestId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requestId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWebCallsByRequestIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWebCallsByRequestIdResult" nillable="true" type="q12:ArrayOfWebCallsDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRequestByWorkersInto">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRequestByWorkersIntoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestByWorkersIntoResult" nillable="true" type="q13:ArrayOfStatInfoDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requestId" type="xs:int" />
+        <xs:element minOccurs="0" name="fileExtension" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fileStream" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveFileResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStatusesAllowedInWeb">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStatusesAllowedInWebResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetStatusesAllowedInWebResult" nillable="true" type="q14:ArrayOfStatusDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeState">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requestId" type="xs:int" />
+        <xs:element minOccurs="0" name="stateId" type="xs:int" />
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeStateResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRequestActs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="workerId" type="xs:int" />
+        <xs:element minOccurs="0" name="fromDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="toDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="FirlerWorkerId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="FilterStreetId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="FilterHouseId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="FilterAddressId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="FilterStatusId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="FilterParrentServiceId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="FilterServiceId" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRequestActsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetRequestActsResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

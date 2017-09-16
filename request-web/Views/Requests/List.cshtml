@@ -1,0 +1,403 @@
+﻿@model request_web.Models.RequestListModel
+
+@{
+    ViewBag.Title = "Заявки";
+}
+@* ReSharper disable UseNameofExpression *@
+@functions{
+    private const string DataFormPost = "data-form-post";
+    private const string RequestIdName = "RequestId";
+
+    static string ServiceStateToClassName(string status)
+    {
+        switch (status)
+        {
+            case "В работе":
+                return "inprogress";
+            case "Закрыта":
+                return "completed";
+            //case ServiceState.Cancelled:
+            //    return "cancelled";
+            default:
+                return "new";
+        }
+
+    }
+}
+@* ReSharper restore UseNameofExpression *@
+<h2>Заявки</h2>
+@Scripts.Render("~/Scripts/jquery.maskedinput.js")
+<script type="text/javascript">
+    $(function () {
+        $('#FromDate, #ToDate').mask("99.99.9999");
+    });
+
+    $(function () {
+        $(function () {
+            $('.datepicker')
+                .datepicker({
+                    dateFormat: 'dd.mm.yy',
+                    inline: true,
+                    changeYear: true,
+                    changeMonth: true,
+                    yearRange: "2017:",
+                    maxDate: "0"
+                });
+        });
+
+        $.datepicker.setDefaults($.datepicker.regional['ru']);
+    });
+</script>
+@using (Html.BeginForm())
+{
+    @Html.Hidden("SelectedWorker")
+    @Html.Hidden("SelectedStreet")
+    @Html.Hidden("SelectedStatus")
+    @Html.Hidden("SelectedHouse")
+    @Html.Hidden("SelectedAddress")
+    @Html.Hidden("SelectedParServ")
+    @Html.Hidden("SelectedService")
+
+    
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "Пожалуйста, укажите коррекные даты!")
+
+<div class="form-inline pull-right" style="margin-bottom: 15px; horiz-align: center; position: relative">
+        @*; z-index: 9999">*@
+        <b style="vertical-align: middle;">За период</b>
+        @Html.TextBoxFor(m => m.FromDate, new { @class = "datepicker form-control", style = "height: 25px; width: 110px", placeholder = Html.DisplayName("Введите дату") })
+
+        @Html.Label("-", new { @class = "control-label mr-sm-2" })
+        @Html.TextBoxFor(m => m.ToDate, new { @class = "datepicker form-control", style = "height: 25px; width: 110px ", placeholder = Html.DisplayName("Введите дату") })
+        
+        <select class="chosen-select" data-placeholder="Исполнитель" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;" >
+            @foreach (var worker in Model.Workers)
+            {
+                string SelectedValue = "";
+                if (worker.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
+                }
+            <option @SelectedValue id='@worker.Id'>@worker.Name</option>
+            }
+        </select>
+
+        <select class="chosen-select" data-placeholder="Статус" id="status_select" tabindex="-1" style="width: 180px; height: 25px;">
+            @foreach (var status in Model.Statuses)
+            {
+                string SelectedValue = "";
+                if (status.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
+                }
+                <option @SelectedValue id='@status.Id'>@status.Name</option>
+            }
+        </select>
+
+        @Html.CheckBoxFor(m => m.AdditionFiltering, new { @class = "checkbox", style = "height: 25px"})
+        @Html.LabelFor(m => m.AdditionFiltering, new { @class = "control-label mr-sm-2" })
+        <button type="button" id="Refresh" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Обновить</button>
+        <button type="button" id="CreateNew" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Создать</button>
+        <button type="button" id="PrintActs" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Печать</button>
+
+        <div id="AdditionParameters" style="margin-top: 10px;">
+           <div>
+            <select class="chosen-select" data-placeholder="Улица" id="street_select" tabindex="-1" style="width: 280px; height: 25px;">
+                @foreach (var street in Model.Streets)
+                {
+                    string SelectedValue = "";
+                    if (street.IsSelected)
+                    {
+                        SelectedValue = "selected='selected'";
+                    }
+                    <option @SelectedValue id='@street.Id'>@street.Name</option>
+                }
+            </select>
+            <select class="chosen-select" data-placeholder="Дом" id="house_select" tabindex="-1" style="width: 180px; height: 25px;">
+                @foreach (var house in Model.Houses)
+                {
+                    string SelectedValue = "";
+                    if (house.IsSelected)
+                    {
+                        SelectedValue = "selected='selected'";
+                    }
+                    <option @SelectedValue id='@house.Id'>@house.Name</option>
+                }
+            </select>
+               <select class="chosen-select" data-placeholder="Адреса" id="address_select" tabindex="-1" style="width: 180px; height: 25px;">
+                   @foreach (var address in Model.Addresses)
+                {
+                    string SelectedValue = "";
+                    if (address.IsSelected)
+                    {
+                        SelectedValue = "selected='selected'";
+                    }
+                   <option @SelectedValue id='@address.Id'>@address.Name</option>
+                   }
+               </select>
+            </div>
+        <div style="margin-top: 10px">
+            <select class="chosen-select" data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
+                @foreach (var parentService in Model.ParentServices)
+                {
+                    string SelectedValue = "";
+                    if (parentService.IsSelected)
+                    {
+                        SelectedValue = "selected='selected'";
+                    }
+                    <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
+                }
+            </select>
+            <select class="chosen-select" data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
+                @foreach (var service in Model.Services)
+                {
+                    string SelectedValue = "";
+                    if (service.IsSelected)
+                    {
+                        SelectedValue = "selected='selected'";
+                    }
+                    <option @SelectedValue id='@service.Id'>@service.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+}
+@*@Html.TextBoxFor(m => m.FromDate, new { @class = "datepicker form-control", style = "height: 30px", placeholder = Html.DisplayName("Введите дату") })*@
+@using (Html.BeginForm("Details", "Requests", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden(RequestIdName)
+
+    <table id="servicesTable" class="table table-bordered table-services hover" style="width: 100%;">
+        <thead>
+        <tr>
+            <th style="vertical-align: middle;">№ Заявки</th>
+            <th style="vertical-align: middle;">Дата создания</th>
+            <th style="vertical-align: middle;">Адрес</th>
+            <th style="vertical-align: middle;">Описание</th>
+            <th style="vertical-align: middle;">Статус</th>
+            <th style="vertical-align: middle;">Дата выполнения</th>
+            <th>Исполнитель</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var request in Model.Requests)
+        {
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-md" style="width: 100%;" @DataFormPost data-request-id="@request.Id">@request.Id</button>
+                </td>
+                <td>@request.CreateTime.ToString("dd.MM.yyyy HH:mm")</td>
+
+                <td>
+                @{    
+                    string Corpus = "";
+                    if (!string.IsNullOrEmpty(@request.Corpus))
+                    {
+                        Corpus = "/"+@request.Corpus;
+                    }
+                }
+
+                @request.StreetName, @request.Building@Corpus, @request.Flat</td>
+                <td>
+                    Услуга: @request.ParentService
+                    <br>
+                    Причина: @request.Service
+                    <br>
+                    Описание: @request.Description
+                </td>
+                <td>@request.Status</td>
+                <td>
+                @(request.ExecuteTime.HasValue ? request.ExecuteTime.Value.ToString("dd.MM.yyyy") : "-" )
+                <br>
+                @request.ExecutePeriod
+                </td>
+
+                <td>@request.Worker.SurName</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".chosen-select").chosen({
+            disable_search_threshold: 0,
+            no_results_text: "Нет совпадений!",
+            search_contains: true,
+        });
+        if (!$("#AdditionFiltering").is(':checked')) {
+            $('#AdditionParameters').hide();
+        }
+    });
+    function SetSelects(mass, id, arr) {
+        var str = "";
+        var s = "1";
+        for (var i = 0; i < mass.length; i++) {
+            str += "<option id='" + mass[i][arr["id"]] + "' >";
+        arr["text"].forEach(function (item, j) {
+            str += mass[i][item] + " ";
+        });
+            str += "</option>"
+        }
+    $("#" + id).empty();
+    $("#" + id).append(str);
+    $("#" + id).chosen({
+        disable_search_threshold: 0,
+        no_results_text: "Нет совпадений!",
+        width: "90%",
+        search_contains: true,
+    });
+    $("#" + id).trigger("chosen:updated");
+    }
+
+    function GetWorkers() {
+        $.ajax({
+            type: "POST",
+            url: '/Requests/GetWorkers',
+            contentType: "application/json; charset=utf-8",
+            data: '{}',
+            dataType: "json",
+            success(data) {
+                var mass = JSON.parse(data);
+                var arr = {
+                    id: "Id",
+                    text: ["Name"]
+                };
+                SetSelects(mass, "worker_select", arr);
+            }
+        });
+    }
+
+    function GetHouses(streetId) {
+        $.ajax({
+            type: "POST",
+            url: '/Requests/GetHouses',
+            contentType: "application/json; charset=utf-8",
+            data: '{streetNum:' + streetId + '}',
+            dataType: "json",
+            success(data) {
+                var mass = JSON.parse(data);
+                var arr = {
+                    id: "Id",
+                    text: ["Name"]
+                };
+                SetSelects(mass, "house_select", arr);
+            }
+        });
+    }
+
+    function GetAddresses(houseId) {
+        $.ajax({
+            type: "POST",
+            url: '/Requests/GetAddresses',
+            contentType: "application/json; charset=utf-8",
+            data: '{houseNum:' + houseId + '}',
+            dataType: "json",
+            success(data) {
+                var mass = JSON.parse(data);
+                var arr = {
+                    id: "Id",
+                    text: ["Name"]
+                };
+                SetSelects(mass, "address_select", arr);
+            }
+        });
+    }
+        function GetServices(parentServiceId) {
+            $.ajax({
+                type: "POST",
+                url: '/Requests/GetServicesByParent',
+                contentType: "application/json; charset=utf-8",
+                data: '{parentServiceNum:' + parentServiceId + '}',
+                dataType: "json",
+                success(data) {
+                    var mass = JSON.parse(data);
+                    var arr = {
+                        id: "Id",
+                        text: ["Name"]
+                    };
+                    SetSelects(mass, "service_select", arr);
+                }
+            });
+    }
+
+    $('#AdditionFiltering').click(function () {
+        if ($(this).is(':checked')) {
+            $('#AdditionParameters').show();
+        }
+        else {
+            $('#AdditionParameters').hide();
+        }
+    });
+    
+    
+    $("#street_select").change(function () {
+        var id = $("#street_select :selected")[0].id;
+        GetHouses(id);
+        GetAddresses(0);
+    });
+    $("#house_select").change(function () {
+        var id = $("#house_select :selected")[0].id;
+        GetAddresses(id);
+    });
+    $("#parrent_service_select").change(function () {
+        var id = $("#parrent_service_select :selected")[0].id;
+        GetServices(id);
+    });
+    
+    //$(".chosen-select").chosen().change(function() {
+    //    $(this).closest('form').submit();
+    //});
+    //$('#FromDate, #ToDate').change(function () {
+    //    $(this).closest('form').submit();
+
+        $('[@DataFormPost]').on('click',
+        function(e) {
+            e.preventDefault();
+
+            const RequestId = e.currentTarget.dataset.requestId;
+            const form = $(e.target).closest('form')[0];
+
+            form["RequestId"].value = RequestId;
+            form.submit();
+        });
+
+        $('#PrintActs').on('click',
+        function() {
+            var url = '/Requests/PrintActs';
+            window.open(url, '_blank');
+            });
+
+        $('#Refresh').on('click', function () {
+            const form = $(this).closest('form')[0];
+
+            var workerId = $("#worker_select :selected")[0].id;
+            form["SelectedWorker"].value = workerId;
+
+            var streetId = $("#street_select :selected")[0].id;
+            form["SelectedStreet"].value = streetId;
+
+            var houseId = $("#house_select :selected")[0].id;
+            form["SelectedHouse"].value = houseId;
+
+            var addressId = $("#address_select :selected")[0].id;
+            form["SelectedAddress"].value = addressId;
+
+            var statusId = $("#status_select :selected")[0].id;
+            form["SelectedStatus"].value = statusId;
+
+            var parServId = $("#parrent_service_select :selected")[0].id;
+            form["SelectedParServ"].value = parServId;
+
+            var serivceId = $("#service_select :selected")[0].id;
+            form["SelectedService"].value = serivceId;
+            
+            form.submit();
+        });
+
+</script>
+

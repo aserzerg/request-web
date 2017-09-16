@@ -1,0 +1,20 @@
+using System;
+using request_web.WebService;
+
+namespace request_web.Models
+{
+    public class RequestDetailModel
+    {
+        public int RequestId { get; set; }
+        public string Address { get; set; }
+        public string Creator { get; set; }
+        public string Worker { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime? WorkDate { get; set; }
+        public string WorkPeriod { get; set; }
+        public string Description { get; set; }
+        public string State { get; set; }
+        public string Contacts { get; set; }
+        public WebCallsDto[] CallList { get; set; }
+    }
+}
