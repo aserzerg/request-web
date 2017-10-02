@@ -1,0 +1,145 @@
+﻿@model request_web.Models.RequestDetailModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Заявка № @Model.RequestId</h2>
+
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+
+<dl class="dl-horizontal service">
+    <dt>
+        @Html.Label("Создатель:", new { @class = "pull-left" })
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Creator)
+        @*<li>
+            <a class ="editItemInModalView" href="/Requests/ChangeWorker?RequestId=@Model.RequestId">@Model.Creator</a>
+        </li>*@
+    </dd>
+
+    <dt>
+        @Html.Label("Адрес:", new {@class = "pull-left"})
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Address)
+    </dd>
+    <dt>
+        @Html.Label("Дата подачи заявки:", new {@class = "pull-left"})
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.CreateTime)
+    </dd>
+    <dt>
+        @Html.Label("Телефоны:", new {@class = "pull-left"})
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Contacts)
+    </dd>
+    <dt>
+        @Html.Label("Описание:", new {@class = "pull-left"})
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Description)
+    </dd>
+    <dt>
+        @Html.Label("Статус:", new {@class = "pull-left"})
+    </dt>
+    <dd>
+        <li>
+            <a class="editItemInModalView" href="/Requests/ChangeStatus?RequestId=@Model.RequestId">@Model.State</a>
+        </li>
+
+    </dd>
+    <dt>
+        @Html.Label("Исполнитель:", new {@class = "pull-left"})
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Worker)
+    </dd>
+    <dt>
+        @Html.Label("Дата исполнения:", new {@class = "pull-left"})
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.WorkDate)
+    </dd>
+</dl>
+<div>
+    <h3>Список звонков</h3>
+</div>
+<table id="servicesTable" class="table table-bordered table-services hover" style="width: 100%;">
+    <thead>
+    <tr>
+        <th style="vertical-align: middle;">Дата</th>
+        <th style="vertical-align: middle;">Номер телефона</th>
+        <th style="vertical-align: middle;">Запись</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var callInfo in Model.CallList)
+    {
+        <tr>
+            <td>@callInfo.CreateTime.ToString("dd.MM.yyyy HH:mm")</td>
+            <td>@callInfo.PhoneNumber</td>
+            <td>
+                <audio class="aud" preload="none" controls="" style="width: 170px; display:  block">
+                    <source src="/Requests/GetMediaByRequestId?RequestId=@callInfo.RequestId" type="audio/wav">
+                </audio>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div>
+    <h3>Документы</h3>
+</div>
+<table id="attachmentTable" class="table table-bordered table-services hover" style="width: 100%;">
+    <thead>
+    <tr>
+        <th style="vertical-align: middle;">Дата</th>
+        <th style="vertical-align: middle;">Название</th>
+        <th style="vertical-align: middle;">Создатель</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var attachment in Model.Attachments)
+    {
+        <tr>
+            <td>@attachment.CreateDate.ToString("dd.MM.yyyy HH:mm")</td>
+            <td>
+                <a href="/Requests/DownloadDocument?requestId=@attachment.RequestId&fileName=@attachment.FileName&defaultName=@attachment.Name">@attachment.Name</a>
+            </td>
+            <td>@attachment.User.SurName @attachment.User.FirstName @attachment.User.PatrName</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $.ajaxSetup({ cache: false });
+        $(".StatusEditItem").click(function (e) {
+            e.preventDefault();
+            $.get(this.href+"?RequestId=@Model.RequestId", function (data) {
+                $('#dialogContent').html(data);
+                $('#modDialog').modal('show');
+            });
+        });
+        $(".editItemInModalView").click(function (e) {
+            e.preventDefault();
+            $.get(this.href, function (data) {
+                $('#dialogContent').html(data);
+                $('#modDialog').modal('show');
+            });
+        });
+
+    })
+</script>

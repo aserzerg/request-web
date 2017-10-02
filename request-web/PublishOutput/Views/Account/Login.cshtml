@@ -1,0 +1,34 @@
+﻿@model request_web.Models.LoginViewModel
+@{
+    ViewBag.Title = "Вход в личный кабинет";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+@*@if (Context.User.Identity.IsAuthenticated)
+{
+    Response.Redirect(Url.Action("Index", "Second"));
+}*@
+@using (Html.BeginForm("Login", "Account",FormMethod.Post,new { @class = "FromFORM" }))
+{
+    <div class="panel  panel-default">
+        @ViewData["Message"]
+        <div class="panel-body">
+            <div>
+                <label for="Login">Имя пользователя:</label>
+                @Html.TextBoxFor(m => m.UserName, new { @id = "Login", @class = "input_first form-group form-control" })
+
+            </div>
+            <div>
+                <label for="Password">Пароль:</label>
+                @Html.PasswordFor(m => m.Password, new { @id = "Password", @class = "input_first form-group form-control" })
+                <!--, placeholder = "Пароль"-->
+
+            </div>
+            <div>
+                <input type="submit" value="Войти" id="Enter" class="btn form-group btn-primary pull-right" />
+            </div>
+        </div>
+        <div style="color:red;margin-left:30px">
+            @Html.ValidationSummary()
+        </div>
+    </div>
+}

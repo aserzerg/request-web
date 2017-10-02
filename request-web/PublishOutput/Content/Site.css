@@ -1,0 +1,270 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.splitter {
+    background-color: var(--default-color);
+    height: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    margin: 0 0 15px 0;
+}
+
+.navbar-proper-right {
+    float: right !important;
+}
+
+a.selected {
+    background-color: #CCCCCC;
+}
+
+.g-recaptcha {
+    -ms-transform: scale(0.935);
+    -webkit-transform: scale(0.935);
+    transform: scale(0.935);
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+/* Services table styles */
+.table-services > thead > tr {
+    background-color: #3283bf;
+    color: #fff;
+}
+
+.table-services > tbody > tr.inprogress {
+    background-color: #fffab3;
+    cursor: pointer;
+}
+
+.table-services > tbody > tr.completed {
+    background-color: #b3f0c2;
+    cursor: pointer;
+}
+
+.table-services > tbody > tr.cancelled {
+    background-color: #ffb3b3;
+    cursor: pointer;
+}
+
+.table-services > tbody > tr.new {
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.table-services > thead > tr > th {
+    text-align: center;
+    border-bottom: 0 !important;
+}
+
+.table-services > tbody > tr > td {
+    text-align: left;
+}
+
+.service-inprogress {
+    color: #FFCF41;
+    font-weight: bold;
+}
+
+.service-completed {
+    color: #31D65A;
+    font-weight: bold;
+}
+
+.service-canceled {
+    color: #DC5352;
+    font-weight: bold;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    background-color: #ffeeee;
+    outline: 1px solid #ff0000;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.btn-in-block {
+    margin: 0 15px;
+}
+
+.overlay {
+    background: rgba(233,233,233,0.5);
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+.loading {
+    background: #fbfbfb;
+    padding: 5px;
+    border: 1px solid #a3bad9;
+    display: flex;
+    align-self: center;
+    margin: 0 auto;
+}
+
+.settings {
+    margin-bottom: 0px;
+}
+
+.settings dt {
+    width: 280px;
+    height: 38px;
+    align-items: center;
+    display: flex;
+}
+
+.settings dd span {
+    width: 220px;
+    height: 38px;
+    align-items: center;
+    display: flex;
+}
+
+.settings dd div {
+    width: 220px;
+    align-items: center;
+    padding-right: 5px;
+}
+
+.settings input.btn {
+    width: 100px;
+}
+
+.service dt {
+    margin: 3px;
+}
+
+.not-active {
+    color: gray;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+.action-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.ui-dialog-titlebar {
+    background: #3283bf;
+    color: white;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/*<это надо будет удалить*/
+#mainmenu {
+    background: #3283bf;
+    position: relative;
+    overflow: hidden;
+    height: 50px;
+    margin: 10px 0;
+}
+
+#mainmenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    left: 50%;
+    float: left;
+    height: 40px;
+}
+
+#mainmenu ul li {
+    position: relative;
+    left: -50%;
+    float: left;
+    margin: 0 10px;
+    height: 40px;
+}
+
+#mainmenu ul li a {
+    color: #fff;
+    display: block;
+    text-decoration: none;
+    padding: 0 15px;
+    line-height: 50px;
+    font: 300 17px/50px Roboto;
+}
+
+
+.select,
+.chosen-select,
+.chosen-select-no-single,
+.chosen-select-no-results,
+.chosen-select-deselect,
+.chosen-select-rtl,
+.chosen-select-width {
+    width: 350px;
+    position: relative;
+    /*display: block;*/
+    font-size: 13px;
+    overflow: hidden;
+    padding: 0 0 0 4px;
+    height: 25px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background-color: #fff;
+    background: linear-gradient(#fff 20%, #f6f6f6 50%, #eee 52%, #f4f4f4 100%);
+    background-clip: padding-box;
+    box-shadow: 0 0 3px #fff inset, 0 1px 1px rgba(0, 0, 0, 0.1);
+    color: #444;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 24px;
+}
+/*это надо будет удалить>*/

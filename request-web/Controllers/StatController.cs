@@ -21,6 +21,10 @@ namespace request_web.Controllers
                 var usersPeriods = statByUsers.GroupBy(s => s.StatDate).ToList();
                 var users = statByUsers.GroupBy(s => s.Name).ToList();
                 var userChartSeries = new List<Series>();
+                
+                //todo удалить i
+                var i = 1;
+
                 foreach (var user in users.Where(u=>!string.IsNullOrEmpty(u.Key)))
                 {
                     List<LineSeriesData> series = new List<LineSeriesData>();
@@ -32,7 +36,8 @@ namespace request_web.Controllers
                         series.Add(new LineSeriesData {Y = count ?? 0});
                     }
 
-                    userChartSeries.Add(new LineSeries{Name = user.Key, Data = series });
+                    userChartSeries.Add(new LineSeries{Name = $"Диспетчер {i++}", Data = series });
+                    //userChartSeries.Add(new LineSeries{Name = user.Key, Data = series });
                 }
                 userChartSeries.Add(new LineSeries {Name = "Всего",
                     Data = statByUsers.GroupBy(s => s.StatDate).Select(g => new LineSeriesData {Y = g.Sum(s => s.Count)}).ToList()});
@@ -44,6 +49,9 @@ namespace request_web.Controllers
                 var workersPeriods = statByWorkers.GroupBy(s => s.StatDate).ToList();
                 var workers = statByWorkers.GroupBy(s => s.Name).ToList();
                 var workerChartSeries = new List<Series>();
+
+                i = 1;
+
                 foreach (var worker in workers.Where(w => !string.IsNullOrEmpty(w.Key)))
                 {
                     List<LineSeriesData> series = new List<LineSeriesData>();
@@ -55,7 +63,8 @@ namespace request_web.Controllers
                         series.Add(new LineSeriesData { Y = count ?? 0 });
                     }
 
-                    workerChartSeries.Add(new LineSeries { Name = worker.Key, Data = series });
+                    workerChartSeries.Add(new LineSeries { Name = $"Исполнитель {i++}", Data = series });
+                    //workerChartSeries.Add(new LineSeries { Name = worker.Key, Data = series });
                 }
                 workerChartSeries.Add(new LineSeries
                 {
