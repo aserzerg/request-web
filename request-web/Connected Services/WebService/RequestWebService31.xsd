@@ -41,6 +41,7 @@
         <xs:element minOccurs="0" name="FilterStatusId" nillable="true" type="xs:int" />
         <xs:element minOccurs="0" name="FilterParrentServiceId" nillable="true" type="xs:int" />
         <xs:element minOccurs="0" name="FilterServiceId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="clientPhone" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -253,6 +254,31 @@
   <xs:element name="ChangeStateResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveRedirectPhone">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="secret" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="phoneNumber" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveRedirectPhoneResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRedirectPhone">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRedirectPhoneResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetRedirectPhoneResult" nillable="true" type="xs:string" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetRequestActs">

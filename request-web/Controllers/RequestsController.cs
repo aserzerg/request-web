@@ -24,6 +24,7 @@ namespace request_web.Controllers
         private const string ParServSessionName = "request_parent_service";
         private const string ServSessionName = "request_service";
         private const string FilteringSessionName = "request_filtering";
+        private const string PhoneSessionName = "request_phoneNumber";
         public RequestsController()
         {
         }
@@ -65,7 +66,7 @@ namespace request_web.Controllers
 
         private RequestListModel GetViewModel(DateTime fromDate, DateTime toDate, int selectedWorkerId,
             int selectedStreetId, int selectedStatusId, int selectedHouseId, int selectedAddressId,
-            int selectedParServId, int selectedServiceId, bool filterIsChecked)
+            int selectedParServId, int selectedServiceId, bool filterIsChecked, string phoneNumber)
         {
             var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
             var workerId = currentUser.WorkerId;
@@ -163,14 +164,15 @@ namespace request_web.Controllers
             selectedAddressId > 0 ? selectedAddressId : (int?)null,
             selectedStatusId > 0 ? selectedStatusId : 2,
             selectedParServId > 0 ? selectedParServId : (int?)null,
-            selectedServiceId > 0 ? selectedServiceId : (int?)null
-            );
+            selectedServiceId > 0 ? selectedServiceId : (int?)null,
+            phoneNumber);
                 #endregion
                 return new RequestListModel
                 {
                     Requests = reguests,
                     FromDate = fromDate,
                     ToDate = toDate,
+                    PhoneNumber = phoneNumber,
                     Workers = workers,
                     Streets = streets,
                     Statuses = statuses,
@@ -195,10 +197,11 @@ namespace request_web.Controllers
             var selectedParServId = (int?)Session[ParServSessionName] ?? 0;
             var selectedServiceId = (int?)Session[ServSessionName] ?? 0;
             var filterIsChecked = (bool?)Session[FilteringSessionName] ?? false;
+            var phoneNumber = (string)Session[PhoneSessionName];
 
 
             var viewModel = GetViewModel(fromDate, toDate, selectedWorkerId,selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
-                        selectedParServId, selectedServiceId, filterIsChecked);
+                        selectedParServId, selectedServiceId, filterIsChecked, phoneNumber);
             return View(viewModel);
         }
 
@@ -223,9 +226,11 @@ namespace request_web.Controllers
             Session[FilteringSessionName] = model.AdditionFiltering;
             Session[ParServSessionName] = selectedParServId;
             Session[ServSessionName] = selectedServiceId;
+            Session[PhoneSessionName] = model.PhoneNumber;
+
 
             var viewModel = GetViewModel(model.FromDate, model.ToDate, selectedWorkerId, selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
-                        selectedParServId, selectedServiceId, model.AdditionFiltering);
+                        selectedParServId, selectedServiceId, model.AdditionFiltering, model.PhoneNumber);
             return View(viewModel);
         }
 
@@ -319,6 +324,9 @@ namespace request_web.Controllers
             using (var requestService = new RequestWebServiceClient())
             {
                 var t = requestService.GetMediaByRequestId(requestId);
+                Response.Headers["accept-ranges"] = "bytes";
+                Response.Headers["Content-Length"] = t.Length.ToString();
+
                 return File(t, "audio/wav");
             }
         }

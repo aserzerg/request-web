@@ -1915,10 +1915,10 @@ namespace request_web.WebService {
         System.Threading.Tasks.Task<request_web.WebService.WebUserDto> LoginAsync(string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/RequestList", ReplyAction="http://tempuri.org/IRequestWebService/RequestListResponse")]
-        request_web.WebService.RequestForListDto[] RequestList(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId);
+        request_web.WebService.RequestForListDto[] RequestList(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, string clientPhone);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/RequestList", ReplyAction="http://tempuri.org/IRequestWebService/RequestListResponse")]
-        System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId);
+        System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, string clientPhone);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestById", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByIdResponse")]
         request_web.WebService.RequestForListDto GetRequestById(int requestId);
@@ -2010,6 +2010,18 @@ namespace request_web.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/ChangeState", ReplyAction="http://tempuri.org/IRequestWebService/ChangeStateResponse")]
         System.Threading.Tasks.Task ChangeStateAsync(int requestId, int stateId, int userId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/SaveRedirectPhone", ReplyAction="http://tempuri.org/IRequestWebService/SaveRedirectPhoneResponse")]
+        void SaveRedirectPhone(string secret, string phoneNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/SaveRedirectPhone", ReplyAction="http://tempuri.org/IRequestWebService/SaveRedirectPhoneResponse")]
+        System.Threading.Tasks.Task SaveRedirectPhoneAsync(string secret, string phoneNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRedirectPhone", ReplyAction="http://tempuri.org/IRequestWebService/GetRedirectPhoneResponse")]
+        string GetRedirectPhone();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRedirectPhone", ReplyAction="http://tempuri.org/IRequestWebService/GetRedirectPhoneResponse")]
+        System.Threading.Tasks.Task<string> GetRedirectPhoneAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestActs", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestActsResponse")]
         byte[] GetRequestActs(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId);
         
@@ -2060,12 +2072,12 @@ namespace request_web.WebService {
             return base.Channel.LoginAsync(login, password);
         }
         
-        public request_web.WebService.RequestForListDto[] RequestList(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId) {
-            return base.Channel.RequestList(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId);
+        public request_web.WebService.RequestForListDto[] RequestList(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, string clientPhone) {
+            return base.Channel.RequestList(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId, clientPhone);
         }
         
-        public System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId) {
-            return base.Channel.RequestListAsync(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId);
+        public System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, string clientPhone) {
+            return base.Channel.RequestListAsync(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId, clientPhone);
         }
         
         public request_web.WebService.RequestForListDto GetRequestById(int requestId) {
@@ -2186,6 +2198,22 @@ namespace request_web.WebService {
         
         public System.Threading.Tasks.Task ChangeStateAsync(int requestId, int stateId, int userId) {
             return base.Channel.ChangeStateAsync(requestId, stateId, userId);
+        }
+        
+        public void SaveRedirectPhone(string secret, string phoneNumber) {
+            base.Channel.SaveRedirectPhone(secret, phoneNumber);
+        }
+        
+        public System.Threading.Tasks.Task SaveRedirectPhoneAsync(string secret, string phoneNumber) {
+            return base.Channel.SaveRedirectPhoneAsync(secret, phoneNumber);
+        }
+        
+        public string GetRedirectPhone() {
+            return base.Channel.GetRedirectPhone();
+        }
+        
+        public System.Threading.Tasks.Task<string> GetRedirectPhoneAsync() {
+            return base.Channel.GetRedirectPhoneAsync();
         }
         
         public byte[] GetRequestActs(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId) {

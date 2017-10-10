@@ -137,30 +137,34 @@
                    }
                </select>
             </div>
-        <div style="margin-top: 10px">
-            <select class="chosen-select" data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
-                @foreach (var parentService in Model.ParentServices)
-                {
-                    string SelectedValue = "";
-                    if (parentService.IsSelected)
+            <div style="margin-top: 10px">
+                <select class="chosen-select" data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
+                    @foreach (var parentService in Model.ParentServices)
                     {
-                        SelectedValue = "selected='selected'";
+                        string SelectedValue = "";
+                        if (parentService.IsSelected)
+                        {
+                            SelectedValue = "selected='selected'";
+                        }
+                        <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
                     }
-                    <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
-                }
-            </select>
-            <select class="chosen-select" data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
-                @foreach (var service in Model.Services)
-                {
-                    string SelectedValue = "";
-                    if (service.IsSelected)
+                </select>
+                <select class="chosen-select" data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
+                    @foreach (var service in Model.Services)
                     {
-                        SelectedValue = "selected='selected'";
+                        string SelectedValue = "";
+                        if (service.IsSelected)
+                        {
+                            SelectedValue = "selected='selected'";
+                        }
+                        <option @SelectedValue id='@service.Id'>@service.Name</option>
                     }
-                    <option @SelectedValue id='@service.Id'>@service.Name</option>
-                }
-            </select>
-        </div>
+                </select>
+            </div>
+            <div style="margin-top: 10px">
+                @Html.Label("Телефон абонента:", new { @class = "control-label mr-sm-2" })
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", style = "height: 25px; width: 180px ", placeholder = Html.DisplayName("Введите номер телефона") })
+            </div>
     </div>
 </div>
 }

@@ -18,6 +18,7 @@ namespace request_web.Models
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "по:")]
         public DateTime ToDate { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Display(Name = "Доп. фильтры")]
         public bool AdditionFiltering { get; set; }
