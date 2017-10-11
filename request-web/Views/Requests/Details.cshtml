@@ -92,6 +92,29 @@
     }
     </tbody>
 </table>
+<div>
+    <h3>Комментарии</h3>
+    <a href="/Requests/AddNote?RequestId=@Model.RequestId" class="editItemInModalView btn form-group btn-primary" style="width:100px;  margin:2px; padding: 2px;">Добавить</a>
+</div>
+<table id="notesTable" class="table table-bordered table-services hover" style="width: 100%;">
+    <thead>
+        <tr>
+            <th style="vertical-align: middle; width:160px;">Дата</th>
+            <th style="vertical-align: middle;">Создатель</th>
+            <th style="vertical-align: middle;">Комментарий</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var note in Model.Notes)
+        {
+            <tr>
+                <td>@note.Date.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@note.User.SurName @note.User.FirstName @note.User.PatrName</td>
+                <td>@note.Note</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 <div>
     <h3>Документы</h3>

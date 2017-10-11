@@ -1898,6 +1898,99 @@ namespace request_web.WebService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NoteDto", Namespace="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto")]
+    [System.SerializableAttribute()]
+    public partial class NoteDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NoteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private request_web.WebService.RequestUserDto UserField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Date {
+            get {
+                return this.DateField;
+            }
+            set {
+                if ((this.DateField.Equals(value) != true)) {
+                    this.DateField = value;
+                    this.RaisePropertyChanged("Date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Note {
+            get {
+                return this.NoteField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NoteField, value) != true)) {
+                    this.NoteField = value;
+                    this.RaisePropertyChanged("Note");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public request_web.WebService.RequestUserDto User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WebService.IRequestWebService")]
     public interface IRequestWebService {
@@ -2003,6 +2096,18 @@ namespace request_web.WebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetAttachmentList", ReplyAction="http://tempuri.org/IRequestWebService/GetAttachmentListResponse")]
         System.Threading.Tasks.Task<request_web.WebService.AttachmentDto[]> GetAttachmentListAsync(int requestId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/AddNote", ReplyAction="http://tempuri.org/IRequestWebService/AddNoteResponse")]
+        void AddNote(int requestId, string note, int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/AddNote", ReplyAction="http://tempuri.org/IRequestWebService/AddNoteResponse")]
+        System.Threading.Tasks.Task AddNoteAsync(int requestId, string note, int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetNotes", ReplyAction="http://tempuri.org/IRequestWebService/GetNotesResponse")]
+        request_web.WebService.NoteDto[] GetNotes(int requestId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetNotes", ReplyAction="http://tempuri.org/IRequestWebService/GetNotesResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.NoteDto[]> GetNotesAsync(int requestId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/ChangeState", ReplyAction="http://tempuri.org/IRequestWebService/ChangeStateResponse")]
         void ChangeState(int requestId, int stateId, int userId);
@@ -2190,6 +2295,22 @@ namespace request_web.WebService {
         
         public System.Threading.Tasks.Task<request_web.WebService.AttachmentDto[]> GetAttachmentListAsync(int requestId) {
             return base.Channel.GetAttachmentListAsync(requestId);
+        }
+        
+        public void AddNote(int requestId, string note, int userId) {
+            base.Channel.AddNote(requestId, note, userId);
+        }
+        
+        public System.Threading.Tasks.Task AddNoteAsync(int requestId, string note, int userId) {
+            return base.Channel.AddNoteAsync(requestId, note, userId);
+        }
+        
+        public request_web.WebService.NoteDto[] GetNotes(int requestId) {
+            return base.Channel.GetNotes(requestId);
+        }
+        
+        public System.Threading.Tasks.Task<request_web.WebService.NoteDto[]> GetNotesAsync(int requestId) {
+            return base.Channel.GetNotesAsync(requestId);
         }
         
         public void ChangeState(int requestId, int stateId, int userId) {

@@ -159,6 +159,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddNoteModel.cs" />
     <Compile Include="Models\ChangeStatusModel.cs" />
     <Compile Include="Models\GeneralInfoModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -186,13 +187,13 @@
     <Content Include="Chosen\index.html" />
     <Content Include="Chosen\index.proto.html" />
     <Content Include="Chosen\options.html" />
+    <None Include="Connected Services\WebService\RequestWebService.disco" />
     <None Include="Connected Services\WebService\configuration91.svcinfo" />
     <None Include="Connected Services\WebService\configuration.svcinfo" />
     <None Include="Connected Services\WebService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\WebService\RequestWebService1.disco" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -414,19 +415,44 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Connected Services\WebService\RequestWebService.wsdl" />
+    <None Include="Connected Services\WebService\RequestWebService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\WebService\RequestWebService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\WebService\RequestWebService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\WebService\request_web.WebService.AttachmentDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <Content Include="Connected Services\WebService\request_web.WebService.CityDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\request_web.WebService.NoteDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\WebService\request_web.WebService.RequestForListDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\WebService\request_web.WebService.WebUserDto.datasource">
+    <Content Include="Connected Services\WebService\request_web.WebService.ServiceDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\WebService\request_web.WebService.WorkerDto.datasource">
+    <Content Include="Connected Services\WebService\request_web.WebService.StatInfoDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\request_web.WebService.StatusDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\WebService\request_web.WebService.StreetDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\request_web.WebService.WebCallsDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\request_web.WebService.WebFlatDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\WebService\request_web.WebService.WebHouseDto.datasource">
@@ -435,32 +461,10 @@
     <Content Include="Connected Services\WebService\request_web.WebService.WebStatusDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\WebService\request_web.WebService.ServiceDto.datasource">
+    <Content Include="Connected Services\WebService\request_web.WebService.WebUserDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\WebService\request_web.WebService.WebFlatDto.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\WebService\RequestWebService1.wsdl" />
-    <None Include="Connected Services\WebService\RequestWebService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\WebService\RequestWebService31.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\WebService\RequestWebService32.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Connected Services\WebService\request_web.WebService.StatInfoDto.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\WebService\request_web.WebService.WebCallsDto.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\WebService\request_web.WebService.StatusDto.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\WebService\request_web.WebService.AttachmentDto.datasource">
+    <Content Include="Connected Services\WebService\request_web.WebService.WorkerDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -591,6 +595,7 @@
     <Content Include="Views\Requests\Close.cshtml" />
     <Content Include="Views\Requests\CreateNew.cshtml" />
     <Content Include="Views\Stat\GeneralInfo.cshtml" />
+    <Content Include="Views\Requests\AddNote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

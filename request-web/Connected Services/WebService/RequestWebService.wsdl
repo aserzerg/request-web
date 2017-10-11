@@ -109,6 +109,18 @@
   <wsdl:message name="IRequestWebService_GetAttachmentList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAttachmentListResponse" />
   </wsdl:message>
+  <wsdl:message name="IRequestWebService_AddNote_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNote" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_AddNote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetNotes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotes" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetNotes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotesResponse" />
+  </wsdl:message>
   <wsdl:message name="IRequestWebService_ChangeState_InputMessage">
     <wsdl:part name="parameters" element="tns:ChangeState" />
   </wsdl:message>
@@ -201,6 +213,14 @@
     <wsdl:operation name="GetAttachmentList">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetAttachmentList" message="tns:IRequestWebService_GetAttachmentList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetAttachmentListResponse" message="tns:IRequestWebService_GetAttachmentList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNote">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/AddNote" message="tns:IRequestWebService_AddNote_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/AddNoteResponse" message="tns:IRequestWebService_AddNote_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNotes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetNotes" message="tns:IRequestWebService_GetNotes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetNotesResponse" message="tns:IRequestWebService_GetNotes_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ChangeState">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/ChangeState" message="tns:IRequestWebService_ChangeState_InputMessage" />
@@ -367,6 +387,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetAttachmentList">
       <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetAttachmentList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNote">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/AddNote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNotes">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetNotes" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

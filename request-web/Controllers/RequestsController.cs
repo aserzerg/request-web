@@ -252,6 +252,7 @@ namespace request_web.Controllers
                 var worker = $"{request.Worker?.SurName} {request.Worker?.FirstName} {request.Worker?.PatrName}";
                 var contactList = request.ContactPhones;
                 var attachments = requestService.GetAttachmentList(request.Id);
+                var notes = requestService.GetNotes(request.Id);
                 var callList = requestService.GetWebCallsByRequestId(request.Id);
 
                 return View(new RequestDetailModel()
@@ -266,10 +267,38 @@ namespace request_web.Controllers
                     WorkDate = request.ExecuteTime,
                     Contacts = contactList,
                     CallList = callList,
-                    Attachments = attachments
+                    Attachments = attachments,
+                    Notes = notes
                 });
             }
         }
+
+        [Authorize]
+        public ActionResult AddNote(string RequestStr)
+        {
+            var requestId = Request.Params["RequestId"];
+            //ViewBag.Processed = true;
+            var model = new AddNoteModel(){RequestId = Convert.ToInt32(requestId) };
+            if (HttpContext.Request.RequestType.ToUpper() == "POST")
+                return View("Close");
+           return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddNote(AddNoteModel model, string action)
+        {
+            if (model.RequestId > 0)
+            {
+                var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
+                using (var requestService = new RequestWebServiceClient())
+                {
+                    requestService.AddNote(model.RequestId, model.Note, currentUser.UserId);
+                }
+            }
+            return Redirect(Url.Action("Details", "Requests") + $"?RequestId={model.RequestId}");
+        }
+
+
         [Authorize]
         public ActionResult ChangeStatus(string RequestStr)
         {
@@ -287,7 +316,7 @@ namespace request_web.Controllers
                 currentStatus = request.StatusId;
             }
 
-            var model = new ChangeStatusModel {RequestId = Convert.ToInt32(requestId),CurrentStatus = webStatuses.FirstOrDefault(s => s.Id == currentStatus)?.Id??0, StatusList = new SelectList(webStatuses, "Id", "Description") };
+            var model = new ChangeStatusModel { RequestId = Convert.ToInt32(requestId), CurrentStatus = webStatuses.FirstOrDefault(s => s.Id == currentStatus)?.Id ?? 0, StatusList = new SelectList(webStatuses, "Id", "Description") };
 
             if (HttpContext.Request.RequestType.ToUpper() == "POST")
                 return View("Close");
