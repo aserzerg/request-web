@@ -12,6 +12,8 @@ namespace request_web.Models
         public DateTime CreateTime { get; set; }
         public DateTime? WorkDate { get; set; }
         public string WorkPeriod { get; set; }
+        public string ParentService { get; set; }
+        public string Service { get; set; }
         public string Description { get; set; }
         public string State { get; set; }
         public string Contacts { get; set; }

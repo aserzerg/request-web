@@ -39,6 +39,18 @@
         @Html.DisplayFor(model => model.Contacts)
     </dd>
     <dt>
+        @Html.Label("Услуга:", new { @class = "pull-left" })
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.ParentService)
+    </dd>
+    <dt>
+        @Html.Label("Причина:", new { @class = "pull-left" })
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Service)
+    </dd>
+    <dt>
         @Html.Label("Описание:", new {@class = "pull-left"})
     </dt>
     <dd>
@@ -85,7 +97,7 @@
             <td>@callInfo.PhoneNumber</td>
             <td>
                 <audio class="aud" preload="none" controls="" style="width: 380px; display:  block">
-                    <source src="/Requests/GetMediaByRequestId?RequestId=@callInfo.RequestId" type="audio/wav">
+                    <source src="/Requests/GetRecordById?Id=@callInfo.Id" type="audio/wav">
                 </audio>
             </td>
         </tr>

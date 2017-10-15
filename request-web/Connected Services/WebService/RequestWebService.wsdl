@@ -73,6 +73,12 @@
   <wsdl:message name="IRequestWebService_GetMediaByRequestId_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetMediaByRequestIdResponse" />
   </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetRecordById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRecordById" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetRecordById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRecordByIdResponse" />
+  </wsdl:message>
   <wsdl:message name="IRequestWebService_GetRequestByUsersInto_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRequestByUsersInto" />
   </wsdl:message>
@@ -189,6 +195,10 @@
     <wsdl:operation name="GetMediaByRequestId">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetMediaByRequestId" message="tns:IRequestWebService_GetMediaByRequestId_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetMediaByRequestIdResponse" message="tns:IRequestWebService_GetMediaByRequestId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecordById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRecordById" message="tns:IRequestWebService_GetRecordById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRecordByIdResponse" message="tns:IRequestWebService_GetRecordById_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetRequestByUsersInto">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByUsersInto" message="tns:IRequestWebService_GetRequestByUsersInto_InputMessage" />
@@ -333,6 +343,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetMediaByRequestId">
       <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetMediaByRequestId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecordById">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetRecordById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

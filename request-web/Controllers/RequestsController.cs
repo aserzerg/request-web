@@ -261,6 +261,8 @@ namespace request_web.Controllers
                     Address = request.StreetName + " " + request.Building + (string.IsNullOrEmpty(request.Corpus) ? "" : "/" + request.Corpus) + ", " + request.Flat,
                     Worker = worker,
                     CreateTime = request.CreateTime,
+                    ParentService = request.ParentService,
+                    Service = request.Service,
                     Description = request.Description,
                     Creator = request.CreateUser.SurName + " " + request.CreateUser.FirstName + " " + request.CreateUser.PatrName,
                     State = request.Status,
@@ -348,11 +350,11 @@ namespace request_web.Controllers
         }
 
         [Authorize]
-        public ActionResult GetMediaByRequestId(int requestId)
+        public ActionResult GetRecordById(int Id)
         {
             using (var requestService = new RequestWebServiceClient())
             {
-                var t = requestService.GetMediaByRequestId(requestId);
+                var t = requestService.GetRecordById(Id);
                 Response.Headers["accept-ranges"] = "bytes";
                 Response.Headers["Content-Length"] = t.Length.ToString();
 

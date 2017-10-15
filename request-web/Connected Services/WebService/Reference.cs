@@ -1430,13 +1430,13 @@ namespace request_web.WebService {
         private System.DateTime CreateTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MonitorFileField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhoneNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int RequestIdField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1457,6 +1457,19 @@ namespace request_web.WebService {
                 if ((this.CreateTimeField.Equals(value) != true)) {
                     this.CreateTimeField = value;
                     this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
@@ -1483,19 +1496,6 @@ namespace request_web.WebService {
                 if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
                     this.PhoneNumberField = value;
                     this.RaisePropertyChanged("PhoneNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int RequestId {
-            get {
-                return this.RequestIdField;
-            }
-            set {
-                if ((this.RequestIdField.Equals(value) != true)) {
-                    this.RequestIdField = value;
-                    this.RaisePropertyChanged("RequestId");
                 }
             }
         }
@@ -2061,6 +2061,12 @@ namespace request_web.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetMediaByRequestId", ReplyAction="http://tempuri.org/IRequestWebService/GetMediaByRequestIdResponse")]
         System.Threading.Tasks.Task<byte[]> GetMediaByRequestIdAsync(int requestId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRecordById", ReplyAction="http://tempuri.org/IRequestWebService/GetRecordByIdResponse")]
+        byte[] GetRecordById(int recordId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRecordById", ReplyAction="http://tempuri.org/IRequestWebService/GetRecordByIdResponse")]
+        System.Threading.Tasks.Task<byte[]> GetRecordByIdAsync(int recordId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestByUsersInto", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByUsersIntoResponse")]
         request_web.WebService.StatInfoDto[] GetRequestByUsersInto();
         
@@ -2247,6 +2253,14 @@ namespace request_web.WebService {
         
         public System.Threading.Tasks.Task<byte[]> GetMediaByRequestIdAsync(int requestId) {
             return base.Channel.GetMediaByRequestIdAsync(requestId);
+        }
+        
+        public byte[] GetRecordById(int recordId) {
+            return base.Channel.GetRecordById(recordId);
+        }
+        
+        public System.Threading.Tasks.Task<byte[]> GetRecordByIdAsync(int recordId) {
+            return base.Channel.GetRecordByIdAsync(recordId);
         }
         
         public request_web.WebService.StatInfoDto[] GetRequestByUsersInto() {

@@ -189,9 +189,9 @@
   <xs:complexType name="WebCallsDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="MonitorFile" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="RequestId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="WebCallsDto" nillable="true" type="tns:WebCallsDto" />
