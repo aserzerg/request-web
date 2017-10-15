@@ -49,7 +49,8 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Highcharts.Web.Mvc, Version=5.0.6461.11763, Culture=neutral, PublicKeyToken=90b74bd27a557bd3, processorArchitecture=MSIL">
-      <HintPath>..\packages\Highsoft.Highcharts.5.0.6461.11763\lib\net40\Highcharts.Web.Mvc.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Highsoft.Highcharts\Highcharts.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.7\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
