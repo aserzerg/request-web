@@ -41,6 +41,7 @@
         <xs:element minOccurs="0" name="FilterStatusId" nillable="true" type="xs:int" />
         <xs:element minOccurs="0" name="FilterParrentServiceId" nillable="true" type="xs:int" />
         <xs:element minOccurs="0" name="FilterServiceId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="badWork" type="xs:boolean" />
         <xs:element minOccurs="0" name="clientPhone" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>

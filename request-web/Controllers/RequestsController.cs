@@ -25,6 +25,7 @@ namespace request_web.Controllers
         private const string ServSessionName = "request_service";
         private const string FilteringSessionName = "request_filtering";
         private const string PhoneSessionName = "request_phoneNumber";
+        private const string IsBadWorkSessionName = "request_is_bad_work";
         public RequestsController()
         {
         }
@@ -66,7 +67,7 @@ namespace request_web.Controllers
 
         private RequestListModel GetViewModel(DateTime fromDate, DateTime toDate, int selectedWorkerId,
             int selectedStreetId, int selectedStatusId, int selectedHouseId, int selectedAddressId,
-            int selectedParServId, int selectedServiceId, bool filterIsChecked, string phoneNumber)
+            int selectedParServId, int selectedServiceId, bool filterIsChecked, string phoneNumber, bool isBadWork)
         {
             var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
             var workerId = currentUser.WorkerId;
@@ -165,7 +166,7 @@ namespace request_web.Controllers
             selectedStatusId > 0 ? selectedStatusId : 2,
             selectedParServId > 0 ? selectedParServId : (int?)null,
             selectedServiceId > 0 ? selectedServiceId : (int?)null,
-            phoneNumber);
+            isBadWork, phoneNumber);
                 #endregion
                 return new RequestListModel
                 {
@@ -178,6 +179,7 @@ namespace request_web.Controllers
                     Statuses = statuses,
                     Houses = houses,
                     AdditionFiltering = filterIsChecked,
+                    IsBadWork = isBadWork,
                     ParentServices = parentServices,
                     Addresses = addresses,
                     Services = services
@@ -198,10 +200,11 @@ namespace request_web.Controllers
             var selectedServiceId = (int?)Session[ServSessionName] ?? 0;
             var filterIsChecked = (bool?)Session[FilteringSessionName] ?? false;
             var phoneNumber = (string)Session[PhoneSessionName];
+            var isBadWork = (bool?)Session[IsBadWorkSessionName] ?? false;
 
 
             var viewModel = GetViewModel(fromDate, toDate, selectedWorkerId,selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
-                        selectedParServId, selectedServiceId, filterIsChecked, phoneNumber);
+                        selectedParServId, selectedServiceId, filterIsChecked, phoneNumber, isBadWork);
             return View(viewModel);
         }
 
@@ -227,10 +230,11 @@ namespace request_web.Controllers
             Session[ParServSessionName] = selectedParServId;
             Session[ServSessionName] = selectedServiceId;
             Session[PhoneSessionName] = model.PhoneNumber;
+            Session[IsBadWorkSessionName] = model.IsBadWork;
 
 
             var viewModel = GetViewModel(model.FromDate, model.ToDate, selectedWorkerId, selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
-                        selectedParServId, selectedServiceId, model.AdditionFiltering, model.PhoneNumber);
+                        selectedParServId, selectedServiceId, model.AdditionFiltering, model.PhoneNumber,model.IsBadWork);
             return View(viewModel);
         }
 

@@ -22,6 +22,8 @@ namespace request_web.Models
 
         [Display(Name = "Доп. фильтры")]
         public bool AdditionFiltering { get; set; }
+        [Display(Name = "Для обсуждения!")]
+        public bool IsBadWork { get; set; }
 
         public RequestForListDto[] Requests { get; set; }
         public WorkerShortDto[] Workers { get; set; }

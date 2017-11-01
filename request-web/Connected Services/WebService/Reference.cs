@@ -228,6 +228,9 @@ namespace request_web.WebService {
         private string AddressTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool BadWorkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string BuildingField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -261,13 +264,22 @@ namespace request_web.WebService {
         private bool HasAttachmentField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool HasRecordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsBadWorkField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ParentServiceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RatingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RecordUniqueIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ServiceField;
@@ -312,6 +324,19 @@ namespace request_web.WebService {
                 if ((object.ReferenceEquals(this.AddressTypeField, value) != true)) {
                     this.AddressTypeField = value;
                     this.RaisePropertyChanged("AddressType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool BadWork {
+            get {
+                return this.BadWorkField;
+            }
+            set {
+                if ((this.BadWorkField.Equals(value) != true)) {
+                    this.BadWorkField = value;
+                    this.RaisePropertyChanged("BadWork");
                 }
             }
         }
@@ -460,6 +485,19 @@ namespace request_web.WebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool HasRecord {
+            get {
+                return this.HasRecordField;
+            }
+            set {
+                if ((this.HasRecordField.Equals(value) != true)) {
+                    this.HasRecordField = value;
+                    this.RaisePropertyChanged("HasRecord");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Id {
             get {
                 return this.IdField;
@@ -468,6 +506,19 @@ namespace request_web.WebService {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsBadWork {
+            get {
+                return this.IsBadWorkField;
+            }
+            set {
+                if ((this.IsBadWorkField.Equals(value) != true)) {
+                    this.IsBadWorkField = value;
+                    this.RaisePropertyChanged("IsBadWork");
                 }
             }
         }
@@ -494,6 +545,19 @@ namespace request_web.WebService {
                 if ((object.ReferenceEquals(this.RatingField, value) != true)) {
                     this.RatingField = value;
                     this.RaisePropertyChanged("Rating");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RecordUniqueId {
+            get {
+                return this.RecordUniqueIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RecordUniqueIdField, value) != true)) {
+                    this.RecordUniqueIdField = value;
+                    this.RaisePropertyChanged("RecordUniqueId");
                 }
             }
         }
@@ -2008,10 +2072,10 @@ namespace request_web.WebService {
         System.Threading.Tasks.Task<request_web.WebService.WebUserDto> LoginAsync(string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/RequestList", ReplyAction="http://tempuri.org/IRequestWebService/RequestListResponse")]
-        request_web.WebService.RequestForListDto[] RequestList(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, string clientPhone);
+        request_web.WebService.RequestForListDto[] RequestList(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, bool badWork, string clientPhone);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/RequestList", ReplyAction="http://tempuri.org/IRequestWebService/RequestListResponse")]
-        System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, string clientPhone);
+        System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, bool badWork, string clientPhone);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestById", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByIdResponse")]
         request_web.WebService.RequestForListDto GetRequestById(int requestId);
@@ -2183,12 +2247,12 @@ namespace request_web.WebService {
             return base.Channel.LoginAsync(login, password);
         }
         
-        public request_web.WebService.RequestForListDto[] RequestList(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, string clientPhone) {
-            return base.Channel.RequestList(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId, clientPhone);
+        public request_web.WebService.RequestForListDto[] RequestList(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, bool badWork, string clientPhone) {
+            return base.Channel.RequestList(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId, badWork, clientPhone);
         }
         
-        public System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, string clientPhone) {
-            return base.Channel.RequestListAsync(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId, clientPhone);
+        public System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, bool badWork, string clientPhone) {
+            return base.Channel.RequestListAsync(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId, badWork, clientPhone);
         }
         
         public request_web.WebService.RequestForListDto GetRequestById(int requestId) {

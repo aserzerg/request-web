@@ -39,9 +39,7 @@
                     dateFormat: 'dd.mm.yy',
                     inline: true,
                     changeYear: true,
-                    changeMonth: true,
-                    yearRange: "2017:",
-                    maxDate: "0"
+                    changeMonth: true
                 });
         });
 
@@ -164,6 +162,9 @@
             <div style="margin-top: 10px">
                 @Html.Label("Телефон абонента:", new { @class = "control-label mr-sm-2" })
                 @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", style = "height: 25px; width: 180px ", placeholder = Html.DisplayName("Введите номер телефона") })
+                @Html.CheckBoxFor(m => m.IsBadWork, new { @class = "checkbox", style = "margin-left:50px; height: 25px" })
+                @Html.LabelFor(m => m.IsBadWork, new { @class = "control-label mr-sm-2", style = "color: red;" })
+
             </div>
     </div>
 </div>
