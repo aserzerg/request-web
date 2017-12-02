@@ -228,6 +228,9 @@ namespace request_web.WebService {
         private string AddressTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> AlertTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool BadWorkField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -279,6 +282,9 @@ namespace request_web.WebService {
         private string RatingField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RatingDescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RecordUniqueIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -324,6 +330,19 @@ namespace request_web.WebService {
                 if ((object.ReferenceEquals(this.AddressTypeField, value) != true)) {
                     this.AddressTypeField = value;
                     this.RaisePropertyChanged("AddressType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> AlertTime {
+            get {
+                return this.AlertTimeField;
+            }
+            set {
+                if ((this.AlertTimeField.Equals(value) != true)) {
+                    this.AlertTimeField = value;
+                    this.RaisePropertyChanged("AlertTime");
                 }
             }
         }
@@ -545,6 +564,19 @@ namespace request_web.WebService {
                 if ((object.ReferenceEquals(this.RatingField, value) != true)) {
                     this.RatingField = value;
                     this.RaisePropertyChanged("Rating");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RatingDescription {
+            get {
+                return this.RatingDescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RatingDescriptionField, value) != true)) {
+                    this.RatingDescriptionField = value;
+                    this.RaisePropertyChanged("RatingDescription");
                 }
             }
         }
@@ -1353,6 +1385,9 @@ namespace request_web.WebService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool CanSendSmsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1365,6 +1400,19 @@ namespace request_web.WebService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanSendSms {
+            get {
+                return this.CanSendSmsField;
+            }
+            set {
+                if ((this.CanSendSmsField.Equals(value) != true)) {
+                    this.CanSendSmsField = value;
+                    this.RaisePropertyChanged("CanSendSms");
+                }
             }
         }
         
@@ -2055,6 +2103,381 @@ namespace request_web.WebService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AppRequestDto", Namespace="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto")]
+    [System.SerializableAttribute()]
+    public partial class AppRequestDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BuildingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorpusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FlatField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PrimaryTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ServiceTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StreetNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Building {
+            get {
+                return this.BuildingField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BuildingField, value) != true)) {
+                    this.BuildingField = value;
+                    this.RaisePropertyChanged("Building");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Corpus {
+            get {
+                return this.CorpusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorpusField, value) != true)) {
+                    this.CorpusField = value;
+                    this.RaisePropertyChanged("Corpus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateTime {
+            get {
+                return this.CreateTimeField;
+            }
+            set {
+                if ((this.CreateTimeField.Equals(value) != true)) {
+                    this.CreateTimeField = value;
+                    this.RaisePropertyChanged("CreateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Flat {
+            get {
+                return this.FlatField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FlatField, value) != true)) {
+                    this.FlatField = value;
+                    this.RaisePropertyChanged("Flat");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PrimaryType {
+            get {
+                return this.PrimaryTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PrimaryTypeField, value) != true)) {
+                    this.PrimaryTypeField = value;
+                    this.RaisePropertyChanged("PrimaryType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ServiceType {
+            get {
+                return this.ServiceTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ServiceTypeField, value) != true)) {
+                    this.ServiceTypeField = value;
+                    this.RaisePropertyChanged("ServiceType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string State {
+            get {
+                return this.StateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StateField, value) != true)) {
+                    this.StateField = value;
+                    this.RaisePropertyChanged("State");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StreetName {
+            get {
+                return this.StreetNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StreetNameField, value) != true)) {
+                    this.StreetNameField = value;
+                    this.RaisePropertyChanged("StreetName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AppTypeDto", Namespace="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto")]
+    [System.SerializableAttribute()]
+    public partial class AppTypeDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ParrentIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ParrentId {
+            get {
+                return this.ParrentIdField;
+            }
+            set {
+                if ((this.ParrentIdField.Equals(value) != true)) {
+                    this.ParrentIdField = value;
+                    this.RaisePropertyChanged("ParrentId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AppAddressDto", Namespace="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto")]
+    [System.SerializableAttribute()]
+    public partial class AppAddressDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BuildingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorpusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FlatField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StreetNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Building {
+            get {
+                return this.BuildingField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BuildingField, value) != true)) {
+                    this.BuildingField = value;
+                    this.RaisePropertyChanged("Building");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Corpus {
+            get {
+                return this.CorpusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorpusField, value) != true)) {
+                    this.CorpusField = value;
+                    this.RaisePropertyChanged("Corpus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Flat {
+            get {
+                return this.FlatField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FlatField, value) != true)) {
+                    this.FlatField = value;
+                    this.RaisePropertyChanged("Flat");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string StreetName {
+            get {
+                return this.StreetNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StreetNameField, value) != true)) {
+                    this.StreetNameField = value;
+                    this.RaisePropertyChanged("StreetName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WebService.IRequestWebService")]
     public interface IRequestWebService {
@@ -2131,11 +2554,11 @@ namespace request_web.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRecordById", ReplyAction="http://tempuri.org/IRequestWebService/GetRecordByIdResponse")]
         System.Threading.Tasks.Task<byte[]> GetRecordByIdAsync(int recordId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestByUsersInto", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByUsersIntoResponse")]
-        request_web.WebService.StatInfoDto[] GetRequestByUsersInto();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestByUsersInfo", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByUsersInfoResponse")]
+        request_web.WebService.StatInfoDto[] GetRequestByUsersInfo();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestByUsersInto", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByUsersIntoResponse")]
-        System.Threading.Tasks.Task<request_web.WebService.StatInfoDto[]> GetRequestByUsersIntoAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestByUsersInfo", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByUsersInfoResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.StatInfoDto[]> GetRequestByUsersInfoAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetWebCallsByRequestId", ReplyAction="http://tempuri.org/IRequestWebService/GetWebCallsByRequestIdResponse")]
         request_web.WebService.WebCallsDto[] GetWebCallsByRequestId(int requestId);
@@ -2143,11 +2566,11 @@ namespace request_web.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetWebCallsByRequestId", ReplyAction="http://tempuri.org/IRequestWebService/GetWebCallsByRequestIdResponse")]
         System.Threading.Tasks.Task<request_web.WebService.WebCallsDto[]> GetWebCallsByRequestIdAsync(int requestId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersInto", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByWorkersIntoResponse")]
-        request_web.WebService.StatInfoDto[] GetRequestByWorkersInto();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersInfo", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByWorkersInfoResponse")]
+        request_web.WebService.StatInfoDto[] GetRequestByWorkersInfo();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersInto", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByWorkersIntoResponse")]
-        System.Threading.Tasks.Task<request_web.WebService.StatInfoDto[]> GetRequestByWorkersIntoAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersInfo", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByWorkersInfoResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.StatInfoDto[]> GetRequestByWorkersInfoAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWeb", ReplyAction="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWebResponse")]
         request_web.WebService.StatusDto[] GetStatusesAllowedInWeb();
@@ -2191,11 +2614,41 @@ namespace request_web.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/SaveRedirectPhone", ReplyAction="http://tempuri.org/IRequestWebService/SaveRedirectPhoneResponse")]
         System.Threading.Tasks.Task SaveRedirectPhoneAsync(string secret, string phoneNumber);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestsByPhone", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestsByPhoneResponse")]
+        request_web.WebService.AppRequestDto[] GetRequestsByPhone(string phone, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestsByPhone", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestsByPhoneResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.AppRequestDto[]> GetRequestsByPhoneAsync(string phone, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetTypesByPhone", ReplyAction="http://tempuri.org/IRequestWebService/GetTypesByPhoneResponse")]
+        request_web.WebService.AppTypeDto[] GetTypesByPhone(string phone, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetTypesByPhone", ReplyAction="http://tempuri.org/IRequestWebService/GetTypesByPhoneResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.AppTypeDto[]> GetTypesByPhoneAsync(string phone, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetAddressesByPhone", ReplyAction="http://tempuri.org/IRequestWebService/GetAddressesByPhoneResponse")]
+        request_web.WebService.AppAddressDto[] GetAddressesByPhone(string phone, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetAddressesByPhone", ReplyAction="http://tempuri.org/IRequestWebService/GetAddressesByPhoneResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.AppAddressDto[]> GetAddressesByPhoneAsync(string phone, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/CreateRequestFromPhone", ReplyAction="http://tempuri.org/IRequestWebService/CreateRequestFromPhoneResponse")]
+        void CreateRequestFromPhone(string phone, string code, int addressId, int typeId, string description);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/CreateRequestFromPhone", ReplyAction="http://tempuri.org/IRequestWebService/CreateRequestFromPhoneResponse")]
+        System.Threading.Tasks.Task CreateRequestFromPhoneAsync(string phone, string code, int addressId, int typeId, string description);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRedirectPhone", ReplyAction="http://tempuri.org/IRequestWebService/GetRedirectPhoneResponse")]
         string GetRedirectPhone();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRedirectPhone", ReplyAction="http://tempuri.org/IRequestWebService/GetRedirectPhoneResponse")]
         System.Threading.Tasks.Task<string> GetRedirectPhoneAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetWorkerStat", ReplyAction="http://tempuri.org/IRequestWebService/GetWorkerStatResponse")]
+        request_web.WebService.StatInfoDto[] GetWorkerStat(int currentWorkerId, System.DateTime fromDate, System.DateTime toDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetWorkerStat", ReplyAction="http://tempuri.org/IRequestWebService/GetWorkerStatResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.StatInfoDto[]> GetWorkerStatAsync(int currentWorkerId, System.DateTime fromDate, System.DateTime toDate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestActs", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestActsResponse")]
         byte[] GetRequestActs(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId);
@@ -2327,12 +2780,12 @@ namespace request_web.WebService {
             return base.Channel.GetRecordByIdAsync(recordId);
         }
         
-        public request_web.WebService.StatInfoDto[] GetRequestByUsersInto() {
-            return base.Channel.GetRequestByUsersInto();
+        public request_web.WebService.StatInfoDto[] GetRequestByUsersInfo() {
+            return base.Channel.GetRequestByUsersInfo();
         }
         
-        public System.Threading.Tasks.Task<request_web.WebService.StatInfoDto[]> GetRequestByUsersIntoAsync() {
-            return base.Channel.GetRequestByUsersIntoAsync();
+        public System.Threading.Tasks.Task<request_web.WebService.StatInfoDto[]> GetRequestByUsersInfoAsync() {
+            return base.Channel.GetRequestByUsersInfoAsync();
         }
         
         public request_web.WebService.WebCallsDto[] GetWebCallsByRequestId(int requestId) {
@@ -2343,12 +2796,12 @@ namespace request_web.WebService {
             return base.Channel.GetWebCallsByRequestIdAsync(requestId);
         }
         
-        public request_web.WebService.StatInfoDto[] GetRequestByWorkersInto() {
-            return base.Channel.GetRequestByWorkersInto();
+        public request_web.WebService.StatInfoDto[] GetRequestByWorkersInfo() {
+            return base.Channel.GetRequestByWorkersInfo();
         }
         
-        public System.Threading.Tasks.Task<request_web.WebService.StatInfoDto[]> GetRequestByWorkersIntoAsync() {
-            return base.Channel.GetRequestByWorkersIntoAsync();
+        public System.Threading.Tasks.Task<request_web.WebService.StatInfoDto[]> GetRequestByWorkersInfoAsync() {
+            return base.Channel.GetRequestByWorkersInfoAsync();
         }
         
         public request_web.WebService.StatusDto[] GetStatusesAllowedInWeb() {
@@ -2407,12 +2860,52 @@ namespace request_web.WebService {
             return base.Channel.SaveRedirectPhoneAsync(secret, phoneNumber);
         }
         
+        public request_web.WebService.AppRequestDto[] GetRequestsByPhone(string phone, string code) {
+            return base.Channel.GetRequestsByPhone(phone, code);
+        }
+        
+        public System.Threading.Tasks.Task<request_web.WebService.AppRequestDto[]> GetRequestsByPhoneAsync(string phone, string code) {
+            return base.Channel.GetRequestsByPhoneAsync(phone, code);
+        }
+        
+        public request_web.WebService.AppTypeDto[] GetTypesByPhone(string phone, string code) {
+            return base.Channel.GetTypesByPhone(phone, code);
+        }
+        
+        public System.Threading.Tasks.Task<request_web.WebService.AppTypeDto[]> GetTypesByPhoneAsync(string phone, string code) {
+            return base.Channel.GetTypesByPhoneAsync(phone, code);
+        }
+        
+        public request_web.WebService.AppAddressDto[] GetAddressesByPhone(string phone, string code) {
+            return base.Channel.GetAddressesByPhone(phone, code);
+        }
+        
+        public System.Threading.Tasks.Task<request_web.WebService.AppAddressDto[]> GetAddressesByPhoneAsync(string phone, string code) {
+            return base.Channel.GetAddressesByPhoneAsync(phone, code);
+        }
+        
+        public void CreateRequestFromPhone(string phone, string code, int addressId, int typeId, string description) {
+            base.Channel.CreateRequestFromPhone(phone, code, addressId, typeId, description);
+        }
+        
+        public System.Threading.Tasks.Task CreateRequestFromPhoneAsync(string phone, string code, int addressId, int typeId, string description) {
+            return base.Channel.CreateRequestFromPhoneAsync(phone, code, addressId, typeId, description);
+        }
+        
         public string GetRedirectPhone() {
             return base.Channel.GetRedirectPhone();
         }
         
         public System.Threading.Tasks.Task<string> GetRedirectPhoneAsync() {
             return base.Channel.GetRedirectPhoneAsync();
+        }
+        
+        public request_web.WebService.StatInfoDto[] GetWorkerStat(int currentWorkerId, System.DateTime fromDate, System.DateTime toDate) {
+            return base.Channel.GetWorkerStat(currentWorkerId, fromDate, toDate);
+        }
+        
+        public System.Threading.Tasks.Task<request_web.WebService.StatInfoDto[]> GetWorkerStatAsync(int currentWorkerId, System.DateTime fromDate, System.DateTime toDate) {
+            return base.Channel.GetWorkerStatAsync(currentWorkerId, fromDate, toDate);
         }
         
         public byte[] GetRequestActs(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId) {

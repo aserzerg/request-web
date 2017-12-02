@@ -1,0 +1,103 @@
+﻿@model request_web.Models.ServiceCompanyGeneralInfoModel
+@{
+    ViewBag.Title = "ServiceCompanyGeneralInfo";
+}
+@Scripts.Render("~/Scripts/HighCharts/highcharts.js", "~/Scripts/HighCharts/exporting.js")
+
+<h2>Статистика УК</h2>
+@Scripts.Render("~/Scripts/jquery.maskedinput.js")
+<script type="text/javascript">
+    $(function () {
+        $('#FromDate, #ToDate').mask("99.99.9999");
+    });
+
+    $(function () {
+        $(function () {
+            $('.datepicker')
+                .datepicker({
+                    dateFormat: 'dd.mm.yy',
+                    inline: true,
+                    changeYear: true,
+                    changeMonth: true
+                });
+        });
+
+        $.datepicker.setDefaults($.datepicker.regional['ru']);
+    });
+</script>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false, "Пожалуйста, укажите коррекные даты!")
+    <div class="form-inline pull-right" style="margin-bottom: 15px; horiz-align: center; position: relative">
+
+        <b style="vertical-align: middle;">За период</b>
+        @Html.TextBoxFor(m => m.FromDate, new { @class = "datepicker form-control", style = "height: 25px; width: 110px", placeholder = Html.DisplayName("Введите дату") })
+
+        @Html.Label("-", new { @class = "control-label mr-sm-2" })
+        @Html.TextBoxFor(m => m.ToDate, new { @class = "datepicker form-control", style = "height: 25px; width: 110px ", placeholder = Html.DisplayName("Введите дату") })
+    </div>
+    <div>
+        @using Highsoft.Web.Mvc.Charts
+        <div style="margin-top: 25px;">
+            @(Html.Highsoft().Highcharts(
+                  new Highcharts
+                  {
+                      Title = new Title { Text = "Количество заявок", X = -20 },
+                      //Subtitle = new Subtitle{Text = "Source: WorldClimate.com",X = -20},
+                      XAxis = new List<XAxis>
+                      {
+                          new XAxis {Categories = @Model.RequestsByUsersXAxis,}
+                      },
+                      YAxis = new List<YAxis>
+                      {
+                          new YAxis
+                          {
+                              Title = new YAxisTitle {Text = "Количество"},
+                              PlotLines = new List<YAxisPlotLines> {new YAxisPlotLines {Value = 0, Width = 1, Color = "#808080"}}
+                          }
+                      },
+                      //Tooltip = new Tooltip{ValueSuffix = "°C"},
+                      Legend = new Legend
+                      {
+                          Layout = LegendLayout.Vertical,
+                          Align = LegendAlign.Right,
+                          VerticalAlign = LegendVerticalAlign.Middle,
+                          BorderWidth = 0
+                      },
+                      Series = @Model.RequestsByUsersSeries
+                  }
+                  , "usersChart")
+                  )
+        </div>
+        <div style="margin-top: 25px; display: none">
+            @(Html.Highsoft().Highcharts(
+                  new Highcharts
+                  {
+                      Title = new Title { Text = "Заявки по исполнителям", X = -20 },
+                      XAxis = new List<XAxis>
+                      {
+                          new XAxis {Categories = @Model.RequestsByWorkersXAxis,}
+                      },
+                      YAxis = new List<YAxis>
+                      {
+                          new YAxis
+                          {
+                              Title = new YAxisTitle {Text = "Количество"},
+                              PlotLines = new List<YAxisPlotLines> {new YAxisPlotLines {Value = 0, Width = 1, Color = "#808080"}}
+                          }
+                      },
+                      //Tooltip = new Tooltip{ValueSuffix = "°C"},
+                      Legend = new Legend
+                      {
+                          Layout = LegendLayout.Vertical,
+                          Align = LegendAlign.Right,
+                          VerticalAlign = LegendVerticalAlign.Middle,
+                          BorderWidth = 0
+                      },
+                      Series = @Model.RequestsByWorkersSeries
+                  }
+                  , "workersChart")
+                  )
+        </div>
+    </div>
+}

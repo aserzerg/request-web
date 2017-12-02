@@ -79,11 +79,11 @@
   <wsdl:message name="IRequestWebService_GetRecordById_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRecordByIdResponse" />
   </wsdl:message>
-  <wsdl:message name="IRequestWebService_GetRequestByUsersInto_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetRequestByUsersInto" />
+  <wsdl:message name="IRequestWebService_GetRequestByUsersInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestByUsersInfo" />
   </wsdl:message>
-  <wsdl:message name="IRequestWebService_GetRequestByUsersInto_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetRequestByUsersIntoResponse" />
+  <wsdl:message name="IRequestWebService_GetRequestByUsersInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestByUsersInfoResponse" />
   </wsdl:message>
   <wsdl:message name="IRequestWebService_GetWebCallsByRequestId_InputMessage">
     <wsdl:part name="parameters" element="tns:GetWebCallsByRequestId" />
@@ -91,11 +91,11 @@
   <wsdl:message name="IRequestWebService_GetWebCallsByRequestId_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetWebCallsByRequestIdResponse" />
   </wsdl:message>
-  <wsdl:message name="IRequestWebService_GetRequestByWorkersInto_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetRequestByWorkersInto" />
+  <wsdl:message name="IRequestWebService_GetRequestByWorkersInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestByWorkersInfo" />
   </wsdl:message>
-  <wsdl:message name="IRequestWebService_GetRequestByWorkersInto_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetRequestByWorkersIntoResponse" />
+  <wsdl:message name="IRequestWebService_GetRequestByWorkersInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestByWorkersInfoResponse" />
   </wsdl:message>
   <wsdl:message name="IRequestWebService_GetStatusesAllowedInWeb_InputMessage">
     <wsdl:part name="parameters" element="tns:GetStatusesAllowedInWeb" />
@@ -139,11 +139,41 @@
   <wsdl:message name="IRequestWebService_SaveRedirectPhone_OutputMessage">
     <wsdl:part name="parameters" element="tns:SaveRedirectPhoneResponse" />
   </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetRequestsByPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestsByPhone" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetRequestsByPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRequestsByPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetTypesByPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTypesByPhone" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetTypesByPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTypesByPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetAddressesByPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddressesByPhone" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetAddressesByPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddressesByPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_CreateRequestFromPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRequestFromPhone" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_CreateRequestFromPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRequestFromPhoneResponse" />
+  </wsdl:message>
   <wsdl:message name="IRequestWebService_GetRedirectPhone_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRedirectPhone" />
   </wsdl:message>
   <wsdl:message name="IRequestWebService_GetRedirectPhone_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRedirectPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetWorkerStat_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkerStat" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetWorkerStat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkerStatResponse" />
   </wsdl:message>
   <wsdl:message name="IRequestWebService_GetRequestActs_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRequestActs" />
@@ -200,17 +230,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRecordById" message="tns:IRequestWebService_GetRecordById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRecordByIdResponse" message="tns:IRequestWebService_GetRecordById_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetRequestByUsersInto">
-      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByUsersInto" message="tns:IRequestWebService_GetRequestByUsersInto_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByUsersIntoResponse" message="tns:IRequestWebService_GetRequestByUsersInto_OutputMessage" />
+    <wsdl:operation name="GetRequestByUsersInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByUsersInfo" message="tns:IRequestWebService_GetRequestByUsersInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByUsersInfoResponse" message="tns:IRequestWebService_GetRequestByUsersInfo_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetWebCallsByRequestId">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetWebCallsByRequestId" message="tns:IRequestWebService_GetWebCallsByRequestId_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetWebCallsByRequestIdResponse" message="tns:IRequestWebService_GetWebCallsByRequestId_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetRequestByWorkersInto">
-      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersInto" message="tns:IRequestWebService_GetRequestByWorkersInto_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersIntoResponse" message="tns:IRequestWebService_GetRequestByWorkersInto_OutputMessage" />
+    <wsdl:operation name="GetRequestByWorkersInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersInfo" message="tns:IRequestWebService_GetRequestByWorkersInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByWorkersInfoResponse" message="tns:IRequestWebService_GetRequestByWorkersInfo_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetStatusesAllowedInWeb">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetStatusesAllowedInWeb" message="tns:IRequestWebService_GetStatusesAllowedInWeb_InputMessage" />
@@ -240,9 +270,29 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/SaveRedirectPhone" message="tns:IRequestWebService_SaveRedirectPhone_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/SaveRedirectPhoneResponse" message="tns:IRequestWebService_SaveRedirectPhone_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetRequestsByPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestsByPhone" message="tns:IRequestWebService_GetRequestsByPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestsByPhoneResponse" message="tns:IRequestWebService_GetRequestsByPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTypesByPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetTypesByPhone" message="tns:IRequestWebService_GetTypesByPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetTypesByPhoneResponse" message="tns:IRequestWebService_GetTypesByPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressesByPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetAddressesByPhone" message="tns:IRequestWebService_GetAddressesByPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetAddressesByPhoneResponse" message="tns:IRequestWebService_GetAddressesByPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateRequestFromPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/CreateRequestFromPhone" message="tns:IRequestWebService_CreateRequestFromPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/CreateRequestFromPhoneResponse" message="tns:IRequestWebService_CreateRequestFromPhone_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetRedirectPhone">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRedirectPhone" message="tns:IRequestWebService_GetRedirectPhone_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRedirectPhoneResponse" message="tns:IRequestWebService_GetRedirectPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkerStat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetWorkerStat" message="tns:IRequestWebService_GetWorkerStat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetWorkerStatResponse" message="tns:IRequestWebService_GetWorkerStat_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetRequestActs">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestActs" message="tns:IRequestWebService_GetRequestActs_InputMessage" />
@@ -359,8 +409,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetRequestByUsersInto">
-      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetRequestByUsersInto" style="document" />
+    <wsdl:operation name="GetRequestByUsersInfo">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetRequestByUsersInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -377,8 +427,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetRequestByWorkersInto">
-      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetRequestByWorkersInto" style="document" />
+    <wsdl:operation name="GetRequestByWorkersInfo">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetRequestByWorkersInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -449,8 +499,53 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetRequestsByPhone">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetRequestsByPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTypesByPhone">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetTypesByPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressesByPhone">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetAddressesByPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRequestFromPhone">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/CreateRequestFromPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetRedirectPhone">
       <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetRedirectPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkerStat">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetWorkerStat" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

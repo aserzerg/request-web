@@ -150,6 +150,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
+    <Compile Include="Controllers\ServiceCompanyStatController.cs" />
     <Compile Include="Controllers\StatController.cs" />
     <Compile Include="Dto\AddressShortDto.cs" />
     <Compile Include="Dto\HouseShortDto.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RequestDetailModel.cs" />
     <Compile Include="Models\RequestListModel.cs" />
+    <Compile Include="Models\ServiceCompanyGeneralInfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -468,6 +470,15 @@
     <Content Include="Connected Services\WebService\request_web.WebService.WorkerDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\WebService\request_web.WebService.AppAddressDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\request_web.WebService.AppRequestDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\WebService\request_web.WebService.AppTypeDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -597,6 +608,8 @@
     <Content Include="Views\Requests\CreateNew.cshtml" />
     <Content Include="Views\Stat\GeneralInfo.cshtml" />
     <Content Include="Views\Requests\AddNote.cshtml" />
+    <Content Include="Views\Stat\ServiceCompanyGeneralInfo.cshtml" />
+    <Content Include="Views\ServiceCompanyStat\GeneralInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

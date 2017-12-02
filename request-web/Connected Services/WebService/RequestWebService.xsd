@@ -34,6 +34,7 @@
   <xs:complexType name="RequestForListDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="AddressType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AlertTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="BadWork" type="xs:boolean" />
       <xs:element minOccurs="0" name="Building" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ContactPhones" nillable="true" type="xs:string" />
@@ -51,6 +52,7 @@
       <xs:element minOccurs="0" name="IsBadWork" type="xs:boolean" />
       <xs:element minOccurs="0" name="ParentService" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Rating" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RatingDescription" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RecordUniqueId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Service" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SpendTime" nillable="true" type="xs:string" />
@@ -165,6 +167,7 @@
   <xs:element name="ArrayOfServiceDto" nillable="true" type="tns:ArrayOfServiceDto" />
   <xs:complexType name="ServiceDto">
     <xs:sequence>
+      <xs:element minOccurs="0" name="CanSendSms" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -269,4 +272,55 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="NoteDto" nillable="true" type="tns:NoteDto" />
+  <xs:complexType name="ArrayOfAppRequestDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AppRequestDto" nillable="true" type="tns:AppRequestDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAppRequestDto" nillable="true" type="tns:ArrayOfAppRequestDto" />
+  <xs:complexType name="AppRequestDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Building" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Corpus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Flat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="PrimaryType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServiceType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StreetName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AppRequestDto" nillable="true" type="tns:AppRequestDto" />
+  <xs:complexType name="ArrayOfAppTypeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AppTypeDto" nillable="true" type="tns:AppTypeDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAppTypeDto" nillable="true" type="tns:ArrayOfAppTypeDto" />
+  <xs:complexType name="AppTypeDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParrentId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AppTypeDto" nillable="true" type="tns:AppTypeDto" />
+  <xs:complexType name="ArrayOfAppAddressDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AppAddressDto" nillable="true" type="tns:AppAddressDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAppAddressDto" nillable="true" type="tns:ArrayOfAppAddressDto" />
+  <xs:complexType name="AppAddressDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Building" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Corpus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Flat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="StreetName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AppAddressDto" nillable="true" type="tns:AppAddressDto" />
 </xs:schema>

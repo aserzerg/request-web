@@ -1,23 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Highsoft.Web.Mvc.Charts;
 using request_web.Models;
 using request_web.WebService;
+using Newtonsoft.Json;
 
 namespace request_web.Controllers
 {
     [Authorize]
-    public class StatController : Controller
+    public class ServiceCompanyStatController : Controller
     {
+        private const string FromDateSessionName = "stat_service_worker_fromDate";
+        private const string ToDateSessionName = "stat_service_worker_toDate";
         [Authorize]
         public ActionResult GeneralInfo()
         {
-            var model = new GeneralInfoModel();
-
+        var model = new ServiceCompanyGeneralInfoModel();
+            model.FromDate = DateTime.Now.AddDays(-30);
+            model.ToDate = DateTime.Now;
             using (var requestService = new RequestWebServiceClient())
             {
-                var statByUsers = requestService.GetRequestByUsersInfo();
+                var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
+                var workerId = currentUser.WorkerId;
+                //workerId = 16;
+                var statByUsers = requestService.GetWorkerStat(workerId, model.FromDate, model.ToDate);
                 var usersPeriods = statByUsers.GroupBy(s => s.StatDate).ToList();
                 var users = statByUsers.GroupBy(s => s.Name).ToList();
                 var userChartSeries = new List<Series>();
@@ -36,16 +44,13 @@ namespace request_web.Controllers
                         series.Add(new LineSeriesData {Y = count ?? 0});
                     }
 
-                    userChartSeries.Add(new LineSeries{Name = $"Диспетчер {i++}", Data = series });
-                    //userChartSeries.Add(new LineSeries{Name = user.Key, Data = series });
+                    //userChartSeries.Add(new LineSeries{Name = $"Диспетчер {i++}", Data = series });
+                    userChartSeries.Add(new LineSeries{Name = user.Key, Data = series });
                 }
-                userChartSeries.Add(new LineSeries {Name = "Всего",
-                    Data = statByUsers.GroupBy(s => s.StatDate).Select(g => new LineSeriesData {Y = g.Sum(s => s.Count)}).ToList()});
-
                 model.RequestsByUsersXAxis = usersPeriods.Select(s=>s.Key.ToString("dd.MM.yyyy")).ToList();
                 model.RequestsByUsersSeries = userChartSeries;
                 /**/
-                var statByWorkers = requestService.GetRequestByWorkersInfo();
+                /*var statByWorkers = requestService.GetRequestByWorkersInfo();
                 var workersPeriods = statByWorkers.GroupBy(s => s.StatDate).ToList();
                 var workers = statByWorkers.GroupBy(s => s.Name).ToList();
                 var workerChartSeries = new List<Series>();
@@ -74,7 +79,7 @@ namespace request_web.Controllers
 
                 model.RequestsByWorkersXAxis = workersPeriods.Select(s => s.Key.ToString("dd.MM.yyyy")).ToList();
                 model.RequestsByWorkersSeries = workerChartSeries;
-
+                */
 
                 return View(model);
             }
