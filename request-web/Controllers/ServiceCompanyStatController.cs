@@ -24,7 +24,6 @@ namespace request_web.Controllers
             {
                 var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
                 var workerId = currentUser.WorkerId;
-                //workerId = 16;
                 var statByUsers = requestService.GetWorkerStat(workerId, model.FromDate, model.ToDate);
                 var usersPeriods = statByUsers.GroupBy(s => s.StatDate).ToList();
                 var users = statByUsers.GroupBy(s => s.Name).ToList();

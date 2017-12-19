@@ -220,7 +220,7 @@
                 @request.ExecutePeriod
                 </td>
 
-                <td>@request.Worker.SurName</td>
+                <td>@(request.Worker != null ? request.Worker.SurName : "")</td>
             </tr>
         }
         </tbody>
