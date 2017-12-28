@@ -252,6 +252,9 @@ namespace request_web.WebService {
         private string DescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EntranceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ExecutePeriodField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -259,6 +262,9 @@ namespace request_web.WebService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FlatField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FloorField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.DateTime> FromTimeField;
@@ -442,6 +448,19 @@ namespace request_web.WebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Entrance {
+            get {
+                return this.EntranceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntranceField, value) != true)) {
+                    this.EntranceField = value;
+                    this.RaisePropertyChanged("Entrance");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string ExecutePeriod {
             get {
                 return this.ExecutePeriodField;
@@ -476,6 +495,19 @@ namespace request_web.WebService {
                 if ((object.ReferenceEquals(this.FlatField, value) != true)) {
                     this.FlatField = value;
                     this.RaisePropertyChanged("Flat");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Floor {
+            get {
+                return this.FloorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FloorField, value) != true)) {
+                    this.FloorField = value;
+                    this.RaisePropertyChanged("Floor");
                 }
             }
         }

@@ -42,9 +42,11 @@
       <xs:element minOccurs="0" name="CreateTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CreateUser" nillable="true" type="tns:RequestUserDto" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Entrance" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ExecutePeriod" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ExecuteTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Flat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Floor" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FromTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="HasAttachment" type="xs:boolean" />
       <xs:element minOccurs="0" name="HasRecord" type="xs:boolean" />

@@ -265,7 +265,8 @@ namespace request_web.Controllers
                 return View(new RequestDetailModel()
                 {
                     RequestId = request.Id,
-                    Address = request.StreetName + " " + request.Building + (string.IsNullOrEmpty(request.Corpus) ? "" : "/" + request.Corpus) + ", " + request.Flat,
+                    Address = request.StreetName + " " + request.Building + (string.IsNullOrEmpty(request.Corpus) ? "" : "/" + request.Corpus) + ", " + request.Flat +
+                     (string.IsNullOrEmpty(request.Entrance) ? "":$", подъезд {request.Entrance}") + (string.IsNullOrEmpty(request.Floor) ? "": $", этаж {request.Floor}"),
                     Worker = worker,
                     CreateTime = request.CreateTime,
                     ParentService = request.ParentService,
