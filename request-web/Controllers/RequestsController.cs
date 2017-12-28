@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
@@ -158,7 +159,7 @@ namespace request_web.Controllers
                 }
                 #endregion
                 #region Requests
-                RequestForListDto[] reguests = requestService.RequestList(workerId, fromDate, toDate.AddDays(1),
+                RequestForListDto[] requests = requestService.RequestList(workerId, fromDate, toDate.AddDays(1),
             selectedWorkerId > 0 ? selectedWorkerId : (int?)null,
             selectedStreetId > 0 ? selectedStreetId : (int?)null,
             selectedHouseId > 0 ? selectedHouseId : (int?)null,
@@ -167,10 +168,11 @@ namespace request_web.Controllers
             selectedParServId > 0 ? selectedParServId : (int?)null,
             selectedServiceId > 0 ? selectedServiceId : (int?)null,
             isBadWork, phoneNumber);
+                var currentDate = requestService.GetCurrentDate();
                 #endregion
                 return new RequestListModel
                 {
-                    Requests = reguests,
+                    Requests = requests,
                     FromDate = fromDate,
                     ToDate = toDate,
                     PhoneNumber = phoneNumber,
@@ -182,7 +184,8 @@ namespace request_web.Controllers
                     IsBadWork = isBadWork,
                     ParentServices = parentServices,
                     Addresses = addresses,
-                    Services = services
+                    Services = services,
+                    CurrentDate = currentDate
                 };
             }
         }

@@ -13,6 +13,12 @@
   <wsdl:message name="IRequestWebService_GetData_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDataResponse" />
   </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetCurrentDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentDate" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetCurrentDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentDateResponse" />
+  </wsdl:message>
   <wsdl:message name="IRequestWebService_Login_InputMessage">
     <wsdl:part name="parameters" element="tns:Login" />
   </wsdl:message>
@@ -186,6 +192,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetData" message="tns:IRequestWebService_GetData_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetDataResponse" message="tns:IRequestWebService_GetData_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetCurrentDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetCurrentDate" message="tns:IRequestWebService_GetCurrentDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetCurrentDateResponse" message="tns:IRequestWebService_GetCurrentDate_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/Login" message="tns:IRequestWebService_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/LoginResponse" message="tns:IRequestWebService_Login_OutputMessage" />
@@ -303,6 +313,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetData">
       <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentDate">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetCurrentDate" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

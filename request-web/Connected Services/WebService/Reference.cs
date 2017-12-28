@@ -276,6 +276,9 @@ namespace request_web.WebService {
         private bool IsBadWorkField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MainFioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ParentServiceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -538,6 +541,19 @@ namespace request_web.WebService {
                 if ((this.IsBadWorkField.Equals(value) != true)) {
                     this.IsBadWorkField = value;
                     this.RaisePropertyChanged("IsBadWork");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MainFio {
+            get {
+                return this.MainFioField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MainFioField, value) != true)) {
+                    this.MainFioField = value;
+                    this.RaisePropertyChanged("MainFio");
                 }
             }
         }
@@ -2488,6 +2504,12 @@ namespace request_web.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetData", ReplyAction="http://tempuri.org/IRequestWebService/GetDataResponse")]
         System.Threading.Tasks.Task<request_web.WebService.CityDto[]> GetDataAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetCurrentDate", ReplyAction="http://tempuri.org/IRequestWebService/GetCurrentDateResponse")]
+        System.DateTime GetCurrentDate();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetCurrentDate", ReplyAction="http://tempuri.org/IRequestWebService/GetCurrentDateResponse")]
+        System.Threading.Tasks.Task<System.DateTime> GetCurrentDateAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/Login", ReplyAction="http://tempuri.org/IRequestWebService/LoginResponse")]
         request_web.WebService.WebUserDto Login([System.ServiceModel.MessageParameterAttribute(Name="login")] string login1, string password);
         
@@ -2690,6 +2712,14 @@ namespace request_web.WebService {
         
         public System.Threading.Tasks.Task<request_web.WebService.CityDto[]> GetDataAsync() {
             return base.Channel.GetDataAsync();
+        }
+        
+        public System.DateTime GetCurrentDate() {
+            return base.Channel.GetCurrentDate();
+        }
+        
+        public System.Threading.Tasks.Task<System.DateTime> GetCurrentDateAsync() {
+            return base.Channel.GetCurrentDateAsync();
         }
         
         public request_web.WebService.WebUserDto Login(string login1, string password) {

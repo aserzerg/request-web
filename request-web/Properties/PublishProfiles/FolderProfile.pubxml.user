@@ -53,7 +53,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/04/2017 17:46:32</publishTime>
     </File>
     <File Include="bin/request-web.dll">
-      <publishTime>12/02/2017 22:55:43</publishTime>
+      <publishTime>12/28/2017 21:20:40</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>04/24/2017 11:35:18</publishTime>
@@ -284,58 +284,58 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/04/2017 12:57:52</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.AppAddressDto.datasource">
-      <publishTime>12/02/2017 22:06:38</publishTime>
+      <publishTime>12/28/2017 21:10:53</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.AppRequestDto.datasource">
-      <publishTime>12/02/2017 22:06:38</publishTime>
+      <publishTime>12/28/2017 21:10:53</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.AppTypeDto.datasource">
-      <publishTime>12/02/2017 22:06:38</publishTime>
+      <publishTime>12/28/2017 21:10:53</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.AttachmentDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:53</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.CityDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:52</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.NoteDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:53</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.RequestForListDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:52</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.RequestInfoDto.datasource">
       <publishTime>09/10/2017 08:12:09</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.ServiceDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:52</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.StatInfoDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:52</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.StatusDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:52</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.StreetDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:52</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.WebCallsDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:52</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.WebFlatDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:52</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.WebHouseDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:52</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.WebStatusDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:52</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.WebUserDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:52</publishTime>
     </File>
     <File Include="Connected Services/WebService/request_web.WebService.WorkerDto.datasource">
-      <publishTime>12/02/2017 22:06:37</publishTime>
+      <publishTime>12/28/2017 21:10:52</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css">
       <publishTime>06/10/2017 23:51:36</publishTime>
@@ -1343,7 +1343,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/15/2017 19:47:51</publishTime>
     </File>
     <File Include="Views/Requests/List.cshtml">
-      <publishTime>01/11/2017 23:01:32</publishTime>
+      <publishTime>12/28/2017 21:28:26</publishTime>
     </File>
     <File Include="Views/ServiceCompanyStat/GeneralInfo.cshtml">
       <publishTime>12/02/2017 22:50:37</publishTime>

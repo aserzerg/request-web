@@ -192,7 +192,8 @@
         {
             <tr>
                 <td>
-                    <button type="button" class="btn btn-md" style="width: 100%;" @DataFormPost data-request-id="@request.Id">@request.Id</button>
+                    <button type="button" class="btn btn-md" style="width: 100%;@(request.StatusId < 3 && request.ExecuteTime.HasValue ?
+                request.ExecuteTime.Value<Model.CurrentDate ? "background-color: red" :"" :"")" @DataFormPost data-request-id="@request.Id">@request.Id</button>
                 </td>
                 <td>@request.CreateTime.ToString("dd.MM.yyyy HH:mm")</td>
 
@@ -220,7 +221,7 @@
                 @request.ExecutePeriod
                 </td>
 
-                <td>@request.Worker.SurName</td>
+                <td>@(request.Worker != null ? request.Worker.SurName : "")</td>
             </tr>
         }
         </tbody>
