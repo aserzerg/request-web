@@ -255,7 +255,9 @@ namespace request_web.Controllers
                 requestId = requestParam;
             using (var requestService = new RequestWebServiceClient())
             {
-                var request = requestService.GetRequestById(Convert.ToInt32(requestId));
+                var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
+                var workerId = currentUser.WorkerId;
+                var request = requestService.GetRequestByWorkerAndId(workerId,Convert.ToInt32(requestId));
                 var worker = $"{request.Worker?.SurName} {request.Worker?.FirstName} {request.Worker?.PatrName}";
                 var contactList = request.ContactPhones;
                 var attachments = requestService.GetAttachmentList(request.Id);

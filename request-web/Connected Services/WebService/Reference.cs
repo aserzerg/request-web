@@ -2560,6 +2560,12 @@ namespace request_web.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestById", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByIdResponse")]
         System.Threading.Tasks.Task<request_web.WebService.RequestForListDto> GetRequestByIdAsync(int requestId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestByWorkerAndId", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByWorkerAndIdResponse")]
+        request_web.WebService.RequestForListDto GetRequestByWorkerAndId(int workerId, int requestId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestByWorkerAndId", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByWorkerAndIdResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.RequestForListDto> GetRequestByWorkerAndIdAsync(int workerId, int requestId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetWorkers", ReplyAction="http://tempuri.org/IRequestWebService/GetWorkersResponse")]
         request_web.WebService.WorkerDto[] GetWorkers(int workerId);
         
@@ -2776,6 +2782,14 @@ namespace request_web.WebService {
         
         public System.Threading.Tasks.Task<request_web.WebService.RequestForListDto> GetRequestByIdAsync(int requestId) {
             return base.Channel.GetRequestByIdAsync(requestId);
+        }
+        
+        public request_web.WebService.RequestForListDto GetRequestByWorkerAndId(int workerId, int requestId) {
+            return base.Channel.GetRequestByWorkerAndId(workerId, requestId);
+        }
+        
+        public System.Threading.Tasks.Task<request_web.WebService.RequestForListDto> GetRequestByWorkerAndIdAsync(int workerId, int requestId) {
+            return base.Channel.GetRequestByWorkerAndIdAsync(workerId, requestId);
         }
         
         public request_web.WebService.WorkerDto[] GetWorkers(int workerId) {
