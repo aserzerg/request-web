@@ -48,6 +48,7 @@
       <xs:element minOccurs="0" name="Flat" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Floor" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FromTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Garanty" type="xs:boolean" />
       <xs:element minOccurs="0" name="HasAttachment" type="xs:boolean" />
       <xs:element minOccurs="0" name="HasRecord" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />

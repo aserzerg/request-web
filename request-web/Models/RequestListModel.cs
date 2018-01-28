@@ -24,6 +24,9 @@ namespace request_web.Models
         public bool AdditionFiltering { get; set; }
         [Display(Name = "Для обсуждения!")]
         public bool IsBadWork { get; set; }
+
+        [Display(Name = "Гарантийные")]
+        public bool Garanty { get; set; }
         public DateTime CurrentDate { get; set; }
 
         public RequestForListDto[] Requests { get; set; }

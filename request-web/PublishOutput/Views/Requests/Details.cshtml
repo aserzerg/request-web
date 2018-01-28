@@ -3,7 +3,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Заявка № @Model.RequestId</h2>
+<h2><div>Заявка № @Model.RequestId</div>
+    <div style="color: blue;">@(Model.Garanty ? "Гарантийная" : null)</div>
+</h2>
 
 <div id="modDialog" class="modal fade">
     <div id="dialogContent" class="modal-dialog"></div>

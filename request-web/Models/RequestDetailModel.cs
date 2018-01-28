@@ -20,5 +20,6 @@ namespace request_web.Models
         public WebCallsDto[] CallList { get; set; }
         public AttachmentDto[] Attachments { get; set; }
         public NoteDto[] Notes { get; set; }
+        public bool Garanty { get; set; }
     }
 }

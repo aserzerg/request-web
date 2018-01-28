@@ -63,7 +63,7 @@
 
 <div class="form-inline pull-right" style="margin-bottom: 15px; horiz-align: center; position: relative">
         @*; z-index: 9999">*@
-        <b style="vertical-align: middle;">За период</b>
+        <b style="vertical-align: middle;">Период выполнения</b>
         @Html.TextBoxFor(m => m.FromDate, new { @class = "datepicker form-control", style = "height: 25px; width: 110px", placeholder = Html.DisplayName("Введите дату") })
 
         @Html.Label("-", new { @class = "control-label mr-sm-2" })
@@ -95,9 +95,9 @@
 
         @Html.CheckBoxFor(m => m.AdditionFiltering, new { @class = "checkbox", style = "height: 25px"})
         @Html.LabelFor(m => m.AdditionFiltering, new { @class = "control-label mr-sm-2" })
-        <button type="button" id="Refresh" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Обновить</button>
-        <button type="button" id="CreateNew" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Создать</button>
+        @*<button type="button" id="CreateNew" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Создать</button>*@
         <button type="button" id="PrintActs" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Печать</button>
+        <button type="button" id="Refresh" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;background: mediumseagreen">Применить</button>
 
         <div id="AdditionParameters" style="margin-top: 10px;">
            <div>
@@ -164,6 +164,8 @@
                 @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", style = "height: 25px; width: 180px ", placeholder = Html.DisplayName("Введите номер телефона") })
                 @Html.CheckBoxFor(m => m.IsBadWork, new { @class = "checkbox", style = "margin-left:50px; height: 25px" })
                 @Html.LabelFor(m => m.IsBadWork, new { @class = "control-label mr-sm-2", style = "color: red;" })
+                @Html.CheckBoxFor(m => m.Garanty, new { @class = "checkbox", style = "margin-left:50px; height: 25px" })
+                @Html.LabelFor(m => m.Garanty, new { @class = "control-label mr-sm-2", style = "color: red;" })
 
             </div>
     </div>
@@ -192,8 +194,11 @@
         {
             <tr>
                 <td>
-                    <button type="button" class="btn btn-md" style="width: 100%;@(request.StatusId < 3 && request.ExecuteTime.HasValue ?
-                request.ExecuteTime.Value<Model.CurrentDate ? "background-color: red" :"" :"")" @DataFormPost data-request-id="@request.Id">@request.Id</button>
+                    <button type="button" class="btn btn-md" style="width: 100%; @(request.StatusId < 3 && request.ExecuteTime.HasValue ?
+                                                                                       request.ExecuteTime.Value < Model.CurrentDate ? "background-color: red" : "" : "")" @DataFormPost data-request-id="@request.Id">
+                        <div>@request.Id</div>
+                        <div style="color: blue;">@(request.Garanty?"Гарантия":null)</div>
+                    </button>
                 </td>
                 <td>@request.CreateTime.ToString("dd.MM.yyyy HH:mm")</td>
 

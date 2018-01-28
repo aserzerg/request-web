@@ -49,6 +49,12 @@
   <wsdl:message name="IRequestWebService_GetWorkers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetWorkersResponse" />
   </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetWorkersByPeriod_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkersByPeriod" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_GetWorkersByPeriod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkersByPeriodResponse" />
+  </wsdl:message>
   <wsdl:message name="IRequestWebService_GetStreetListByWorker_InputMessage">
     <wsdl:part name="parameters" element="tns:GetStreetListByWorker" />
   </wsdl:message>
@@ -222,6 +228,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetWorkers" message="tns:IRequestWebService_GetWorkers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetWorkersResponse" message="tns:IRequestWebService_GetWorkers_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetWorkersByPeriod">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetWorkersByPeriod" message="tns:IRequestWebService_GetWorkersByPeriod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetWorkersByPeriodResponse" message="tns:IRequestWebService_GetWorkersByPeriod_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetStreetListByWorker">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetStreetListByWorker" message="tns:IRequestWebService_GetStreetListByWorker_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetStreetListByWorkerResponse" message="tns:IRequestWebService_GetStreetListByWorker_OutputMessage" />
@@ -377,6 +387,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetWorkers">
       <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetWorkers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkersByPeriod">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/GetWorkersByPeriod" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -27,14 +27,15 @@ namespace request_web.Controllers
         private const string FilteringSessionName = "request_filtering";
         private const string PhoneSessionName = "request_phoneNumber";
         private const string IsBadWorkSessionName = "request_is_bad_work";
+        private const string GarantySessionName = "request_garanty";
         public RequestsController()
         {
         }
 
-        private WorkerShortDto[] GetWorkerList(RequestWebServiceClient requestService, int workerId)
+        private WorkerShortDto[] GetWorkerList(RequestWebServiceClient requestService,DateTime fromDate,DateTime toDate, int workerId)
         {
             var workers = new[] { new WorkerShortDto { Id = 0, Name = "Все исполнители" } };
-            workers = workers.Concat(requestService.GetWorkers(workerId).OrderBy(w => $"{w.SurName} {w.FirstName} {w.PatrName}").Select(w => new WorkerShortDto { Id = w.Id, Name = $"{w.SurName} {w.FirstName} {w.PatrName}" })).ToArray();
+            workers = workers.Concat(requestService.GetWorkersByPeriod(true,fromDate,toDate, fromDate, toDate, workerId).OrderBy(w => $"{w.SurName} {w.FirstName} {w.PatrName}").Select(w => new WorkerShortDto { Id = w.Id, Name = $"{w.SurName} {w.FirstName} {w.PatrName}" })).ToArray();
             return workers;
         }
 
@@ -68,7 +69,7 @@ namespace request_web.Controllers
 
         private RequestListModel GetViewModel(DateTime fromDate, DateTime toDate, int selectedWorkerId,
             int selectedStreetId, int selectedStatusId, int selectedHouseId, int selectedAddressId,
-            int selectedParServId, int selectedServiceId, bool filterIsChecked, string phoneNumber, bool isBadWork)
+            int selectedParServId, int selectedServiceId, bool filterIsChecked, string phoneNumber, bool isBadWork, bool garanty)
         {
             var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
             var workerId = currentUser.WorkerId;
@@ -79,7 +80,7 @@ namespace request_web.Controllers
             {
 
                 #region Workers
-                var workers = GetWorkerList(requestService, currentUser.WorkerId);
+                var workers = GetWorkerList(requestService,fromDate,toDate, currentUser.WorkerId);
                 var selected = workers.Where(w => w.Id == selectedWorkerId).FirstOrDefault();
                 if (selected != null)
                 {
@@ -167,7 +168,7 @@ namespace request_web.Controllers
             selectedStatusId > 0 ? selectedStatusId : 2,
             selectedParServId > 0 ? selectedParServId : (int?)null,
             selectedServiceId > 0 ? selectedServiceId : (int?)null,
-            isBadWork, phoneNumber);
+            isBadWork, garanty, phoneNumber).OrderByDescending(r=>r.CreateTime).ToArray();
                 var currentDate = requestService.GetCurrentDate();
                 #endregion
                 return new RequestListModel
@@ -182,6 +183,7 @@ namespace request_web.Controllers
                     Houses = houses,
                     AdditionFiltering = filterIsChecked,
                     IsBadWork = isBadWork,
+                    Garanty = garanty,
                     ParentServices = parentServices,
                     Addresses = addresses,
                     Services = services,
@@ -204,10 +206,11 @@ namespace request_web.Controllers
             var filterIsChecked = (bool?)Session[FilteringSessionName] ?? false;
             var phoneNumber = (string)Session[PhoneSessionName];
             var isBadWork = (bool?)Session[IsBadWorkSessionName] ?? false;
+            var garanty = (bool?)Session[GarantySessionName] ?? false;
 
 
             var viewModel = GetViewModel(fromDate, toDate, selectedWorkerId,selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
-                        selectedParServId, selectedServiceId, filterIsChecked, phoneNumber, isBadWork);
+                        selectedParServId, selectedServiceId, filterIsChecked, phoneNumber, isBadWork, garanty);
             return View(viewModel);
         }
 
@@ -234,10 +237,11 @@ namespace request_web.Controllers
             Session[ServSessionName] = selectedServiceId;
             Session[PhoneSessionName] = model.PhoneNumber;
             Session[IsBadWorkSessionName] = model.IsBadWork;
+            Session[GarantySessionName] = model.Garanty;
 
 
             var viewModel = GetViewModel(model.FromDate, model.ToDate, selectedWorkerId, selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
-                        selectedParServId, selectedServiceId, model.AdditionFiltering, model.PhoneNumber,model.IsBadWork);
+                        selectedParServId, selectedServiceId, model.AdditionFiltering, model.PhoneNumber,model.IsBadWork, model.Garanty);
             return View(viewModel);
         }
 
@@ -279,6 +283,7 @@ namespace request_web.Controllers
                     WorkDate = request.ExecuteTime,
                     Contacts = contactList,
                     CallList = callList,
+                    Garanty = request.Garanty,
                     Attachments = attachments,
                     Notes = notes
                 });

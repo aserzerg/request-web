@@ -270,6 +270,9 @@ namespace request_web.WebService {
         private System.Nullable<System.DateTime> FromTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool GarantyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool HasAttachmentField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -521,6 +524,19 @@ namespace request_web.WebService {
                 if ((this.FromTimeField.Equals(value) != true)) {
                     this.FromTimeField = value;
                     this.RaisePropertyChanged("FromTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Garanty {
+            get {
+                return this.GarantyField;
+            }
+            set {
+                if ((this.GarantyField.Equals(value) != true)) {
+                    this.GarantyField = value;
+                    this.RaisePropertyChanged("Garanty");
                 }
             }
         }
@@ -2549,10 +2565,10 @@ namespace request_web.WebService {
         System.Threading.Tasks.Task<request_web.WebService.WebUserDto> LoginAsync(string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/RequestList", ReplyAction="http://tempuri.org/IRequestWebService/RequestListResponse")]
-        request_web.WebService.RequestForListDto[] RequestList(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, bool badWork, string clientPhone);
+        request_web.WebService.RequestForListDto[] RequestList(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, bool badWork, bool garanty, string clientPhone);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/RequestList", ReplyAction="http://tempuri.org/IRequestWebService/RequestListResponse")]
-        System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, bool badWork, string clientPhone);
+        System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, bool badWork, bool garanty, string clientPhone);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestById", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestByIdResponse")]
         request_web.WebService.RequestForListDto GetRequestById(int requestId);
@@ -2571,6 +2587,12 @@ namespace request_web.WebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetWorkers", ReplyAction="http://tempuri.org/IRequestWebService/GetWorkersResponse")]
         System.Threading.Tasks.Task<request_web.WebService.WorkerDto[]> GetWorkersAsync(int workerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetWorkersByPeriod", ReplyAction="http://tempuri.org/IRequestWebService/GetWorkersByPeriodResponse")]
+        request_web.WebService.WorkerDto[] GetWorkersByPeriod(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetWorkersByPeriod", ReplyAction="http://tempuri.org/IRequestWebService/GetWorkersByPeriodResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.WorkerDto[]> GetWorkersByPeriodAsync(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetStreetListByWorker", ReplyAction="http://tempuri.org/IRequestWebService/GetStreetListByWorkerResponse")]
         request_web.WebService.StreetDto[] GetStreetListByWorker(int workerId);
@@ -2768,12 +2790,12 @@ namespace request_web.WebService {
             return base.Channel.LoginAsync(login, password);
         }
         
-        public request_web.WebService.RequestForListDto[] RequestList(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, bool badWork, string clientPhone) {
-            return base.Channel.RequestList(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId, badWork, clientPhone);
+        public request_web.WebService.RequestForListDto[] RequestList(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, bool badWork, bool garanty, string clientPhone) {
+            return base.Channel.RequestList(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId, badWork, garanty, clientPhone);
         }
         
-        public System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, bool badWork, string clientPhone) {
-            return base.Channel.RequestListAsync(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId, badWork, clientPhone);
+        public System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId, bool badWork, bool garanty, string clientPhone) {
+            return base.Channel.RequestListAsync(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId, badWork, garanty, clientPhone);
         }
         
         public request_web.WebService.RequestForListDto GetRequestById(int requestId) {
@@ -2798,6 +2820,14 @@ namespace request_web.WebService {
         
         public System.Threading.Tasks.Task<request_web.WebService.WorkerDto[]> GetWorkersAsync(int workerId) {
             return base.Channel.GetWorkersAsync(workerId);
+        }
+        
+        public request_web.WebService.WorkerDto[] GetWorkersByPeriod(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId) {
+            return base.Channel.GetWorkersByPeriod(filterByCreateDate, fromDate, toDate, executeFromDate, executeToDate, workerId);
+        }
+        
+        public System.Threading.Tasks.Task<request_web.WebService.WorkerDto[]> GetWorkersByPeriodAsync(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId) {
+            return base.Channel.GetWorkersByPeriodAsync(filterByCreateDate, fromDate, toDate, executeFromDate, executeToDate, workerId);
         }
         
         public request_web.WebService.StreetDto[] GetStreetListByWorker(int workerId) {
