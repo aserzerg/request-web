@@ -53,6 +53,7 @@
       <xs:element minOccurs="0" name="HasRecord" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IsBadWork" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsRetry" type="xs:boolean" />
       <xs:element minOccurs="0" name="MainFio" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ParentService" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Rating" nillable="true" type="xs:string" />

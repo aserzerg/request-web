@@ -285,6 +285,9 @@ namespace request_web.WebService {
         private bool IsBadWorkField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsRetryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MainFioField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -589,6 +592,19 @@ namespace request_web.WebService {
                 if ((this.IsBadWorkField.Equals(value) != true)) {
                     this.IsBadWorkField = value;
                     this.RaisePropertyChanged("IsBadWork");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsRetry {
+            get {
+                return this.IsRetryField;
+            }
+            set {
+                if ((this.IsRetryField.Equals(value) != true)) {
+                    this.IsRetryField = value;
+                    this.RaisePropertyChanged("IsRetry");
                 }
             }
         }
