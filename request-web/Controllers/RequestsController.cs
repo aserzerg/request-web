@@ -329,7 +329,7 @@ namespace request_web.Controllers
             using (var requestService = new RequestWebServiceClient())
             {
                 webStatuses = requestService.GetStatusesAllowedInWeb();
-                var request = requestService.GetRequestById(Convert.ToInt32(requestId));
+                var request = requestService.GetRequestByWorkerAndId(currentUser.WorkerId,Convert.ToInt32(requestId));
                 currentStatus = request.StatusId;
             }
 
