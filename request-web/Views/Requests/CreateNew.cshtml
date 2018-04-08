@@ -1,7 +1,209 @@
-﻿
-@{
-    ViewBag.Title = "CreateNew";
-}
+﻿@model request_web.Models.RequestCreateNewModel
+    @{
+        ViewBag.Title = "CreateNew";
+    }
 
-<h2>CreateNew</h2>
+    <h2>CreateNew</h2>
+<div>
+    @Html.Label("Адрес:", new { @class = "control-label mr-sm-2" })
+    <select class="chosen-select" data-placeholder="Улица" id="street_select" tabindex="-1" style="width: 280px; height: 25px;">
+        @foreach (var street in Model.Streets)
+        {
+            string SelectedValue = "";
+            if (street.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@street.Id'>@street.Name</option>
+        }
+    </select>
+    <select class="chosen-select" data-placeholder="Дом" id="house_select" tabindex="-1" style="width: 180px; height: 25px;">
+        @foreach (var house in Model.Houses)
+        {
+            string SelectedValue = "";
+            if (house.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@house.Id'>@house.Name</option>
+        }
+    </select>
+    <select class="chosen-select" data-placeholder="Адреса" id="address_select" tabindex="-1" style="width: 180px; height: 25px;">
+        @foreach (var address in Model.Addresses)
+        {
+            string SelectedValue = "";
+            if (address.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@address.Id'>@address.Name</option>
+        }
+    </select>
+</div>
+<div style="margin-top: 10px">
+    @Html.Label("Услуга:", new { @class = "control-label mr-sm-2" })
+    <select class="chosen-select" data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
+        @foreach (var parentService in Model.ParentServices)
+        {
+            string SelectedValue = "";
+            if (parentService.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
+        }
+    </select>
+    <select class="chosen-select" data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
+        @foreach (var service in Model.Services)
+        {
+            string SelectedValue = "";
+            if (service.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@service.Id'>@service.Name</option>
+        }
+    </select>
+</div>
+<div>
+    @Html.Label("Мастер:", new { @class = "control-label mr-sm-2" })
+    <select class="chosen-select" data-placeholder="Мастер:" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;">
+        @foreach (var worker in Model.Workers)
+        {
+            string SelectedValue = "";
+            if (worker.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@worker.Id'>@worker.Name</option>
+        }
+    </select>
+    @Html.Label("Исполнитель:", new { @class = "control-label mr-sm-2" })
+    <select class="chosen-select" data-placeholder="Исполнитель:" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;">
+        @foreach (var worker in Model.Executers)
+        {
+            string SelectedValue = "";
+            if (worker.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@worker.Id'>@worker.Name</option>
+        }
+    </select>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".chosen-select").chosen({
+            disable_search_threshold: 0,
+            no_results_text: "Нет совпадений!",
+            search_contains: true,
+        });
+    });
+    function SetSelects(mass, id, arr) {
+        var str = "";
+        var s = "1";
+        for (var i = 0; i < mass.length; i++) {
+            str += "<option id='" + mass[i][arr["id"]] + "' >";
+            arr["text"].forEach(function (item, j) {
+                str += mass[i][item] + " ";
+            });
+            str += "</option>"
+        }
+        $("#" + id).empty();
+        $("#" + id).append(str);
+        $("#" + id).chosen({
+            disable_search_threshold: 0,
+            no_results_text: "Нет совпадений!",
+            width: "90%",
+            search_contains: true,
+        });
+        $("#" + id).trigger("chosen:updated");
+    }
 
+    function GetWorkers() {
+        $.ajax({
+            type: "POST",
+            url: '/Requests/GetWorkers',
+            contentType: "application/json; charset=utf-8",
+            data: '{}',
+            dataType: "json",
+            success(data) {
+                var mass = JSON.parse(data);
+                var arr = {
+                    id: "Id",
+                    text: ["Name"]
+                };
+                SetSelects(mass, "worker_select", arr);
+            }
+        });
+    }
+
+    function GetHouses(streetId) {
+        $.ajax({
+            type: "POST",
+            url: '/Requests/GetHousesForCreateNew',
+            contentType: "application/json; charset=utf-8",
+            data: '{streetNum:' + streetId + '}',
+            dataType: "json",
+            success(data) {
+                var mass = JSON.parse(data);
+                var arr = {
+                    id: "Id",
+                    text: ["Name"]
+                };
+                SetSelects(mass, "house_select", arr);
+            }
+        });
+    }
+
+    function GetAddresses(houseId) {
+        $.ajax({
+            type: "POST",
+            url: '/Requests/GetAddressesForCreateNew',
+            contentType: "application/json; charset=utf-8",
+            data: '{houseNum:' + houseId + '}',
+            dataType: "json",
+            success(data) {
+                var mass = JSON.parse(data);
+                var arr = {
+                    id: "Id",
+                    text: ["Name"]
+                };
+                SetSelects(mass, "address_select", arr);
+            }
+        });
+    }
+    function GetServices(parentServiceId) {
+        $.ajax({
+            type: "POST",
+            url: '/Requests/GetServicesByParent',
+            contentType: "application/json; charset=utf-8",
+            data: '{parentServiceNum:' + parentServiceId + '}',
+            dataType: "json",
+            success(data) {
+                var mass = JSON.parse(data);
+                var arr = {
+                    id: "Id",
+                    text: ["Name"]
+                };
+                SetSelects(mass, "service_select", arr);
+            }
+        });
+    }
+
+    $("#street_select").change(function () {
+        var id = $("#street_select :selected")[0].id;
+        GetHouses(id);
+        GetAddresses(0);
+    });
+    $("#house_select").change(function () {
+        var id = $("#house_select :selected")[0].id;
+        GetAddresses(id);
+    });
+    $("#parrent_service_select").change(function () {
+        var id = $("#parrent_service_select :selected")[0].id;
+        GetServices(id);
+    });
+
+
+</script>
