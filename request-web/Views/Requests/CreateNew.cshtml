@@ -1,96 +1,125 @@
 ﻿@model request_web.Models.RequestCreateNewModel
-    @{
-        ViewBag.Title = "CreateNew";
-    }
+@{
+    ViewBag.Title = "Создать заявку";
+}
 
-    <h2>CreateNew</h2>
+<h2>Создать заявку</h2>
+@using (Html.BeginForm("CreateNew", "Requests", FormMethod.Post, new { @class = "FromFORM" }))
+{
+    @Html.Hidden("SelectedWorker")
+    @Html.Hidden("SelectedStreet")
+    @Html.Hidden("SelectedStatus")
+    @Html.Hidden("SelectedHouse")
+    @Html.Hidden("SelectedAddress")
+    @Html.Hidden("SelectedParServ")
+    @Html.Hidden("SelectedService")
 <div>
-    @Html.Label("Адрес:", new { @class = "control-label mr-sm-2" })
-    <select class="chosen-select" data-placeholder="Улица" id="street_select" tabindex="-1" style="width: 280px; height: 25px;">
-        @foreach (var street in Model.Streets)
-        {
-            string SelectedValue = "";
-            if (street.IsSelected)
-            {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@street.Id'>@street.Name</option>
-        }
-    </select>
-    <select class="chosen-select" data-placeholder="Дом" id="house_select" tabindex="-1" style="width: 180px; height: 25px;">
-        @foreach (var house in Model.Houses)
-        {
-            string SelectedValue = "";
-            if (house.IsSelected)
-            {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@house.Id'>@house.Name</option>
-        }
-    </select>
-    <select class="chosen-select" data-placeholder="Адреса" id="address_select" tabindex="-1" style="width: 180px; height: 25px;">
-        @foreach (var address in Model.Addresses)
-        {
-            string SelectedValue = "";
-            if (address.IsSelected)
-            {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@address.Id'>@address.Name</option>
-        }
-    </select>
+    <label id="ErrorLabel" style="color: red;"></label>
 </div>
-<div style="margin-top: 10px">
-    @Html.Label("Услуга:", new { @class = "control-label mr-sm-2" })
-    <select class="chosen-select" data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
-        @foreach (var parentService in Model.ParentServices)
-        {
-            string SelectedValue = "";
-            if (parentService.IsSelected)
+    <div style="margin: 10px">
+        @Html.Label("Телефон:", new { @class = "control-label mr-sm-2" })
+        @Html.TextBoxFor(m => m.PhoneNumber)
+        @Html.Label("ФИО:", new { @class = "control-label mr-sm-2" })
+        @Html.TextBoxFor(m => m.Fio)
+    </div>
+
+    <div style="margin: 10px">
+        @Html.Label("Адрес:", new { @class = "control-label mr-sm-2" })
+        <select class="chosen-select" data-placeholder="Улица" id="street_select" tabindex="-1" style="width: 280px; height: 25px;">
+            @foreach (var street in Model.Streets)
             {
-                SelectedValue = "selected='selected'";
+                string SelectedValue = "";
+                if (street.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
+                }
+                <option @SelectedValue id='@street.Id'>@street.Name</option>
             }
-            <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
-        }
-    </select>
-    <select class="chosen-select" data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
-        @foreach (var service in Model.Services)
-        {
-            string SelectedValue = "";
-            if (service.IsSelected)
+        </select>
+        <select class="chosen-select" data-placeholder="Дом" id="house_select" tabindex="-1" style="width: 180px; height: 25px;">
+            @foreach (var house in Model.Houses)
             {
-                SelectedValue = "selected='selected'";
+                string SelectedValue = "";
+                if (house.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
+                }
+                <option @SelectedValue id='@house.Id'>@house.Name</option>
             }
-            <option @SelectedValue id='@service.Id'>@service.Name</option>
-        }
-    </select>
-</div>
-<div>
-    @Html.Label("Мастер:", new { @class = "control-label mr-sm-2" })
-    <select class="chosen-select" data-placeholder="Мастер:" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;">
-        @foreach (var worker in Model.Workers)
-        {
-            string SelectedValue = "";
-            if (worker.IsSelected)
+        </select>
+        <select class="chosen-select" data-placeholder="Адреса" id="address_select" tabindex="-1" style="width: 180px; height: 25px;">
+            @foreach (var address in Model.Addresses)
             {
-                SelectedValue = "selected='selected'";
+                string SelectedValue = "";
+                if (address.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
+                }
+                <option @SelectedValue id='@address.Id'>@address.Name</option>
             }
-            <option @SelectedValue id='@worker.Id'>@worker.Name</option>
-        }
-    </select>
-    @Html.Label("Исполнитель:", new { @class = "control-label mr-sm-2" })
-    <select class="chosen-select" data-placeholder="Исполнитель:" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;">
-        @foreach (var worker in Model.Executers)
-        {
-            string SelectedValue = "";
-            if (worker.IsSelected)
+        </select>
+    </div>
+    <div style="margin: 10px">
+        @Html.Label("Услуга:", new { @class = "control-label mr-sm-2" })
+        <select class="chosen-select" data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
+            @foreach (var parentService in Model.ParentServices)
             {
-                SelectedValue = "selected='selected'";
+                string SelectedValue = "";
+                if (parentService.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
+                }
+                <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
             }
-            <option @SelectedValue id='@worker.Id'>@worker.Name</option>
-        }
-    </select>
-</div>
+        </select>
+        <select class="chosen-select" data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
+            @foreach (var service in Model.Services)
+            {
+                string SelectedValue = "";
+                if (service.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
+                }
+                <option @SelectedValue id='@service.Id'>@service.Name</option>
+            }
+        </select>
+    </div>
+    <div style="margin: 10px">
+        @Html.Label("Мастер:", new { @class = "control-label mr-sm-2" })
+        <select class="chosen-select" data-placeholder="Мастер:" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;">
+            @foreach (var worker in Model.Workers)
+            {
+                string SelectedValue = "";
+                if (worker.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
+                }
+                <option @SelectedValue id='@worker.Id'>@worker.Name</option>
+            }
+        </select>
+        @Html.Label("Исполнитель:", new { @class = "control-label mr-sm-2" })
+        <select class="chosen-select" data-placeholder="Исполнитель:" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;">
+            @foreach (var worker in Model.Executers)
+            {
+                string SelectedValue = "";
+                if (worker.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
+                }
+                <option @SelectedValue id='@worker.Id'>@worker.Name</option>
+            }
+        </select>
+    </div>
+    <div style="margin: 10px">
+        <dl class="dl-horizontal">
+            <dt>Комментарий:</dt>
+            <dd>@Html.TextAreaFor(m => m.Description, new { style = "max-width: 480px; width:100%; height:100px;" })</dd>
+        </dl>
+    </div>
+    <div>
+        <button type="button" id="SaveRequest" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Сохранить</button>
+    </div>
+}
 <script type="text/javascript">
     $(function () {
         $(".chosen-select").chosen({
@@ -98,7 +127,44 @@
             no_results_text: "Нет совпадений!",
             search_contains: true,
         });
+        GetServices(0);
     });
+    $('#SaveRequest').on('click', function () {
+        const form = $(this).closest('form')[0];
+
+        var workerId = $("#worker_select :selected")[0].id;
+        form["SelectedWorker"].value = workerId;
+
+        var streetId = $("#street_select :selected")[0].id;
+        form["SelectedStreet"].value = streetId;
+
+        var houseId = $("#house_select :selected")[0].id;
+        form["SelectedHouse"].value = houseId;
+
+        var addressId = $("#address_select :selected")[0].id;
+        form["SelectedAddress"].value = addressId;
+
+        //var statusId = $("#status_select :selected")[0].id;
+        //form["SelectedStatus"].value = statusId;
+
+        var parServId = $("#parrent_service_select :selected")[0].id;
+        form["SelectedParServ"].value = parServId;
+
+        var serviceId = $("#service_select :selected")[0].id;
+        form["SelectedService"].value = serviceId;
+        if (serviceId == 0) {
+            //$('#dialogContent').html(data);
+            $("#ErrorLabel").html("Необходимо выбрать услугу и причину обращения!");
+            return;
+        }
+        if (addressId == 0) {
+            //$('#dialogContent').html(data);
+            $("#ErrorLabel").html("Необходимо выбрать адрес!");
+            return;
+        }   
+        form.submit();
+    });
+
     function SetSelects(mass, id, arr) {
         var str = "";
         var s = "1";
@@ -176,7 +242,7 @@
     function GetServices(parentServiceId) {
         $.ajax({
             type: "POST",
-            url: '/Requests/GetServicesByParent',
+            url: '/Requests/GetServicesByParentForCreateNew',
             contentType: "application/json; charset=utf-8",
             data: '{parentServiceNum:' + parentServiceId + '}',
             dataType: "json",

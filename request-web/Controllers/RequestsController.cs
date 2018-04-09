@@ -32,11 +32,14 @@ namespace request_web.Controllers
         {
         }
 
-        private WorkerShortDto[] GetWorkerList(RequestWebServiceClient requestService,DateTime fromDate,DateTime toDate, int workerId)
+        private WorkerShortDto[] GetWorkerList(RequestWebServiceClient requestService,DateTime fromDate,DateTime toDate, int workerId, bool withAll = true)
         {
-            var workers = new[] { new WorkerShortDto { Id = 0, Name = "Все исполнители" } };
-            workers = workers.Concat(requestService.GetWorkersByPeriod(true,fromDate,toDate, fromDate, toDate, workerId).OrderBy(w => $"{w.SurName} {w.FirstName} {w.PatrName}").Select(w => new WorkerShortDto { Id = w.Id, Name = $"{w.SurName} {w.FirstName} {w.PatrName}" })).ToArray();
-            return workers;
+            if (withAll)
+            {
+                return new[] { new WorkerShortDto { Id = 0, Name = "Все исполнители" } }.Concat(requestService.GetWorkersByPeriod(true, fromDate, toDate, fromDate, toDate, workerId).OrderBy(w => $"{w.SurName} {w.FirstName} {w.PatrName}").Select(w => new WorkerShortDto { Id = w.Id, Name = $"{w.SurName} {w.FirstName} {w.PatrName}" })).ToArray();
+            }
+            return new[] { new WorkerShortDto { Id = 0, Name = "Нет" } }.Concat(requestService.GetWorkersByPeriod(true, fromDate, toDate, fromDate, toDate, workerId).OrderBy(w => $"{w.SurName} {w.FirstName} {w.PatrName}").Select(w => new WorkerShortDto { Id = w.Id, Name = $"{w.SurName} {w.FirstName} {w.PatrName}" })).ToArray();
+
         }
 
         private StreetShortDto[] GetStreetList(RequestWebServiceClient requestService, int workerId, bool withAll = true)
@@ -73,10 +76,13 @@ namespace request_web.Controllers
             }
             return new[] { new AddressShortDto { Id = 0, Name = "Выберите адрес" } }.Concat(addresses.Select(h => new AddressShortDto { Id = h.Id, Name = h.Name })).ToArray();
         }
-        private ServiceShortDto[] GetServices(RequestWebServiceClient requestService, int? parentId)
+        private ServiceShortDto[] GetServices(RequestWebServiceClient requestService, int? parentId, bool withAll = true)
         {
-            var services = requestService.GetServices(parentId);
-            return services.Select(s => new ServiceShortDto { Id = s.Id, Name = s.Name }).ToArray();
+            if (withAll)
+            {
+                return requestService.GetServices(parentId).Select(s => new ServiceShortDto {Id = s.Id, Name = s.Name}).ToArray();
+            }
+            return new[] { new ServiceShortDto { Id = 0, Name = "Выберите услугу" } }.Concat(requestService.GetServices(parentId).Select(s => new ServiceShortDto { Id = s.Id, Name = s.Name })).ToArray();
         }
 
         private RequestListModel GetViewModel(DateTime fromDate, DateTime toDate, int selectedWorkerId,
@@ -265,19 +271,39 @@ namespace request_web.Controllers
             {
                 var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
                 var workerId = currentUser.WorkerId;
-                var workers = GetWorkerList(requestService,DateTime.MinValue, DateTime.MaxValue,  currentUser.WorkerId);
+                var workers = GetWorkerList(requestService,DateTime.MinValue, DateTime.MaxValue,  currentUser.WorkerId, false);
                 var streets = GetStreetList(requestService, currentUser.WorkerId, false);
-                var parentServices = GetServices(requestService, null).ToArray();
+                var parentServices = GetServices(requestService, null, false).ToArray();
                 var model = new RequestCreateNewModel();
                 model.Workers = workers;
                 model.Executers = workers;
                 model.Streets = streets;
                 model.ParentServices = parentServices;
                 model.Services = new ServiceShortDto[0];
-                model.Addresses = new AddressShortDto[0];
-                model.Houses = new HouseShortDto[0];
+                model.Addresses = new[] { new AddressShortDto { Id = 0, Name = "Выберите адрес" } };
+                model.Houses = new[] { new HouseShortDto { Id = 0, Name = "Выберите дом" } };
                 return View(model);
             }
+        }
+        [HttpPost]
+        public ActionResult CreateNew(RequestCreateNewModel model, string action)
+        {
+            Int32.TryParse(Request.Params["SelectedWorker"], out int selectedWorkerId);
+            Int32.TryParse(Request.Params["SelectedStreet"], out int selectedStreetId);
+            Int32.TryParse(Request.Params["SelectedStatus"], out int selectedStatusId);
+            Int32.TryParse(Request.Params["SelectedHouse"], out int selectedHouseId);
+            Int32.TryParse(Request.Params["SelectedAddress"], out int selectedAddressId);
+            Int32.TryParse(Request.Params["SelectedParServ"], out int selectedParServId);
+            Int32.TryParse(Request.Params["SelectedService"], out int selectedServiceId);
+            if (model.Description.Length > 0)
+            {
+                var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
+                using (var requestService = new RequestWebServiceClient())
+                {
+                    //requestService.AddNote(model.RequestId, model.Note, currentUser.UserId);
+                }
+            }
+            return Redirect(Url.Action("List", "Requests"));
         }
         [Authorize]
         public ActionResult Details(string requestParam)
@@ -472,6 +498,17 @@ namespace request_web.Controllers
             using (var requestService = new RequestWebServiceClient())
             {
                 var services = new[] { new ServiceShortDto { Id = 0, Name = "Все причины" } }.Concat(GetServices(requestService, parentServiceId)).ToArray();
+                return Json(JsonConvert.SerializeObject(services));
+            }
+        }
+
+        [HttpPost]
+        public JsonResult GetServicesByParentForCreateNew(string parentServiceNum)
+        {
+            Int32.TryParse(parentServiceNum, out int parentServiceId);
+            using (var requestService = new RequestWebServiceClient())
+            {
+                var services = new[] { new ServiceShortDto { Id = 0, Name = "Выберите причину" } }.Concat(GetServices(requestService, parentServiceId)).ToArray();
                 return Json(JsonConvert.SerializeObject(services));
             }
         }
