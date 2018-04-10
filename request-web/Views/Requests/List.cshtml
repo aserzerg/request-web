@@ -97,7 +97,10 @@
     @Html.LabelFor(m => m.AdditionFiltering, new { @class = "control-label mr-sm-2" })
     <button type="button" id="PrintActs" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Печать</button>
     <button type="button" id="Refresh" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;background: mediumseagreen">Применить</button>
-    <button type="button" id="CreateNew" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Создать</button>
+    @if (Model.UserInfo.CanCreateRequestInWeb)
+    {
+        <button type="button" id="CreateNew" class="btn form-group btn-primary pull-right" style="width: 100px; height: 25px; margin-left: 10px; padding: 0;">Создать</button>
+    }
 
     <div id="AdditionParameters" style="margin-top: 10px;">
         <div>
@@ -232,7 +235,7 @@
                 @request.ExecutePeriod
                 </td>
 
-                <td>@(request.Worker != null ? request.Worker.SurName : "")</td>
+                <td>@(request.Master != null ? request.Master.SurName : "")</td>
             </tr>
         }
         </tbody>

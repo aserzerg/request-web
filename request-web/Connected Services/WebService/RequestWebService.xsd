@@ -15,6 +15,7 @@
   <xs:element name="CityDto" nillable="true" type="tns:CityDto" />
   <xs:complexType name="WebUserDto">
     <xs:sequence>
+      <xs:element minOccurs="0" name="CanCreateRequestInWeb" type="xs:boolean" />
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PatrName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ServiceCompanyId" type="xs:int" />
@@ -45,6 +46,7 @@
       <xs:element minOccurs="0" name="Entrance" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ExecutePeriod" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ExecuteTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Executer" nillable="true" type="tns:RequestUserDto" />
       <xs:element minOccurs="0" name="Flat" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Floor" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FromTime" nillable="true" type="xs:dateTime" />
@@ -54,7 +56,9 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IsBadWork" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsRetry" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastNote" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="MainFio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Master" nillable="true" type="tns:RequestUserDto" />
       <xs:element minOccurs="0" name="ParentService" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Rating" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RatingDescription" nillable="true" type="xs:string" />
@@ -66,7 +70,6 @@
       <xs:element minOccurs="0" name="StreetName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="StreetPrefix" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ToTime" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Worker" nillable="true" type="tns:RequestUserDto" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RequestForListDto" nillable="true" type="tns:RequestForListDto" />
@@ -90,6 +93,7 @@
       <xs:element minOccurs="0" name="CanAssign" type="xs:boolean" />
       <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsMaster" type="xs:boolean" />
       <xs:element minOccurs="0" name="ParentWorkerId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="PatrName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />

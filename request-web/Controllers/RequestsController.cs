@@ -191,6 +191,7 @@ namespace request_web.Controllers
                 #endregion
                 return new RequestListModel
                 {
+                    UserInfo = currentUser,
                     Requests = requests,
                     FromDate = fromDate,
                     ToDate = toDate,
@@ -285,26 +286,40 @@ namespace request_web.Controllers
                 return View(model);
             }
         }
+
         [HttpPost]
         public ActionResult CreateNew(RequestCreateNewModel model, string action)
         {
-            Int32.TryParse(Request.Params["SelectedWorker"], out int selectedWorkerId);
-            Int32.TryParse(Request.Params["SelectedStreet"], out int selectedStreetId);
-            Int32.TryParse(Request.Params["SelectedStatus"], out int selectedStatusId);
-            Int32.TryParse(Request.Params["SelectedHouse"], out int selectedHouseId);
-            Int32.TryParse(Request.Params["SelectedAddress"], out int selectedAddressId);
-            Int32.TryParse(Request.Params["SelectedParServ"], out int selectedParServId);
-            Int32.TryParse(Request.Params["SelectedService"], out int selectedServiceId);
-            if (model.Description.Length > 0)
+            //Int32.TryParse(Request.Params["SelectedWorker"], out int selectedWorkerId);
+            //Int32.TryParse(Request.Params["SelectedStreet"], out int selectedStreetId);
+            //Int32.TryParse(Request.Params["SelectedStatus"], out int selectedStatusId);
+            //Int32.TryParse(Request.Params["SelectedHouse"], out int selectedHouseId);
+            //Int32.TryParse(Request.Params["SelectedParServ"], out int selectedParServId);
+            Int32.TryParse(Request.Params["SelectedAddress"], out int addressId);
+            Int32.TryParse(Request.Params["SelectedExecuter"], out int executerId);
+            Int32.TryParse(Request.Params["SelectedMaster"], out int masterId);
+            Int32.TryParse(Request.Params["SelectedService"], out int serviceId);
+            var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
+            using (var requestService = new RequestWebServiceClient())
             {
-                var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
-                using (var requestService = new RequestWebServiceClient())
-                {
-                    //requestService.AddNote(model.RequestId, model.Note, currentUser.UserId);
-                }
+                var result = requestService.CreateRequest(currentUser.WorkerId, model.PhoneNumber, model.Fio, addressId,
+                    serviceId, masterId==0 ? (int?)null : masterId, executerId == 0 ? (int?)null : executerId, model.Description);
+                return Redirect(Url.Action("SaveDone", "Requests") + $"?RequestId={result}");
             }
-            return Redirect(Url.Action("List", "Requests"));
         }
+
+        [Authorize]
+        public ActionResult SaveDone(string requestParam)
+        {
+            var requestId = Request.Params["RequestId"];
+            if (string.IsNullOrEmpty(requestId))
+                requestId = requestParam;
+            return View(new RequestSaveModel()
+            {
+                RequestId = requestId
+            });
+        }
+
         [Authorize]
         public ActionResult Details(string requestParam)
         {
@@ -316,7 +331,7 @@ namespace request_web.Controllers
                 var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
                 var workerId = currentUser.WorkerId;
                 var request = requestService.GetRequestByWorkerAndId(workerId,Convert.ToInt32(requestId));
-                var worker = $"{request.Worker?.SurName} {request.Worker?.FirstName} {request.Worker?.PatrName}";
+                var worker = $"{request.Master?.SurName} {request.Master?.FirstName} {request.Master?.PatrName}";
                 var contactList = request.ContactPhones;
                 var attachments = requestService.GetAttachmentList(request.Id);
                 var notes = requestService.GetNotes(request.Id);

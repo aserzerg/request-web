@@ -420,6 +420,27 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="CreateRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="workerId" type="xs:int" />
+        <xs:element minOccurs="0" name="phone" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="fio" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="addressId" type="xs:int" />
+        <xs:element minOccurs="0" name="typeId" type="xs:int" />
+        <xs:element minOccurs="0" name="masterId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="executerId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateRequestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateRequestResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetRedirectPhone">
     <xs:complexType>
       <xs:sequence />

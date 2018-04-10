@@ -169,6 +169,7 @@
     <Compile Include="Models\RequestCreateNewModel.cs" />
     <Compile Include="Models\RequestDetailModel.cs" />
     <Compile Include="Models\RequestListModel.cs" />
+    <Compile Include="Models\RequestSaveModel.cs" />
     <Compile Include="Models\ServiceCompanyGeneralInfoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -615,6 +616,7 @@
     <Content Include="Views\Requests\AddNote.cshtml" />
     <Content Include="Views\Stat\ServiceCompanyGeneralInfo.cshtml" />
     <Content Include="Views\ServiceCompanyStat\GeneralInfo.cshtml" />
+    <Content Include="Views\Requests\SaveDone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -62,45 +62,48 @@
     @Html.ValidationSummary(false, "Пожалуйста, укажите коррекные даты!")
 
 <div class="form-inline pull-right" style="margin-bottom: 15px; horiz-align: center; position: relative">
-        @*; z-index: 9999">*@
-        <b style="vertical-align: middle;">Период выполнения</b>
-        @Html.TextBoxFor(m => m.FromDate, new { @class = "datepicker form-control", style = "height: 25px; width: 110px", placeholder = Html.DisplayName("Введите дату") })
+    @*; z-index: 9999">*@
+    <b style="vertical-align: middle;">Период выполнения</b>
+    @Html.TextBoxFor(m => m.FromDate, new { @class = "datepicker form-control", style = "height: 25px; width: 110px", placeholder = Html.DisplayName("Введите дату") })
 
-        @Html.Label("-", new { @class = "control-label mr-sm-2" })
-        @Html.TextBoxFor(m => m.ToDate, new { @class = "datepicker form-control", style = "height: 25px; width: 110px ", placeholder = Html.DisplayName("Введите дату") })
-        
-        <select class="chosen-select" data-placeholder="Исполнитель" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;" >
-            @foreach (var worker in Model.Workers)
+    @Html.Label("-", new { @class = "control-label mr-sm-2" })
+    @Html.TextBoxFor(m => m.ToDate, new { @class = "datepicker form-control", style = "height: 25px; width: 110px ", placeholder = Html.DisplayName("Введите дату") })
+
+    <select class="chosen-select" data-placeholder="Мастер" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;">
+        @foreach (var worker in Model.Workers)
+        {
+            string SelectedValue = "";
+            if (worker.IsSelected)
             {
-                string SelectedValue = "";
-                if (worker.IsSelected)
-                {
-                    SelectedValue = "selected='selected'";
-                }
+                SelectedValue = "selected='selected'";
+            }
             <option @SelectedValue id='@worker.Id'>@worker.Name</option>
-            }
-        </select>
+        }
+    </select>
 
-        <select class="chosen-select" data-placeholder="Статус" id="status_select" tabindex="-1" style="width: 180px; height: 25px;">
-            @foreach (var status in Model.Statuses)
+    <select class="chosen-select" data-placeholder="Статус" id="status_select" tabindex="-1" style="width: 180px; height: 25px;">
+        @foreach (var status in Model.Statuses)
+        {
+            string SelectedValue = "";
+            if (status.IsSelected)
             {
-                string SelectedValue = "";
-                if (status.IsSelected)
-                {
-                    SelectedValue = "selected='selected'";
-                }
-                <option @SelectedValue id='@status.Id'>@status.Name</option>
+                SelectedValue = "selected='selected'";
             }
-        </select>
+            <option @SelectedValue id='@status.Id'>@status.Name</option>
+        }
+    </select>
 
-        @Html.CheckBoxFor(m => m.AdditionFiltering, new { @class = "checkbox", style = "height: 25px"})
-        @Html.LabelFor(m => m.AdditionFiltering, new { @class = "control-label mr-sm-2" })
-        @*<button type="button" id="CreateNew" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Создать</button>*@
-        <button type="button" id="PrintActs" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Печать</button>
-        <button type="button" id="Refresh" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;background: mediumseagreen">Применить</button>
+    @Html.CheckBoxFor(m => m.AdditionFiltering, new { @class = "checkbox", style = "height: 25px" })
+    @Html.LabelFor(m => m.AdditionFiltering, new { @class = "control-label mr-sm-2" })
+    <button type="button" id="PrintActs" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Печать</button>
+    <button type="button" id="Refresh" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;background: mediumseagreen">Применить</button>
+    @if (Model.UserInfo.CanCreateRequestInWeb)
+    {
+        <button type="button" id="CreateNew" class="btn form-group btn-primary pull-right" style="width: 100px; height: 25px; margin-left: 10px; padding: 0;">Создать</button>
+    }
 
-        <div id="AdditionParameters" style="margin-top: 10px;">
-           <div>
+    <div id="AdditionParameters" style="margin-top: 10px;">
+        <div>
             <select class="chosen-select" data-placeholder="Улица" id="street_select" tabindex="-1" style="width: 280px; height: 25px;">
                 @foreach (var street in Model.Streets)
                 {
@@ -123,51 +126,51 @@
                     <option @SelectedValue id='@house.Id'>@house.Name</option>
                 }
             </select>
-               <select class="chosen-select" data-placeholder="Адреса" id="address_select" tabindex="-1" style="width: 180px; height: 25px;">
-                   @foreach (var address in Model.Addresses)
+            <select class="chosen-select" data-placeholder="Адреса" id="address_select" tabindex="-1" style="width: 180px; height: 25px;">
+                @foreach (var address in Model.Addresses)
                 {
                     string SelectedValue = "";
                     if (address.IsSelected)
                     {
                         SelectedValue = "selected='selected'";
                     }
-                   <option @SelectedValue id='@address.Id'>@address.Name</option>
-                   }
-               </select>
-            </div>
-            <div style="margin-top: 10px">
-                <select class="chosen-select" data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
-                    @foreach (var parentService in Model.ParentServices)
+                    <option @SelectedValue id='@address.Id'>@address.Name</option>
+                }
+            </select>
+        </div>
+        <div style="margin-top: 10px">
+            <select class="chosen-select" data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
+                @foreach (var parentService in Model.ParentServices)
+                {
+                    string SelectedValue = "";
+                    if (parentService.IsSelected)
                     {
-                        string SelectedValue = "";
-                        if (parentService.IsSelected)
-                        {
-                            SelectedValue = "selected='selected'";
-                        }
-                        <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
+                        SelectedValue = "selected='selected'";
                     }
-                </select>
-                <select class="chosen-select" data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
-                    @foreach (var service in Model.Services)
+                    <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
+                }
+            </select>
+            <select class="chosen-select" data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
+                @foreach (var service in Model.Services)
+                {
+                    string SelectedValue = "";
+                    if (service.IsSelected)
                     {
-                        string SelectedValue = "";
-                        if (service.IsSelected)
-                        {
-                            SelectedValue = "selected='selected'";
-                        }
-                        <option @SelectedValue id='@service.Id'>@service.Name</option>
+                        SelectedValue = "selected='selected'";
                     }
-                </select>
-            </div>
-            <div style="margin-top: 10px">
-                @Html.Label("Телефон абонента:", new { @class = "control-label mr-sm-2" })
-                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", style = "height: 25px; width: 180px ", placeholder = Html.DisplayName("Введите номер телефона") })
-                @Html.CheckBoxFor(m => m.IsBadWork, new { @class = "checkbox", style = "margin-left:50px; height: 25px" })
-                @Html.LabelFor(m => m.IsBadWork, new { @class = "control-label mr-sm-2", style = "color: red;" })
-                @Html.CheckBoxFor(m => m.Garanty, new { @class = "checkbox", style = "margin-left:50px; height: 25px" })
-                @Html.LabelFor(m => m.Garanty, new { @class = "control-label mr-sm-2", style = "color: red;" })
+                    <option @SelectedValue id='@service.Id'>@service.Name</option>
+                }
+            </select>
+        </div>
+        <div style="margin-top: 10px">
+            @Html.Label("Телефон абонента:", new { @class = "control-label mr-sm-2" })
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", style = "height: 25px; width: 180px ", placeholder = Html.DisplayName("Введите номер телефона") })
+            @Html.CheckBoxFor(m => m.IsBadWork, new { @class = "checkbox", style = "margin-left:50px; height: 25px" })
+            @Html.LabelFor(m => m.IsBadWork, new { @class = "control-label mr-sm-2", style = "color: red;" })
+            @Html.CheckBoxFor(m => m.Garanty, new { @class = "checkbox", style = "margin-left:50px; height: 25px" })
+            @Html.LabelFor(m => m.Garanty, new { @class = "control-label mr-sm-2", style = "color: red;" })
 
-            </div>
+        </div>
     </div>
 </div>
 }
@@ -232,7 +235,7 @@
                 @request.ExecutePeriod
                 </td>
 
-                <td>@(request.Worker != null ? request.Worker.SurName : "")</td>
+                <td>@(request.Master != null ? request.Master.SurName : "")</td>
             </tr>
         }
         </tbody>
@@ -386,6 +389,11 @@
         $('#PrintActs').on('click',
         function() {
             var url = '/Requests/PrintActs';
+            window.open(url, '_blank');
+            });
+        $('#CreateNew').on('click',
+        function() {
+            var url = '/Requests/CreateNew';
             window.open(url, '_blank');
             });
 

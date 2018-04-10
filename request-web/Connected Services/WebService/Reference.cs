@@ -84,6 +84,9 @@ namespace request_web.WebService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool CanCreateRequestInWebField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FirstNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -111,6 +114,19 @@ namespace request_web.WebService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanCreateRequestInWeb {
+            get {
+                return this.CanCreateRequestInWebField;
+            }
+            set {
+                if ((this.CanCreateRequestInWebField.Equals(value) != true)) {
+                    this.CanCreateRequestInWebField = value;
+                    this.RaisePropertyChanged("CanCreateRequestInWeb");
+                }
             }
         }
         
@@ -261,6 +277,9 @@ namespace request_web.WebService {
         private System.Nullable<System.DateTime> ExecuteTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private request_web.WebService.RequestUserDto ExecuterField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FlatField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -288,7 +307,13 @@ namespace request_web.WebService {
         private bool IsRetryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LastNoteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MainFioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private request_web.WebService.RequestUserDto MasterField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ParentServiceField;
@@ -322,9 +347,6 @@ namespace request_web.WebService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.DateTime> ToTimeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private request_web.WebService.RequestUserDto WorkerField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -493,6 +515,19 @@ namespace request_web.WebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public request_web.WebService.RequestUserDto Executer {
+            get {
+                return this.ExecuterField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ExecuterField, value) != true)) {
+                    this.ExecuterField = value;
+                    this.RaisePropertyChanged("Executer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Flat {
             get {
                 return this.FlatField;
@@ -610,6 +645,19 @@ namespace request_web.WebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LastNote {
+            get {
+                return this.LastNoteField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LastNoteField, value) != true)) {
+                    this.LastNoteField = value;
+                    this.RaisePropertyChanged("LastNote");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string MainFio {
             get {
                 return this.MainFioField;
@@ -618,6 +666,19 @@ namespace request_web.WebService {
                 if ((object.ReferenceEquals(this.MainFioField, value) != true)) {
                     this.MainFioField = value;
                     this.RaisePropertyChanged("MainFio");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public request_web.WebService.RequestUserDto Master {
+            get {
+                return this.MasterField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MasterField, value) != true)) {
+                    this.MasterField = value;
+                    this.RaisePropertyChanged("Master");
                 }
             }
         }
@@ -765,19 +826,6 @@ namespace request_web.WebService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public request_web.WebService.RequestUserDto Worker {
-            get {
-                return this.WorkerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.WorkerField, value) != true)) {
-                    this.WorkerField = value;
-                    this.RaisePropertyChanged("Worker");
-                }
-            }
-        }
-        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -900,6 +948,9 @@ namespace request_web.WebService {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsMasterField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> ParentWorkerIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -968,6 +1019,19 @@ namespace request_web.WebService {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsMaster {
+            get {
+                return this.IsMasterField;
+            }
+            set {
+                if ((this.IsMasterField.Equals(value) != true)) {
+                    this.IsMasterField = value;
+                    this.RaisePropertyChanged("IsMaster");
                 }
             }
         }
@@ -2736,6 +2800,12 @@ namespace request_web.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/CreateRequestFromPhone", ReplyAction="http://tempuri.org/IRequestWebService/CreateRequestFromPhoneResponse")]
         System.Threading.Tasks.Task CreateRequestFromPhoneAsync(string phone, string code, int addressId, int typeId, string description);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/CreateRequest", ReplyAction="http://tempuri.org/IRequestWebService/CreateRequestResponse")]
+        string CreateRequest(int workerId, string phone, string fio, int addressId, int typeId, System.Nullable<int> masterId, System.Nullable<int> executerId, string description);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/CreateRequest", ReplyAction="http://tempuri.org/IRequestWebService/CreateRequestResponse")]
+        System.Threading.Tasks.Task<string> CreateRequestAsync(int workerId, string phone, string fio, int addressId, int typeId, System.Nullable<int> masterId, System.Nullable<int> executerId, string description);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRedirectPhone", ReplyAction="http://tempuri.org/IRequestWebService/GetRedirectPhoneResponse")]
         string GetRedirectPhone();
         
@@ -3012,6 +3082,14 @@ namespace request_web.WebService {
         
         public System.Threading.Tasks.Task CreateRequestFromPhoneAsync(string phone, string code, int addressId, int typeId, string description) {
             return base.Channel.CreateRequestFromPhoneAsync(phone, code, addressId, typeId, description);
+        }
+        
+        public string CreateRequest(int workerId, string phone, string fio, int addressId, int typeId, System.Nullable<int> masterId, System.Nullable<int> executerId, string description) {
+            return base.Channel.CreateRequest(workerId, phone, fio, addressId, typeId, masterId, executerId, description);
+        }
+        
+        public System.Threading.Tasks.Task<string> CreateRequestAsync(int workerId, string phone, string fio, int addressId, int typeId, System.Nullable<int> masterId, System.Nullable<int> executerId, string description) {
+            return base.Channel.CreateRequestAsync(workerId, phone, fio, addressId, typeId, masterId, executerId, description);
         }
         
         public string GetRedirectPhone() {

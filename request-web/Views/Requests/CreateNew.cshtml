@@ -6,16 +6,17 @@
 <h2>Создать заявку</h2>
 @using (Html.BeginForm("CreateNew", "Requests", FormMethod.Post, new { @class = "FromFORM" }))
 {
-    @Html.Hidden("SelectedWorker")
+    @Html.Hidden("SelectedMaster")
+    @Html.Hidden("SelectedExecuter")
     @Html.Hidden("SelectedStreet")
     @Html.Hidden("SelectedStatus")
     @Html.Hidden("SelectedHouse")
     @Html.Hidden("SelectedAddress")
     @Html.Hidden("SelectedParServ")
     @Html.Hidden("SelectedService")
-<div>
-    <label id="ErrorLabel" style="color: red;"></label>
-</div>
+    <div>
+        <label id="ErrorLabel" style="color: red;"></label>
+    </div>
     <div style="margin: 10px">
         @Html.Label("Телефон:", new { @class = "control-label mr-sm-2" })
         @Html.TextBoxFor(m => m.PhoneNumber)
@@ -86,7 +87,7 @@
     </div>
     <div style="margin: 10px">
         @Html.Label("Мастер:", new { @class = "control-label mr-sm-2" })
-        <select class="chosen-select" data-placeholder="Мастер:" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;">
+        <select class="chosen-select" data-placeholder="Мастер:" id="master_select" tabindex="-1" style="width: 180px; height: 25px;">
             @foreach (var worker in Model.Workers)
             {
                 string SelectedValue = "";
@@ -98,7 +99,7 @@
             }
         </select>
         @Html.Label("Исполнитель:", new { @class = "control-label mr-sm-2" })
-        <select class="chosen-select" data-placeholder="Исполнитель:" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;">
+        <select class="chosen-select" data-placeholder="Исполнитель:" id="executer_select" tabindex="-1" style="width: 180px; height: 25px;">
             @foreach (var worker in Model.Executers)
             {
                 string SelectedValue = "";
@@ -132,8 +133,11 @@
     $('#SaveRequest').on('click', function () {
         const form = $(this).closest('form')[0];
 
-        var workerId = $("#worker_select :selected")[0].id;
-        form["SelectedWorker"].value = workerId;
+        var masterId = $("#master_select :selected")[0].id;
+        form["SelectedMaster"].value = masterId;
+
+        var executerId = $("#executer_select :selected")[0].id;
+        form["SelectedExecuter"].value = executerId;
 
         var streetId = $("#street_select :selected")[0].id;
         form["SelectedStreet"].value = streetId;
@@ -152,6 +156,13 @@
 
         var serviceId = $("#service_select :selected")[0].id;
         form["SelectedService"].value = serviceId;
+        var phone = form["PhoneNumber"].value;
+        if (phone.length <= 5) {
+            //$('#dialogContent').html(data);
+            $("#ErrorLabel").html("Необходимо указать контактный телефон!");
+            return;
+        }
+
         if (serviceId == 0) {
             //$('#dialogContent').html(data);
             $("#ErrorLabel").html("Необходимо выбрать услугу и причину обращения!");
@@ -161,7 +172,7 @@
             //$('#dialogContent').html(data);
             $("#ErrorLabel").html("Необходимо выбрать адрес!");
             return;
-        }   
+        }
         form.submit();
     });
 

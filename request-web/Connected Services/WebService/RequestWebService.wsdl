@@ -181,6 +181,12 @@
   <wsdl:message name="IRequestWebService_CreateRequestFromPhone_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateRequestFromPhoneResponse" />
   </wsdl:message>
+  <wsdl:message name="IRequestWebService_CreateRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRequest" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_CreateRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRequestResponse" />
+  </wsdl:message>
   <wsdl:message name="IRequestWebService_GetRedirectPhone_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRedirectPhone" />
   </wsdl:message>
@@ -315,6 +321,10 @@
     <wsdl:operation name="CreateRequestFromPhone">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/CreateRequestFromPhone" message="tns:IRequestWebService_CreateRequestFromPhone_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/CreateRequestFromPhoneResponse" message="tns:IRequestWebService_CreateRequestFromPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/CreateRequest" message="tns:IRequestWebService_CreateRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/CreateRequestResponse" message="tns:IRequestWebService_CreateRequest_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetRedirectPhone">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRedirectPhone" message="tns:IRequestWebService_GetRedirectPhone_InputMessage" />
@@ -585,6 +595,15 @@
     </wsdl:operation>
     <wsdl:operation name="CreateRequestFromPhone">
       <soap:operation soapAction="http://tempuri.org/IRequestWebService/CreateRequestFromPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRequest">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/CreateRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
