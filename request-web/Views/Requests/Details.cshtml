@@ -79,6 +79,18 @@
     <dd>
         @Html.DisplayFor(model => model.WorkDate)
     </dd>
+    <dt>
+        @Html.Label("Оценка:", new {@class = "pull-left"})
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Rating)
+    </dd>
+    <dt>
+        @Html.Label("Описание к оценке:", new {@class = "pull-left"})
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.RatingDescription)
+    </dd>
 </dl>
 <div>
     <h3>Список звонков</h3>

@@ -7,6 +7,7 @@ namespace request_web.Models
 {
     public class RequestListModel
     {
+        public int LineNumber = 1;
         public WebUserDto UserInfo { get; set; }
         [Required(ErrorMessage = "Необходимо заполнить поле {0}.")]
         [DataType(DataType.Date)]
@@ -37,6 +38,7 @@ namespace request_web.Models
         public AddressShortDto[] Addresses { get; set; }
         public ServiceShortDto[] ParentServices { get; set; }
         public ServiceShortDto[] Services { get; set; }
+        public RatingShortDto[] Ratings { get; set; }
         //public string SelectedWorker { get; set; }
 
     }

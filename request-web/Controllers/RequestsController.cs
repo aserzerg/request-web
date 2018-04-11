@@ -24,6 +24,7 @@ namespace request_web.Controllers
         private const string AddressSessionName = "request_address";
         private const string ParServSessionName = "request_parent_service";
         private const string ServSessionName = "request_service";
+        private const string RatingSessionName = "request_rating";
         private const string FilteringSessionName = "request_filtering";
         private const string PhoneSessionName = "request_phoneNumber";
         private const string IsBadWorkSessionName = "request_is_bad_work";
@@ -87,7 +88,7 @@ namespace request_web.Controllers
 
         private RequestListModel GetViewModel(DateTime fromDate, DateTime toDate, int selectedWorkerId,
             int selectedStreetId, int selectedStatusId, int selectedHouseId, int selectedAddressId,
-            int selectedParServId, int selectedServiceId, bool filterIsChecked, string phoneNumber, bool isBadWork, bool garanty)
+            int selectedParServId, int selectedServiceId, bool filterIsChecked, string phoneNumber, bool isBadWork, bool garanty, int rating)
         {
             var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
             var workerId = currentUser.WorkerId;
@@ -135,6 +136,13 @@ namespace request_web.Controllers
                     {
                         selectedAddress.IsSelected = true;
                     }
+                }
+
+                var ratings = (new[] {0, 1, 2, 3, 4, 5}).Select(a => new RatingShortDto {Id = a, Name = a > 0 ? a.ToString() : "Не выбрана"}).ToArray();
+                var selectedRating = ratings.Where(h => h.Id == rating).FirstOrDefault();
+                if (selectedRating != null)
+                {
+                    selectedRating.IsSelected = true;
                 }
 
                 #endregion
@@ -186,8 +194,10 @@ namespace request_web.Controllers
             selectedStatusId > 0 ? selectedStatusId : 2,
             selectedParServId > 0 ? selectedParServId : (int?)null,
             selectedServiceId > 0 ? selectedServiceId : (int?)null,
-            isBadWork, garanty, phoneNumber).OrderByDescending(r=>r.CreateTime).ToArray();
+            isBadWork, garanty, phoneNumber, rating > 0 ? rating : (int?)null).OrderByDescending(r=>r.CreateTime).ToArray();
                 var currentDate = requestService.GetCurrentDate();
+
+
                 #endregion
                 return new RequestListModel
                 {
@@ -206,7 +216,8 @@ namespace request_web.Controllers
                     ParentServices = parentServices,
                     Addresses = addresses,
                     Services = services,
-                    CurrentDate = currentDate
+                    CurrentDate = currentDate,
+                    Ratings = ratings 
                 };
             }
         }
@@ -222,6 +233,7 @@ namespace request_web.Controllers
             var selectedAddressId = (int?)Session[AddressSessionName] ?? 0;
             var selectedParServId = (int?)Session[ParServSessionName] ?? 0;
             var selectedServiceId = (int?)Session[ServSessionName] ?? 0;
+            var selectedRatingId = (int?) Session[RatingSessionName] ?? 0;
             var filterIsChecked = (bool?)Session[FilteringSessionName] ?? false;
             var phoneNumber = (string)Session[PhoneSessionName];
             var isBadWork = (bool?)Session[IsBadWorkSessionName] ?? false;
@@ -229,7 +241,7 @@ namespace request_web.Controllers
 
 
             var viewModel = GetViewModel(fromDate, toDate, selectedWorkerId,selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
-                        selectedParServId, selectedServiceId, filterIsChecked, phoneNumber, isBadWork, garanty);
+                        selectedParServId, selectedServiceId, filterIsChecked, phoneNumber, isBadWork, garanty, selectedRatingId);
             return View(viewModel);
         }
 
@@ -243,6 +255,7 @@ namespace request_web.Controllers
             Int32.TryParse(Request.Params["SelectedAddress"], out int selectedAddressId);
             Int32.TryParse(Request.Params["SelectedParServ"], out int selectedParServId);
             Int32.TryParse(Request.Params["SelectedService"], out int selectedServiceId);
+            Int32.TryParse(Request.Params["SelectedRating"], out int selectedRatingId);
 
             Session[FromDateSessionName] = model.FromDate;
             Session[ToDateSessionName] = model.ToDate;
@@ -254,13 +267,14 @@ namespace request_web.Controllers
             Session[FilteringSessionName] = model.AdditionFiltering;
             Session[ParServSessionName] = selectedParServId;
             Session[ServSessionName] = selectedServiceId;
+            Session[RatingSessionName] = selectedRatingId;
             Session[PhoneSessionName] = model.PhoneNumber;
             Session[IsBadWorkSessionName] = model.IsBadWork;
             Session[GarantySessionName] = model.Garanty;
 
 
             var viewModel = GetViewModel(model.FromDate, model.ToDate, selectedWorkerId, selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
-                        selectedParServId, selectedServiceId, model.AdditionFiltering, model.PhoneNumber,model.IsBadWork, model.Garanty);
+                        selectedParServId, selectedServiceId, model.AdditionFiltering, model.PhoneNumber,model.IsBadWork, model.Garanty,selectedRatingId);
             return View(viewModel);
         }
 
@@ -354,7 +368,9 @@ namespace request_web.Controllers
                     CallList = callList,
                     Garanty = request.Garanty,
                     Attachments = attachments,
-                    Notes = notes
+                    Notes = notes,
+                    Rating = request.Rating,
+                    RatingDescription = request.RatingDescription
                 });
             }
         }
@@ -540,6 +556,7 @@ namespace request_web.Controllers
             var selectedAddressId = (int?)Session[AddressSessionName] ?? 0;
             var selectedParServId = (int?)Session[ParServSessionName] ?? 0;
             var selectedServiceId = (int?)Session[ServSessionName] ?? 0;
+            var selectedRatungId = (int?)Session[RatingSessionName] ?? 0;
             var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
             var workerId = currentUser.WorkerId;
 

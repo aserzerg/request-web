@@ -1,6 +1,6 @@
 ﻿namespace request_web.Dto
 {
-    public class ServiceShortDto
+    public class RatingShortDto
     {
         public int Id;
         public string Name;

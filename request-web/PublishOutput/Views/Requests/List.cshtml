@@ -55,9 +55,8 @@
     @Html.Hidden("SelectedAddress")
     @Html.Hidden("SelectedParServ")
     @Html.Hidden("SelectedService")
-
+    @Html.Hidden("SelectedRating")
     
-
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(false, "Пожалуйста, укажите коррекные даты!")
 
@@ -141,25 +140,37 @@
         <div style="margin-top: 10px">
             <select class="chosen-select" data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
                 @foreach (var parentService in Model.ParentServices)
-                {
-                    string SelectedValue = "";
-                    if (parentService.IsSelected)
-                    {
-                        SelectedValue = "selected='selected'";
-                    }
-                    <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
-                }
+        {
+            string SelectedValue = "";
+            if (parentService.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
+}
             </select>
             <select class="chosen-select" data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
                 @foreach (var service in Model.Services)
-                {
-                    string SelectedValue = "";
-                    if (service.IsSelected)
-                    {
-                        SelectedValue = "selected='selected'";
-                    }
-                    <option @SelectedValue id='@service.Id'>@service.Name</option>
-                }
+        {
+            string SelectedValue = "";
+            if (service.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@service.Id'>@service.Name</option>
+}
+            </select>
+            @Html.Label("Оценка:", new { @class = "control-label mr-sm-2" })
+            <select class="chosen-select" data-placeholder="Оценка" id="rating_select" tabindex="-1" style="width: 280px; height: 25px;">
+                @foreach (var rating in Model.Ratings)
+        {
+            string SelectedValue = "";
+            if (rating.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@rating.Id'>@rating.Name</option>
+}
             </select>
         </div>
         <div style="margin-top: 10px">
@@ -182,45 +193,50 @@
 
     <table id="servicesTable" class="table table-bordered table-services hover" style="width: 100%;">
         <thead>
-        <tr>
-            <th style="vertical-align: middle;">№ Заявки</th>
-            <th style="vertical-align: middle;">Дата создания</th>
-            <th style="vertical-align: middle;">Адрес</th>
-            <th style="vertical-align: middle;">Описание</th>
-            <th style="vertical-align: middle;">Статус</th>
-            <th style="vertical-align: middle;">Дата выполнения</th>
-            <th>Исполнитель</th>
-        </tr>
+            <tr>
+                <th style="vertical-align: middle;">№</th>
+                <th style="vertical-align: middle;">№ Заявки</th>
+                <th style="vertical-align: middle;">Дата создания</th>
+                <th style="vertical-align: middle;">Адрес</th>
+                <th style="vertical-align: middle;">Описание</th>
+                <th style="vertical-align: middle;">Статус</th>
+                <th style="vertical-align: middle;">Дата выполнения</th>
+                <th style="vertical-align: middle;">Исполнитель</th>
+                <th style="vertical-align: middle;">Оценка</th>
+            </tr>
         </thead>
         <tbody>
         @foreach (var request in Model.Requests)
         {
             <tr>
+                <td>@(Model.LineNumber++)</td>
+
                 <td>
                     <button type="button" class="btn btn-md" style="width: 100%; @(request.StatusId < 3 && request.ExecuteTime.HasValue ?
                                                                                        request.ExecuteTime.Value < Model.CurrentDate ? "background-color: red" : "" : "")" @DataFormPost data-request-id="@request.Id">
                         <div>
                             @if (request.IsRetry)
-                            {
-                                <span style="display: inline-block; vertical-align: middle; width: 20px; height: 20px; margin: 1 5px 0 0; position: relative; background-size: cover; background-image: url('/Images/retry.png')"></span>
-                            }
+                {
+                    <span style="display: inline-block; vertical-align: middle; width: 20px; height: 20px; margin: 1 5px 0 0; position: relative; background-size: cover; background-image: url('/Images/retry.png')"></span>
+    }
                             @request.Id
                         </div>
-                        <div style="color: blue;">@(request.Garanty?"Гарантия":null)</div>
+                        <div style="color: blue;">@(request.Garanty ? "Гарантия" : null)</div>
                     </button>
                 </td>
                 <td>@request.CreateTime.ToString("dd.MM.yyyy HH:mm")</td>
 
                 <td>
-                @{    
-                    string Corpus = "";
-                    if (!string.IsNullOrEmpty(@request.Corpus))
-                    {
-                        Corpus = "/"+@request.Corpus;
+                    @{
+            string Corpus = "";
+            if (!string.IsNullOrEmpty(@request.Corpus))
+            {
+                Corpus = "/" + @request.Corpus;
+            }
                     }
-                }
 
-                @request.StreetName, @request.Building@Corpus, @request.Flat</td>
+                    @request.StreetName, @request.Building@Corpus, @request.Flat
+                </td>
                 <td>
                     Услуга: @request.ParentService
                     <br>
@@ -230,12 +246,13 @@
                 </td>
                 <td>@request.Status</td>
                 <td>
-                @(request.ExecuteTime.HasValue ? request.ExecuteTime.Value.ToString("dd.MM.yyyy") : "-" )
-                <br>
-                @request.ExecutePeriod
+                    @(request.ExecuteTime.HasValue ? request.ExecuteTime.Value.ToString("dd.MM.yyyy") : "-")
+                    <br>
+                    @request.ExecutePeriod
                 </td>
 
                 <td>@(request.Master != null ? request.Master.SurName : "")</td>
+                <td>@request.Rating</td>
             </tr>
         }
         </tbody>
@@ -418,8 +435,11 @@
             var parServId = $("#parrent_service_select :selected")[0].id;
             form["SelectedParServ"].value = parServId;
 
-            var serivceId = $("#service_select :selected")[0].id;
-            form["SelectedService"].value = serivceId;
+            var serviceId = $("#service_select :selected")[0].id;
+            form["SelectedService"].value = serviceId;
+
+            var ratingId = $("#rating_select :selected")[0].id;
+            form["SelectedRating"].value = ratingId;
             
             form.submit();
         });

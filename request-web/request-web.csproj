@@ -155,6 +155,7 @@
     <Compile Include="Controllers\StatController.cs" />
     <Compile Include="Dto\AddressShortDto.cs" />
     <Compile Include="Dto\HouseShortDto.cs" />
+    <Compile Include="Dto\RatingShortDto.cs" />
     <Compile Include="Dto\ServiceShortDto.cs" />
     <Compile Include="Dto\StatusShortDto.cs" />
     <Compile Include="Dto\StreetShortDto.cs" />
