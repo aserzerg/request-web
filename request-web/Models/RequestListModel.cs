@@ -31,6 +31,7 @@ namespace request_web.Models
         public DateTime CurrentDate { get; set; }
 
         public RequestForListDto[] Requests { get; set; }
+        public FilterShortDto[] FilterByDate { get; set; }
         public WorkerShortDto[] Workers { get; set; }
         public StreetShortDto[] Streets { get; set; }
         public StatusShortDto[] Statuses { get; set; }

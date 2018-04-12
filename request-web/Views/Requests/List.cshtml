@@ -48,6 +48,7 @@
 </script>
 @using (Html.BeginForm())
 {
+    @Html.Hidden("SelectedFilter")
     @Html.Hidden("SelectedWorker")
     @Html.Hidden("SelectedStreet")
     @Html.Hidden("SelectedStatus")
@@ -62,7 +63,19 @@
 
 <div class="form-inline pull-right" style="margin-bottom: 15px; horiz-align: center; position: relative">
     @*; z-index: 9999">*@
-    <b style="vertical-align: middle;">Период выполнения</b>
+    @*<b style="vertical-align: middle;">Период выполнения</b>*@
+    <select class="chosen-select" data-placeholder="Фильтр" id="filter_select" tabindex="-1" style="width: 180px; height: 25px;">
+        @foreach (var filter in Model.FilterByDate)
+        {
+            string SelectedValue = "";
+            if (filter.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@filter.Id'>@filter.Name</option>
+        }
+    </select>
+
     @Html.TextBoxFor(m => m.FromDate, new { @class = "datepicker form-control", style = "height: 25px; width: 110px", placeholder = Html.DisplayName("Введите дату") })
 
     @Html.Label("-", new { @class = "control-label mr-sm-2" })
@@ -140,37 +153,37 @@
         <div style="margin-top: 10px">
             <select class="chosen-select" data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
                 @foreach (var parentService in Model.ParentServices)
-        {
-            string SelectedValue = "";
-            if (parentService.IsSelected)
-            {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
-}
+                {
+                    string SelectedValue = "";
+                    if (parentService.IsSelected)
+                    {
+                        SelectedValue = "selected='selected'";
+                    }
+                    <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
+                }
             </select>
             <select class="chosen-select" data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
                 @foreach (var service in Model.Services)
-        {
-            string SelectedValue = "";
-            if (service.IsSelected)
-            {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@service.Id'>@service.Name</option>
-}
+                {
+                    string SelectedValue = "";
+                    if (service.IsSelected)
+                    {
+                        SelectedValue = "selected='selected'";
+                    }
+                    <option @SelectedValue id='@service.Id'>@service.Name</option>
+                }
             </select>
             @Html.Label("Оценка:", new { @class = "control-label mr-sm-2" })
             <select class="chosen-select" data-placeholder="Оценка" id="rating_select" tabindex="-1" style="width: 120px; height: 25px;">
                 @foreach (var rating in Model.Ratings)
-        {
-            string SelectedValue = "";
-            if (rating.IsSelected)
-            {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@rating.Id'>@rating.Name</option>
-}
+                {
+                    string SelectedValue = "";
+                    if (rating.IsSelected)
+                    {
+                        SelectedValue = "selected='selected'";
+                    }
+                    <option @SelectedValue id='@rating.Id'>@rating.Name</option>
+                }
             </select>
         </div>
         <div style="margin-top: 10px">
@@ -416,6 +429,9 @@
 
         $('#Refresh').on('click', function () {
             const form = $(this).closest('form')[0];
+
+            var filterId = $("#filter_select :selected")[0].id;
+            form["SelectedFilter"].value = filterId;
 
             var workerId = $("#worker_select :selected")[0].id;
             form["SelectedWorker"].value = workerId;

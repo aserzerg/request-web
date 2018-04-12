@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - CMS24</title>
+    <title>@ViewBag.Title</title>
     @Scripts.Render("~/bundles/jquery", "~/bundles/bootstrap", "~/bundles/jqueryui", "~/Scripts/jquery-ui-datepicker-ru.js", "~/bundles/inputmasks", "~/bundles/jqueryval", "~/Chosen/chosen.jquery.min.js")
     @Styles.Render("~/Content/css", "~/Chosen/chosen.css")
     @*@Scripts.Render("~/bundles/modernizr")*@
@@ -12,7 +12,8 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
+            @*<div class="navbar-header">*@
+            <div>
                  @Html.Label("Dispex",new {@class = "navbar-brand", style = "width: 120px;"})
                 @*@Html.Label("ЦМС24", new { @class = "h4 control-label"})*@
                     @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@

@@ -11,5 +11,4 @@ namespace request_web.Dto
         public string Name;
         public bool IsSelected;
     }
-
 }

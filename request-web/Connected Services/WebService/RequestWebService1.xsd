@@ -57,6 +57,7 @@
         <xs:element minOccurs="0" name="garanty" type="xs:boolean" />
         <xs:element minOccurs="0" name="clientPhone" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="rating" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="filterByCreateDate" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
