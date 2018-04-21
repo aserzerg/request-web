@@ -2823,6 +2823,59 @@ namespace request_web.WebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestActs", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestActsResponse")]
         System.Threading.Tasks.Task<byte[]> GetRequestActsAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId);
+        
+        // CODEGEN: Generating message contract since the wrapper name (FileUploadRequest) of message FileUploadRequest does not match the default value (UploadFile)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/UploadFile", ReplyAction="http://tempuri.org/IRequestWebService/UploadFileResponse")]
+        request_web.WebService.FileUploadResponse UploadFile(request_web.WebService.FileUploadRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/UploadFile", ReplyAction="http://tempuri.org/IRequestWebService/UploadFileResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.FileUploadResponse> UploadFileAsync(request_web.WebService.FileUploadRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="FileUploadRequest", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class FileUploadRequest {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public string FileName;
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public int RequestId;
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public int UserId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.IO.Stream FileStream;
+        
+        public FileUploadRequest() {
+        }
+        
+        public FileUploadRequest(string FileName, int RequestId, int UserId, System.IO.Stream FileStream) {
+            this.FileName = FileName;
+            this.RequestId = RequestId;
+            this.UserId = UserId;
+            this.FileStream = FileStream;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="FileUploadResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class FileUploadResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string RetFileName;
+        
+        public FileUploadResponse() {
+        }
+        
+        public FileUploadResponse(string RetFileName) {
+            this.RetFileName = RetFileName;
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -3114,6 +3167,35 @@ namespace request_web.WebService {
         
         public System.Threading.Tasks.Task<byte[]> GetRequestActsAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId) {
             return base.Channel.GetRequestActsAsync(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        request_web.WebService.FileUploadResponse request_web.WebService.IRequestWebService.UploadFile(request_web.WebService.FileUploadRequest request) {
+            return base.Channel.UploadFile(request);
+        }
+        
+        public string UploadFile(string FileName, int RequestId, int UserId, System.IO.Stream FileStream) {
+            request_web.WebService.FileUploadRequest inValue = new request_web.WebService.FileUploadRequest();
+            inValue.FileName = FileName;
+            inValue.RequestId = RequestId;
+            inValue.UserId = UserId;
+            inValue.FileStream = FileStream;
+            request_web.WebService.FileUploadResponse retVal = ((request_web.WebService.IRequestWebService)(this)).UploadFile(inValue);
+            return retVal.RetFileName;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<request_web.WebService.FileUploadResponse> request_web.WebService.IRequestWebService.UploadFileAsync(request_web.WebService.FileUploadRequest request) {
+            return base.Channel.UploadFileAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<request_web.WebService.FileUploadResponse> UploadFileAsync(string FileName, int RequestId, int UserId, System.IO.Stream FileStream) {
+            request_web.WebService.FileUploadRequest inValue = new request_web.WebService.FileUploadRequest();
+            inValue.FileName = FileName;
+            inValue.RequestId = RequestId;
+            inValue.UserId = UserId;
+            inValue.FileStream = FileStream;
+            return ((request_web.WebService.IRequestWebService)(this)).UploadFileAsync(inValue);
         }
     }
 }

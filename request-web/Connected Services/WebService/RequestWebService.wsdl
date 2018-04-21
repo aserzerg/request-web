@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" />
+      <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IRequestWebService_GetData_InputMessage">
@@ -205,6 +206,17 @@
   <wsdl:message name="IRequestWebService_GetRequestActs_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRequestActsResponse" />
   </wsdl:message>
+  <wsdl:message name="FileUploadRequest">
+    <wsdl:part name="parameters" element="tns:FileUploadRequest" />
+  </wsdl:message>
+  <wsdl:message name="FileUploadRequest_Headers">
+    <wsdl:part name="FileName" element="tns:FileName" />
+    <wsdl:part name="RequestId" element="tns:RequestId" />
+    <wsdl:part name="UserId" element="tns:UserId" />
+  </wsdl:message>
+  <wsdl:message name="FileUploadResponse">
+    <wsdl:part name="parameters" element="tns:FileUploadResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRequestWebService">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetData" message="tns:IRequestWebService_GetData_InputMessage" />
@@ -337,6 +349,10 @@
     <wsdl:operation name="GetRequestActs">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestActs" message="tns:IRequestWebService_GetRequestActs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestActsResponse" message="tns:IRequestWebService_GetRequestActs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/UploadFile" name="FileUploadRequest" message="tns:FileUploadRequest" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/UploadFileResponse" name="FileUploadResponse" message="tns:FileUploadResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRequestWebService" type="tns:IRequestWebService">
@@ -635,6 +651,18 @@
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFile">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/UploadFile" style="document" />
+      <wsdl:input name="FileUploadRequest">
+        <soap:header message="tns:FileUploadRequest_Headers" part="FileName" use="literal" />
+        <soap:header message="tns:FileUploadRequest_Headers" part="RequestId" use="literal" />
+        <soap:header message="tns:FileUploadRequest_Headers" part="UserId" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="FileUploadResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

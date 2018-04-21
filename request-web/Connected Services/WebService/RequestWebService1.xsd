@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" />
+  <xs:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
   <xs:element name="GetData">
     <xs:complexType>
       <xs:sequence />
@@ -491,6 +492,23 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="GetRequestActsResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FileUploadRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.microsoft.com/Message" name="FileStream" type="q23:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FileName" nillable="true" type="xs:string" />
+  <xs:element name="RequestId" type="xs:int" />
+  <xs:element name="UserId" type="xs:int" />
+  <xs:element name="FileUploadResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RetFileName" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

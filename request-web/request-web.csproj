@@ -484,6 +484,12 @@
     <Content Include="Connected Services\WebService\request_web.WebService.AppTypeDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Connected Services\WebService\RequestWebService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\WebService\request_web.WebService.FileUploadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Images\retry.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

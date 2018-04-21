@@ -9,6 +9,7 @@ namespace request_web.Models
         public string Address { get; set; }
         public string Creator { get; set; }
         public string Worker { get; set; }
+        public string Executer { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime? WorkDate { get; set; }
         public string WorkPeriod { get; set; }

@@ -50,6 +50,7 @@
 {
     @Html.Hidden("SelectedFilter")
     @Html.Hidden("SelectedWorker")
+    @Html.Hidden("SelectedExecuter")
     @Html.Hidden("SelectedStreet")
     @Html.Hidden("SelectedStatus")
     @Html.Hidden("SelectedHouse")
@@ -214,6 +215,7 @@
                 <th style="vertical-align: middle;">Описание</th>
                 <th style="vertical-align: middle;">Статус</th>
                 <th style="vertical-align: middle;">Дата выполнения</th>
+                <th style="vertical-align: middle;">Мастер</th>
                 <th style="vertical-align: middle;">Исполнитель</th>
                 <th style="vertical-align: middle;">Оценка</th>
             </tr>
@@ -265,6 +267,7 @@
                 </td>
 
                 <td>@(request.Master != null ? request.Master.SurName : "")</td>
+                <td>@(request.Executer != null ? request.Executer.SurName : "")</td>
                 <td>@request.Rating</td>
             </tr>
         }

@@ -18,6 +18,7 @@ namespace request_web.Controllers
         private const string FromDateSessionName = "request_fromDate";
         private const string ToDateSessionName = "request_toDate";
         private const string WorkerSessionName = "request_worker";
+        private const string ExecuterSessionName = "request_executer";
         private const string StreetSessionName = "request_street";
         private const string FilterSessionName = "request_filter";
         private const string StatusSessionName = "request_status";
@@ -245,6 +246,7 @@ namespace request_web.Controllers
             var fromDate = (DateTime?)Session[FromDateSessionName] ?? DateTime.Now.Date.AddDays(-30);
             var toDate = (DateTime?)Session[ToDateSessionName] ?? DateTime.Now.Date;
             var selectedWorkerId  = (int?)Session[WorkerSessionName] ?? 0;
+            var selectedExecuterId = (int?)Session[ExecuterSessionName] ?? 0;
             var selectedStreetId = (int?)Session[StreetSessionName] ?? 0;
             var selectedStatusId = (int?)Session[StatusSessionName] ?? 0;
             var selectedFilterId = (int?)Session[FilterSessionName] ?? 0;
@@ -268,6 +270,7 @@ namespace request_web.Controllers
         public ActionResult List(RequestListModel model)
         {
             Int32.TryParse(Request.Params["SelectedWorker"], out int selectedWorkerId);
+            Int32.TryParse(Request.Params["SelectedExecuter"], out int selectedExecuterId);
             Int32.TryParse(Request.Params["SelectedStreet"], out int selectedStreetId);
             Int32.TryParse(Request.Params["SelectedStatus"], out int selectedStatusId);
             Int32.TryParse(Request.Params["SelectedHouse"], out int selectedHouseId);
@@ -280,6 +283,7 @@ namespace request_web.Controllers
             Session[FromDateSessionName] = model.FromDate;
             Session[ToDateSessionName] = model.ToDate;
             Session[WorkerSessionName] = selectedWorkerId;
+            Session[ExecuterSessionName] = selectedExecuterId;
             Session[StreetSessionName] = selectedStreetId;
             Session[FilterSessionName] = selectedFilterId;
             Session[StatusSessionName] = selectedStatusId;
@@ -367,6 +371,7 @@ namespace request_web.Controllers
                 var workerId = currentUser.WorkerId;
                 var request = requestService.GetRequestByWorkerAndId(workerId,Convert.ToInt32(requestId));
                 var worker = $"{request.Master?.SurName} {request.Master?.FirstName} {request.Master?.PatrName}";
+                var executer = $"{request.Executer?.SurName} {request.Executer?.FirstName} {request.Executer?.PatrName}";
                 var contactList = request.ContactPhones;
                 var attachments = requestService.GetAttachmentList(request.Id);
                 var notes = requestService.GetNotes(request.Id);
@@ -378,6 +383,7 @@ namespace request_web.Controllers
                     Address = request.StreetName + " " + request.Building + (string.IsNullOrEmpty(request.Corpus) ? "" : "/" + request.Corpus) + ", " + request.Flat +
                      (string.IsNullOrEmpty(request.Entrance) ? "":$", подъезд {request.Entrance}") + (string.IsNullOrEmpty(request.Floor) ? "": $", этаж {request.Floor}"),
                     Worker = worker,
+                    Executer = executer,
                     CreateTime = request.CreateTime,
                     ParentService = request.ParentService,
                     Service = request.Service,
@@ -396,6 +402,24 @@ namespace request_web.Controllers
             }
         }
 
+        [Authorize]
+        public ActionResult UploadFile()
+        {
+            var requestStr = Request.Params["RequestId"];
+            HttpPostedFileBase file = Request.Files[0];
+            if (file == null)
+                return null;
+            using (var requestService = new RequestWebServiceClient())
+            {
+                var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
+                var workerId = currentUser.WorkerId;
+                if (int.TryParse(requestStr, out int requestId))
+                {
+                    requestService.UploadFile(UserId: currentUser.UserId,FileName: file.FileName, RequestId: requestId, FileStream: file.InputStream);
+                }
+            }
+            return Redirect(Url.Action("Details", "Requests") + $"?RequestId={requestStr}");
+        }
         [Authorize]
         public ActionResult AddNote(string RequestStr)
         {
