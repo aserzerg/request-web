@@ -204,7 +204,7 @@
             contentType: "application/json; charset=utf-8",
             data: '{}',
             dataType: "json",
-            success(data) {
+            success: function(data) {
                 var mass = JSON.parse(data);
                 var arr = {
                     id: "Id",
@@ -222,7 +222,7 @@
             contentType: "application/json; charset=utf-8",
             data: '{streetNum:' + streetId + '}',
             dataType: "json",
-            success(data) {
+            success: function(data) {
                 var mass = JSON.parse(data);
                 var arr = {
                     id: "Id",
@@ -240,7 +240,7 @@
             contentType: "application/json; charset=utf-8",
             data: '{houseNum:' + houseId + '}',
             dataType: "json",
-            success(data) {
+            success: function(data) {
                 var mass = JSON.parse(data);
                 var arr = {
                     id: "Id",
@@ -257,7 +257,7 @@
             contentType: "application/json; charset=utf-8",
             data: '{parentServiceNum:' + parentServiceId + '}',
             dataType: "json",
-            success(data) {
+            success: function(data) {
                 var mass = JSON.parse(data);
                 var arr = {
                     id: "Id",

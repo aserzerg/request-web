@@ -5,40 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Scripts.Render("~/bundles/jquery", "~/bundles/bootstrap", "~/bundles/jqueryui", "~/Scripts/jquery-ui-datepicker-ru.js", "~/bundles/inputmasks", "~/bundles/jqueryval", "~/Chosen/chosen.jquery.min.js")
-    @Styles.Render("~/Content/css", "~/Chosen/chosen.css")
+    @Styles.Render("~/Content/css", "~/Chosen/chosen.css", "~/Content/app.css")
     @*@Scripts.Render("~/bundles/modernizr")*@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <div class="newnavbar newnavbar-inverse newnavbar-fixed-top">
+        <div class="newcontainer">
             @*<div class="navbar-header">*@
             <div>
-                 @Html.Label("Dispex",new {@class = "navbar-brand", style = "width: 120px;"})
+                 @Html.Label("Dispex",new {@class = "newnavbar-brand", style = "width: 120px;"})
                 @*@Html.Label("ЦМС24", new { @class = "h4 control-label"})*@
                     @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
-            <div >
-                <ul class="nav navbar-nav">
+            <div>
+                <ul class="newnav newnavbar-nav">
                     <li>@Html.ActionLink("Заявки", "List", "Requests")</li>
                 </ul>
-                <ul class="nav navbar-nav">
+                <ul class="newnav newnavbar-nav">
                     <li>@Html.ActionLink("Статистика", "GeneralInfo", "Stat")</li>
                 </ul>
-                <ul class="nav navbar-nav">
+                <ul class="newnav newnavbar-nav">
                     <li>@Html.ActionLink("Статистика УК", "GeneralInfo", "ServiceCompanyStat")</li>
-                </ul>
-                <ul class="nav navbar-nav">
+                </ul>@**@
+                <ul class="newnav newnavbar-nav">
                     <li>@Html.ActionLink("Выход", "Logout", "Account")</li>
                 </ul>
                 @*<ul class="nav nav-pills">
-                        <li>
-                            @Html.ActionLink("Здравствуйте " + Context.User.Identity.Name + "!", null, null, new { title = "Редактировать профиль" })
-                        </li>
-                        <li>
-                            @Html.ActionLink("Выход", "Logout", "Account")
-                        </li>
-                    </ul>*@
+            <li>
+                @Html.ActionLink("Здравствуйте " + Context.User.Identity.Name + "!", null, null, new { title = "Редактировать профиль" })
+            </li>
+            <li>
+                @Html.ActionLink("Выход", "Logout", "Account")
+            </li>
+        </ul>*@
 
             </div>
         </div>

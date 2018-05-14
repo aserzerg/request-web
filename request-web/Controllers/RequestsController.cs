@@ -29,6 +29,7 @@ namespace request_web.Controllers
         private const string RatingSessionName = "request_rating";
         private const string FilteringSessionName = "request_filtering";
         private const string PhoneSessionName = "request_phoneNumber";
+        private const string IdSessionName = "request_Id";
         private const string IsBadWorkSessionName = "request_is_bad_work";
         private const string GarantySessionName = "request_garanty";
         public RequestsController()
@@ -39,6 +40,7 @@ namespace request_web.Controllers
         {
             if (withAll)
             {
+                return requestService.GetWorkersByPeriod(true, fromDate, toDate, fromDate, toDate, workerId).OrderBy(w => $"{w.SurName} {w.FirstName} {w.PatrName}").Select(w => new WorkerShortDto { Id = w.Id, Name = $"{w.SurName} {w.FirstName} {w.PatrName}" }).ToArray();
                 return new[] { new WorkerShortDto { Id = 0, Name = "Все исполнители" } }.Concat(requestService.GetWorkersByPeriod(true, fromDate, toDate, fromDate, toDate, workerId).OrderBy(w => $"{w.SurName} {w.FirstName} {w.PatrName}").Select(w => new WorkerShortDto { Id = w.Id, Name = $"{w.SurName} {w.FirstName} {w.PatrName}" })).ToArray();
             }
             return new[] { new WorkerShortDto { Id = 0, Name = "Нет" } }.Concat(requestService.GetWorkersByPeriod(true, fromDate, toDate, fromDate, toDate, workerId).OrderBy(w => $"{w.SurName} {w.FirstName} {w.PatrName}").Select(w => new WorkerShortDto { Id = w.Id, Name = $"{w.SurName} {w.FirstName} {w.PatrName}" })).ToArray();
@@ -51,6 +53,7 @@ namespace request_web.Controllers
             var streets = requestService.GetStreetListByWorker(workerId).OrderBy(s => s.Name).Select(s => new StreetShortDto { Id = s.Id, Name = $"{s.Name}" });
             if (withAll)
             {
+                return streets.ToArray();
                 return new[] {new StreetShortDto {Id = 0, Name = "Все улицы"}}.Concat(streets).ToArray();
             }
             return new[] { new StreetShortDto { Id = 0, Name = "Выберите улицу" } }.Concat(streets).ToArray();
@@ -61,9 +64,13 @@ namespace request_web.Controllers
         }
         private HouseShortDto[] GetHouseList(RequestWebServiceClient requestService, int streetId, int workerId, bool withAll = true)
         {
+            if(streetId==0)
+                return new HouseShortDto[0];
+
             var houses = requestService.GetHousesByStreetAndWorkerId(streetId, workerId).OrderBy(h => h.Name.PadLeft(6, '0'));
             if (withAll)
             {
+                return houses.Select(h => new HouseShortDto { Id = h.Id, Name = h.Name }).ToArray();
                 return new[] {new HouseShortDto {Id = 0, Name = "Все дома"}}.Concat(houses.Select(h => new HouseShortDto {Id = h.Id, Name = h.Name})).ToArray();
             }
             return new[] { new HouseShortDto { Id = 0, Name = "Выберите дом" } }.Concat(houses.Select(h => new HouseShortDto { Id = h.Id, Name = h.Name })).ToArray();
@@ -72,9 +79,12 @@ namespace request_web.Controllers
 
         private AddressShortDto[] GetAddressList(RequestWebServiceClient requestService, int houseId, bool withAll = true)
         {
+            if(houseId==0)
+                return new AddressShortDto[0];
             var addresses = requestService.GetFlatByHouseId(houseId);
             if (withAll)
             {
+                return addresses.Select(h => new AddressShortDto { Id = h.Id, Name = h.Name }).ToArray();
                 return new[] {new AddressShortDto {Id = 0, Name = "Все адреса"}}.Concat(addresses.Select(h => new AddressShortDto {Id = h.Id, Name = h.Name})).ToArray();
             }
             return new[] { new AddressShortDto { Id = 0, Name = "Выберите адрес" } }.Concat(addresses.Select(h => new AddressShortDto { Id = h.Id, Name = h.Name })).ToArray();
@@ -83,14 +93,15 @@ namespace request_web.Controllers
         {
             if (withAll)
             {
+                return requestService.GetServices(parentId).Select(s => new ServiceShortDto { Id = s.Id, Name = s.Name }).ToArray();
                 return requestService.GetServices(parentId).Select(s => new ServiceShortDto {Id = s.Id, Name = s.Name}).ToArray();
             }
             return new[] { new ServiceShortDto { Id = 0, Name = "Выберите услугу" } }.Concat(requestService.GetServices(parentId).Select(s => new ServiceShortDto { Id = s.Id, Name = s.Name })).ToArray();
         }
 
-        private RequestListModel GetViewModel(DateTime fromDate, DateTime toDate, int selectedWorkerId,
-            int selectedStreetId, int selectedStatusId, int selectedHouseId, int selectedAddressId,
-            int selectedParServId, int selectedServiceId, bool filterIsChecked, string phoneNumber, bool isBadWork, bool garanty, int rating, int filterByExec)
+        private RequestListModel GetViewModel(DateTime fromDate, DateTime toDate, int[] selectedWorkerIds,
+            int[] selectedStreetIds, int[] selectedStatusIds, int[] selectedHouseIds, int[] selectedAddressIds,
+            int[] selectedParServIds, int[] selectedServiceIds, bool filterIsChecked, string phoneNumber, bool isBadWork, bool garanty, int[] ratingIds, int filterByExec,int? requestId)
         {
             var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
             var workerId = currentUser.WorkerId;
@@ -102,51 +113,46 @@ namespace request_web.Controllers
 
                 #region Workers
                 var workers = GetWorkerList(requestService,fromDate,toDate, currentUser.WorkerId);
-                var selected = workers.Where(w => w.Id == selectedWorkerId).FirstOrDefault();
-                if (selected != null)
+                foreach (var worker in workers.Where(w => selectedWorkerIds.Contains(w.Id)))
                 {
-                    selected.IsSelected = true;
+                    worker.IsSelected = true;
                 }
                 #endregion
                 #region Streets
                 var streets = GetStreetList(requestService, currentUser.WorkerId);
-                var selectedStreet = streets.Where(w => w.Id == selectedStreetId).FirstOrDefault();
-                if (selectedStreet != null)
+                foreach (var street in streets.Where(w => selectedStreetIds.Contains(w.Id)))
                 {
-                    selectedStreet.IsSelected = true;
+                    street.IsSelected = true;
                 }
                 #endregion
                 #region Houses
-                var houses = new[] { new HouseShortDto { Id = 0, Name = "Все дома" } };
-                if (selectedStreetId > 0)
+                var houses = new HouseShortDto[0];
+                if (selectedStreetIds.Length == 1)
                 {
-                    houses = GetHouseList(requestService, selectedStreetId, currentUser.WorkerId);
-                    var selectedHouse = houses.Where(h => h.Id == selectedHouseId).FirstOrDefault();
-                    if (selectedHouse != null)
+                    houses = GetHouseList(requestService, selectedStreetIds[0], currentUser.WorkerId);
+                    foreach (var house in houses.Where(w => selectedHouseIds.Contains(w.Id)))
                     {
-                        selectedHouse.IsSelected = true;
+                        house.IsSelected = true;
                     }
                 }
                 #endregion
                 #region Addresses
-                var addresses = new[] { new AddressShortDto { Id = 0, Name = "Все адреса" } };
-                if (selectedHouseId > 0)
+
+                var addresses = new AddressShortDto[0];
+                if (selectedHouseIds.Length == 1)
                 {
-                    addresses = GetAddressList(requestService, selectedHouseId);
-                    var selectedAddress = addresses.Where(h => h.Id == selectedAddressId).FirstOrDefault();
-                    if (selectedAddress != null)
+                    addresses = GetAddressList(requestService, selectedHouseIds[0]);
+                    foreach (var address in addresses.Where(w => selectedAddressIds.Contains(w.Id)))
                     {
-                        selectedAddress.IsSelected = true;
+                        address.IsSelected = true;
                     }
                 }
 
-                var ratings = (new[] {0, 1, 2, 3, 4, 5}).Select(a => new RatingShortDto {Id = a, Name = a > 0 ? a.ToString() : "Не выбрана"}).ToArray();
-                var selectedRating = ratings.Where(h => h.Id == rating).FirstOrDefault();
-                if (selectedRating != null)
+                var ratings = (new[] {1, 2, 3, 4, 5}).Select(a => new RatingShortDto {Id = a, Name = a.ToString()}).ToArray();
+                foreach (var rating in ratings.Where(w => ratingIds.Contains(w.Id)))
                 {
-                    selectedRating.IsSelected = true;
+                    rating.IsSelected = true;
                 }
-
                 var filters = new[]
                 {
                     new FilterShortDto {Id = 1, Name = "По дате выполнения"},
@@ -161,58 +167,38 @@ namespace request_web.Controllers
                 #endregion
                 #region Statuses
                 var statuses = GetStatusList(requestService);
-                var selectedStatus = statuses.Where(w => w.Id == selectedStatusId).FirstOrDefault();
-                if (selectedStatus != null)
+                if (!statuses.Any(w => selectedStatusIds.Contains(w.Id)))
                 {
-                    selectedStatus.IsSelected = true;
+                    selectedStatusIds = new[] {2};
                 }
-                else
+                foreach (var status in statuses.Where(w => selectedStatusIds.Contains(w.Id)))
                 {
-                    statuses.FirstOrDefault(w => w.Id == 2).IsSelected = true;
+                    status.IsSelected = true;
                 }
                 #endregion
                 #region Parent Services
-                var parentServices = new[] { new ServiceShortDto { Id = 0, Name = "Все услуги" } }.Concat(GetServices(requestService, null)).ToArray();
-                var selectedParentServices = parentServices.Where(w => w.Id == selectedParServId).FirstOrDefault();
-                if (selectedParentServices != null)
+                var parentServices = GetServices(requestService, null).ToArray();
+                foreach (var parentService in parentServices.Where(w => selectedParServIds.Contains(w.Id)))
                 {
-                    selectedParentServices.IsSelected = true;
-                }
-                else
-                {
-                    parentServices.FirstOrDefault(w => w.Id == 0).IsSelected = true;
+                    parentService.IsSelected = true;
                 }
                 #endregion
                 #region Services
-                var services = new[] { new ServiceShortDto { Id = 0, Name = "Все причины" } };
-                if (selectedParServId > 0)
+                var services = new ServiceShortDto[0];
+                if (selectedParServIds.Length == 1)
                 {
-                    services = services.Concat(GetServices(requestService, selectedParServId)).ToArray();
-                }
-                if (selectedServiceId > 0)
-                {
-                    var selectedService = services.Where(s => s.Id == selectedServiceId).FirstOrDefault();
-                    if (selectedService != null)
+                    services = GetServices(requestService, selectedParServIds[0]).ToArray();
+                    foreach (var service in services.Where(w => selectedServiceIds.Contains(w.Id)))
                     {
-                        selectedService.IsSelected = true;
+                        service.IsSelected = true;
                     }
                 }
+                
                 #endregion
                 #region Requests
-                RequestForListDto[] requests = requestService.RequestList(workerId, fromDate, toDate.AddDays(1),
-            selectedWorkerId > 0 ? selectedWorkerId : (int?)null,
-            selectedStreetId > 0 ? selectedStreetId : (int?)null,
-            selectedHouseId > 0 ? selectedHouseId : (int?)null,
-            selectedAddressId > 0 ? selectedAddressId : (int?)null,
-            selectedStatusId > 0 ? selectedStatusId : 2,
-            selectedParServId > 0 ? selectedParServId : (int?)null,
-            selectedServiceId > 0 ? selectedServiceId : (int?)null,
-            isBadWork,
-            garanty,
-            phoneNumber,
-            rating > 0 ? rating : (int?)null,
-            filterByExec == 2
-            ).OrderByDescending(r=>r.CreateTime).ToArray();
+                RequestForListDto[] requests = requestService.RequestListArrayParams(workerId, requestId, fromDate, toDate.AddDays(1),
+            selectedWorkerIds,selectedStreetIds,selectedHouseIds,selectedAddressIds,selectedStatusIds,selectedParServIds,selectedServiceIds,
+            isBadWork,garanty,phoneNumber,ratingIds,filterByExec == 2).OrderByDescending(r=>r.CreateTime).ToArray();
                 var currentDate = requestService.GetCurrentDate();
 
 
@@ -245,39 +231,53 @@ namespace request_web.Controllers
         {
             var fromDate = (DateTime?)Session[FromDateSessionName] ?? DateTime.Now.Date.AddDays(-30);
             var toDate = (DateTime?)Session[ToDateSessionName] ?? DateTime.Now.Date;
-            var selectedWorkerId  = (int?)Session[WorkerSessionName] ?? 0;
-            var selectedExecuterId = (int?)Session[ExecuterSessionName] ?? 0;
-            var selectedStreetId = (int?)Session[StreetSessionName] ?? 0;
-            var selectedStatusId = (int?)Session[StatusSessionName] ?? 0;
+            var selectedWorkerId  = (int[])Session[WorkerSessionName] ?? new int[0];
+            var selectedExecuterId = (int[])Session[ExecuterSessionName] ?? new int[0];
+            var selectedStreetId = (int[])Session[StreetSessionName] ?? new int[0];
+            var selectedStatusId = (int[])Session[StatusSessionName] ?? new int[0];
             var selectedFilterId = (int?)Session[FilterSessionName] ?? 0;
-            var selectedHouseId = (int?)Session[HouseSessionName] ?? 0;
-            var selectedAddressId = (int?)Session[AddressSessionName] ?? 0;
-            var selectedParServId = (int?)Session[ParServSessionName] ?? 0;
-            var selectedServiceId = (int?)Session[ServSessionName] ?? 0;
-            var selectedRatingId = (int?) Session[RatingSessionName] ?? 0;
+            var selectedHouseId = (int[])Session[HouseSessionName] ?? new int[0];
+            var selectedAddressId = (int[])Session[AddressSessionName] ?? new int[0];
+            var selectedParServId = (int[])Session[ParServSessionName] ?? new int[0];
+            var selectedServiceId = (int[])Session[ServSessionName] ?? new int[0];
+            var selectedRatingId = (int[]) Session[RatingSessionName] ?? new int[0];
             var filterIsChecked = (bool?)Session[FilteringSessionName] ?? false;
             var phoneNumber = (string)Session[PhoneSessionName];
+            var requestId = (int?)Session[IdSessionName];
             var isBadWork = (bool?)Session[IsBadWorkSessionName] ?? false;
             var garanty = (bool?)Session[GarantySessionName] ?? false;
 
 
             var viewModel = GetViewModel(fromDate, toDate, selectedWorkerId,selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
-                        selectedParServId, selectedServiceId, filterIsChecked, phoneNumber, isBadWork, garanty, selectedRatingId, selectedFilterId);
+                        selectedParServId, selectedServiceId, filterIsChecked, phoneNumber, isBadWork, garanty, selectedRatingId, selectedFilterId, requestId);
             return View(viewModel);
         }
 
+        private void TryParseParam(string param, out int[] result)
+        {
+            var items = param.Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries);
+            var resultList = new List<int>();
+            foreach (var item in items)
+            {
+                if (Int32.TryParse(item, out int parsed))
+                {
+                    resultList.Add(parsed);
+                }
+            }
+            result = resultList.ToArray();
+        }
         [HttpPost]
         public ActionResult List(RequestListModel model)
         {
-            Int32.TryParse(Request.Params["SelectedWorker"], out int selectedWorkerId);
-            Int32.TryParse(Request.Params["SelectedExecuter"], out int selectedExecuterId);
-            Int32.TryParse(Request.Params["SelectedStreet"], out int selectedStreetId);
-            Int32.TryParse(Request.Params["SelectedStatus"], out int selectedStatusId);
-            Int32.TryParse(Request.Params["SelectedHouse"], out int selectedHouseId);
-            Int32.TryParse(Request.Params["SelectedAddress"], out int selectedAddressId);
-            Int32.TryParse(Request.Params["SelectedParServ"], out int selectedParServId);
-            Int32.TryParse(Request.Params["SelectedService"], out int selectedServiceId);
-            Int32.TryParse(Request.Params["SelectedRating"], out int selectedRatingId);
+            TryParseParam(Request.Params["SelectedWorker"], out int[] selectedWorkerId);
+            TryParseParam(Request.Params["SelectedExecuter"], out int[] selectedExecuterId);
+            TryParseParam(Request.Params["SelectedStreet"], out int[] selectedStreetId);
+            TryParseParam(Request.Params["SelectedStatus"], out int[] selectedStatusId);
+            TryParseParam(Request.Params["SelectedHouse"], out int[] selectedHouseId);
+            TryParseParam(Request.Params["SelectedAddress"], out int[] selectedAddressId);
+            TryParseParam(Request.Params["SelectedParServ"], out int[] selectedParServId);
+            TryParseParam(Request.Params["SelectedService"], out int[] selectedServiceId);
+            TryParseParam(Request.Params["SelectedRating"], out int[] selectedRatingId);
             Int32.TryParse(Request.Params["SelectedFilter"], out int selectedFilterId);
 
             Session[FromDateSessionName] = model.FromDate;
@@ -294,12 +294,13 @@ namespace request_web.Controllers
             Session[ServSessionName] = selectedServiceId;
             Session[RatingSessionName] = selectedRatingId;
             Session[PhoneSessionName] = model.PhoneNumber;
+            Session[IdSessionName] = model.RequestId;
             Session[IsBadWorkSessionName] = model.IsBadWork;
             Session[GarantySessionName] = model.Garanty;
 
 
-            var viewModel = GetViewModel(model.FromDate, model.ToDate, selectedWorkerId, selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
-                        selectedParServId, selectedServiceId, model.AdditionFiltering, model.PhoneNumber,model.IsBadWork, model.Garanty,selectedRatingId, selectedFilterId);
+           var viewModel = GetViewModel(model.FromDate, model.ToDate, selectedWorkerId, selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
+                       selectedParServId, selectedServiceId, model.AdditionFiltering, model.PhoneNumber, model.IsBadWork, model.Garanty, selectedRatingId, selectedFilterId, model.RequestId);
             return View(viewModel);
         }
 
@@ -568,25 +569,29 @@ namespace request_web.Controllers
             }
         }
         [HttpPost]
-        public JsonResult GetServicesByParent(string parentServiceNum)
+        public JsonResult GetServicesByParent(string parentServiceNum, bool withAll = true)
         {
+            var services = new ServiceShortDto[0];
             Int32.TryParse(parentServiceNum, out int parentServiceId);
             using (var requestService = new RequestWebServiceClient())
             {
-                var services = new[] { new ServiceShortDto { Id = 0, Name = "Все причины" } }.Concat(GetServices(requestService, parentServiceId)).ToArray();
-                return Json(JsonConvert.SerializeObject(services));
+                var mainServices = GetServices(requestService, parentServiceId);
+                services = withAll ? mainServices.ToArray() : new[] { new ServiceShortDto { Id = 0, Name = "Все причины" } }.Concat(mainServices).ToArray();
             }
+            return Json(JsonConvert.SerializeObject(services));
         }
 
         [HttpPost]
-        public JsonResult GetServicesByParentForCreateNew(string parentServiceNum)
+        public JsonResult GetServicesByParentForCreateNew(string parentServiceNum, bool withAll = true)
         {
+            var services = new ServiceShortDto[0];
             Int32.TryParse(parentServiceNum, out int parentServiceId);
             using (var requestService = new RequestWebServiceClient())
             {
-                var services = new[] { new ServiceShortDto { Id = 0, Name = "Выберите причину" } }.Concat(GetServices(requestService, parentServiceId)).ToArray();
-                return Json(JsonConvert.SerializeObject(services));
+                var mainServices = GetServices(requestService, parentServiceId);
+                services = withAll ? mainServices.ToArray() : new[] { new ServiceShortDto { Id = 0, Name = "Выберите причину" } }.Concat(mainServices).ToArray();
             }
+            return Json(JsonConvert.SerializeObject(services));
         }
 
         [Authorize]

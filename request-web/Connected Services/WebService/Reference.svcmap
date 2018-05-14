@@ -26,6 +26,7 @@
     <MetadataFile FileName="RequestWebService.xsd" MetadataType="Schema" ID="492614b2-24a3-45d2-8530-d8c965a3cf22" SourceId="1" SourceUrl="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd2" />
     <MetadataFile FileName="RequestWebService1.xsd" MetadataType="Schema" ID="fc555583-37b8-4b10-bf4c-8a7ed37e7341" SourceId="1" SourceUrl="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd0" />
     <MetadataFile FileName="RequestWebService.wsdl" MetadataType="Wsdl" ID="02c4d665-bacc-4e9c-8503-39d61d6ed1eb" SourceId="1" SourceUrl="http://178.46.158.29:8001/RequestWebService.svc?wsdl" />
+    <MetadataFile FileName="RequestWebService4.xsd" MetadataType="Schema" ID="9853ba2e-1162-4dbc-8c8f-3fb22bc4bef6" SourceId="1" SourceUrl="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd4" />
     <MetadataFile FileName="RequestWebService.disco" MetadataType="Disco" ID="ed278ae4-fa3f-4879-998c-65ac8acd9921" SourceId="1" SourceUrl="http://178.46.158.29:8001/RequestWebService.svc?disco" />
     <MetadataFile FileName="RequestWebService2.xsd" MetadataType="Schema" ID="26c233b3-c9ce-4f27-abbe-26a8ca7cd1fc" SourceId="1" SourceUrl="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd1" />
   </Metadata>

@@ -5,7 +5,8 @@
       <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" />
-      <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://178.46.158.29:8001/RequestWebService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IRequestWebService_GetData_InputMessage">
@@ -31,6 +32,12 @@
   </wsdl:message>
   <wsdl:message name="IRequestWebService_RequestList_OutputMessage">
     <wsdl:part name="parameters" element="tns:RequestListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_RequestListArrayParams_InputMessage">
+    <wsdl:part name="parameters" element="tns:RequestListArrayParams" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_RequestListArrayParams_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RequestListArrayParamsResponse" />
   </wsdl:message>
   <wsdl:message name="IRequestWebService_GetRequestById_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRequestById" />
@@ -234,6 +241,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/RequestList" message="tns:IRequestWebService_RequestList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/RequestListResponse" message="tns:IRequestWebService_RequestList_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RequestListArrayParams">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/RequestListArrayParams" message="tns:IRequestWebService_RequestListArrayParams_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/RequestListArrayParamsResponse" message="tns:IRequestWebService_RequestListArrayParams_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetRequestById">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestById" message="tns:IRequestWebService_GetRequestById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/GetRequestByIdResponse" message="tns:IRequestWebService_GetRequestById_OutputMessage" />
@@ -386,6 +397,15 @@
     </wsdl:operation>
     <wsdl:operation name="RequestList">
       <soap:operation soapAction="http://tempuri.org/IRequestWebService/RequestList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestListArrayParams">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/RequestListArrayParams" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
