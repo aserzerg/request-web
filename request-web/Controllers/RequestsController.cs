@@ -47,6 +47,17 @@ namespace request_web.Controllers
 
         }
 
+        private WorkerShortDto[] GetExecutersList(RequestWebServiceClient requestService,DateTime fromDate,DateTime toDate, int workerId, bool withAll = true)
+        {
+            if (withAll)
+            {
+                return requestService.GetExecutersByPeriod(true, fromDate, toDate, fromDate, toDate, workerId).OrderBy(w => $"{w.SurName} {w.FirstName} {w.PatrName}").Select(w => new WorkerShortDto { Id = w.Id, Name = $"{w.SurName} {w.FirstName} {w.PatrName}" }).ToArray();
+                return new[] { new WorkerShortDto { Id = 0, Name = "Все исполнители" } }.Concat(requestService.GetWorkersByPeriod(true, fromDate, toDate, fromDate, toDate, workerId).OrderBy(w => $"{w.SurName} {w.FirstName} {w.PatrName}").Select(w => new WorkerShortDto { Id = w.Id, Name = $"{w.SurName} {w.FirstName} {w.PatrName}" })).ToArray();
+            }
+            return new[] { new WorkerShortDto { Id = 0, Name = "Нет" } }.Concat(requestService.GetWorkersByPeriod(true, fromDate, toDate, fromDate, toDate, workerId).OrderBy(w => $"{w.SurName} {w.FirstName} {w.PatrName}").Select(w => new WorkerShortDto { Id = w.Id, Name = $"{w.SurName} {w.FirstName} {w.PatrName}" })).ToArray();
+
+        }
+
         private StreetShortDto[] GetStreetList(RequestWebServiceClient requestService, int workerId, bool withAll = true)
         {
 
@@ -99,7 +110,7 @@ namespace request_web.Controllers
             return new[] { new ServiceShortDto { Id = 0, Name = "Выберите услугу" } }.Concat(requestService.GetServices(parentId).Select(s => new ServiceShortDto { Id = s.Id, Name = s.Name })).ToArray();
         }
 
-        private RequestListModel GetViewModel(DateTime fromDate, DateTime toDate, int[] selectedWorkerIds,
+        private RequestListModel GetViewModel(DateTime fromDate, DateTime toDate, int[] selectedWorkerIds, int[] selectedExecutersIds,
             int[] selectedStreetIds, int[] selectedStatusIds, int[] selectedHouseIds, int[] selectedAddressIds,
             int[] selectedParServIds, int[] selectedServiceIds, bool filterIsChecked, string phoneNumber, bool isBadWork, bool garanty, int[] ratingIds, int filterByExec,int? requestId)
         {
@@ -111,11 +122,16 @@ namespace request_web.Controllers
             using (var requestService = new RequestWebServiceClient())
             {
 
-                #region Workers
-                var workers = GetWorkerList(requestService,fromDate,toDate, currentUser.WorkerId);
-                foreach (var worker in workers.Where(w => selectedWorkerIds.Contains(w.Id)))
+                #region Masters
+                var masters = GetWorkerList(requestService,fromDate,toDate, currentUser.WorkerId);
+                foreach (var master in masters.Where(w => selectedWorkerIds.Contains(w.Id)))
                 {
-                    worker.IsSelected = true;
+                    master.IsSelected = true;
+                }
+                var executers = GetExecutersList(requestService, fromDate, toDate, currentUser.WorkerId);
+                foreach (var executer in executers.Where(w => selectedExecutersIds.Contains(w.Id)))
+                {
+                    executer.IsSelected = true;
                 }
                 #endregion
                 #region Streets
@@ -184,20 +200,21 @@ namespace request_web.Controllers
                 }
                 #endregion
                 #region Services
-                var services = new ServiceShortDto[0];
-                if (selectedParServIds.Length == 1)
+                var services = new List<ServiceWithParrentShortDto>();
+                foreach (var parrent in parentServices.Where(w => selectedParServIds.Contains(w.Id)))
                 {
-                    services = GetServices(requestService, selectedParServIds[0]).ToArray();
-                    foreach (var service in services.Where(w => selectedServiceIds.Contains(w.Id)))
+                    var children = GetServices(requestService, parrent.Id).ToArray();
+                    foreach (var service in children.Where(w => selectedServiceIds.Contains(w.Id)))
                     {
                         service.IsSelected = true;
                     }
+                    services.Add(new ServiceWithParrentShortDto{Id=parrent.Id,Name = parrent.Name,Children = children });
                 }
-                
+
                 #endregion
                 #region Requests
                 RequestForListDto[] requests = requestService.RequestListArrayParams(workerId, requestId, fromDate, toDate.AddDays(1),
-            selectedWorkerIds,selectedStreetIds,selectedHouseIds,selectedAddressIds,selectedStatusIds,selectedParServIds,selectedServiceIds,
+            selectedWorkerIds, selectedExecutersIds,selectedStreetIds, selectedHouseIds,selectedAddressIds,selectedStatusIds,selectedParServIds,selectedServiceIds,
             isBadWork,garanty,phoneNumber,ratingIds,filterByExec == 2).OrderByDescending(r=>r.CreateTime).ToArray();
                 var currentDate = requestService.GetCurrentDate();
 
@@ -210,7 +227,8 @@ namespace request_web.Controllers
                     FromDate = fromDate,
                     ToDate = toDate,
                     PhoneNumber = phoneNumber,
-                    Workers = workers,
+                    Masters = masters,
+                    Executers = executers,
                     Streets = streets,
                     Statuses = statuses,
                     Houses = houses,
@@ -219,7 +237,7 @@ namespace request_web.Controllers
                     Garanty = garanty,
                     ParentServices = parentServices,
                     Addresses = addresses,
-                    Services = services,
+                    Services = services.ToArray(),
                     CurrentDate = currentDate,
                     Ratings = ratings,
                     FilterByDate = filters
@@ -248,7 +266,7 @@ namespace request_web.Controllers
             var garanty = (bool?)Session[GarantySessionName] ?? false;
 
 
-            var viewModel = GetViewModel(fromDate, toDate, selectedWorkerId,selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
+            var viewModel = GetViewModel(fromDate, toDate, selectedWorkerId, selectedExecuterId,selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
                         selectedParServId, selectedServiceId, filterIsChecked, phoneNumber, isBadWork, garanty, selectedRatingId, selectedFilterId, requestId);
             return View(viewModel);
         }
@@ -299,7 +317,7 @@ namespace request_web.Controllers
             Session[GarantySessionName] = model.Garanty;
 
 
-           var viewModel = GetViewModel(model.FromDate, model.ToDate, selectedWorkerId, selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
+           var viewModel = GetViewModel(model.FromDate, model.ToDate, selectedWorkerId, selectedExecuterId, selectedStreetId, selectedStatusId, selectedHouseId, selectedAddressId,
                        selectedParServId, selectedServiceId, model.AdditionFiltering, model.PhoneNumber, model.IsBadWork, model.Garanty, selectedRatingId, selectedFilterId, model.RequestId);
             return View(viewModel);
         }
@@ -517,7 +535,7 @@ namespace request_web.Controllers
             }
         }
         [HttpPost]
-        public JsonResult GetWorkers()
+        public JsonResult GetMasters()
         {
             var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
             using (var requestService = new RequestWebServiceClient())
@@ -571,12 +589,20 @@ namespace request_web.Controllers
         [HttpPost]
         public JsonResult GetServicesByParent(string parentServiceNum, bool withAll = true)
         {
-            var services = new ServiceShortDto[0];
-            Int32.TryParse(parentServiceNum, out int parentServiceId);
+            var services = new List<ServiceWithParrentShortDto>();
+            var selectedParrentServicesId = new int[0];
+            TryParseParam(parentServiceNum, out selectedParrentServicesId);
+            if(selectedParrentServicesId.Length==0)
+                return Json(JsonConvert.SerializeObject(services));
+
             using (var requestService = new RequestWebServiceClient())
             {
-                var mainServices = GetServices(requestService, parentServiceId);
-                services = withAll ? mainServices.ToArray() : new[] { new ServiceShortDto { Id = 0, Name = "Все причины" } }.Concat(mainServices).ToArray();
+                var parentServices = GetServices(requestService, null).Where(t=> selectedParrentServicesId.Contains(t.Id)).ToArray();
+                foreach (var parrent in parentServices)
+                {
+                    var children = GetServices(requestService, parrent.Id).ToArray();
+                    services.Add(new ServiceWithParrentShortDto { Id = parrent.Id, Name = parrent.Name, Children = children });
+                }
             }
             return Json(JsonConvert.SerializeObject(services));
         }

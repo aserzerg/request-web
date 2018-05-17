@@ -158,6 +158,7 @@
     <Compile Include="Dto\HouseShortDto.cs" />
     <Compile Include="Dto\RatingShortDto.cs" />
     <Compile Include="Dto\ServiceShortDto.cs" />
+    <Compile Include="Dto\ServiceWithParrentShortDto.cs" />
     <Compile Include="Dto\StatusShortDto.cs" />
     <Compile Include="Dto\StreetShortDto.cs" />
     <Compile Include="Dto\WorkerDto.cs" />

@@ -197,10 +197,10 @@
         $("#" + id).trigger("chosen:updated");
     }
 
-    function GetWorkers() {
+    function GetMasters() {
         $.ajax({
             type: "POST",
-            url: '/Requests/GetWorkers',
+            url: '/Requests/GetMasters',
             contentType: "application/json; charset=utf-8",
             data: '{}',
             dataType: "json",

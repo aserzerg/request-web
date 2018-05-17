@@ -33,13 +33,14 @@ namespace request_web.Models
 
         public RequestForListDto[] Requests { get; set; }
         public FilterShortDto[] FilterByDate { get; set; }
-        public WorkerShortDto[] Workers { get; set; }
+        public WorkerShortDto[] Masters { get; set; }
+        public WorkerShortDto[] Executers { get; set; }
         public StreetShortDto[] Streets { get; set; }
         public StatusShortDto[] Statuses { get; set; }
         public HouseShortDto[] Houses { get; set; }
         public AddressShortDto[] Addresses { get; set; }
         public ServiceShortDto[] ParentServices { get; set; }
-        public ServiceShortDto[] Services { get; set; }
+        public ServiceWithParrentShortDto[] Services { get; set; }
         public RatingShortDto[] Ratings { get; set; }
         //public string SelectedWorker { get; set; }
 

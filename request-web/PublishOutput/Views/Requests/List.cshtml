@@ -86,7 +86,7 @@
     @Html.TextBoxFor(m => m.ToDate, new { @class = "datepicker form-control", style = "height: 25px; width: 100px ", placeholder = Html.DisplayName("Введите дату") })
 
     <select class="chosen-select" multiple data-placeholder="Мастер" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;">
-        @foreach (var worker in Model.Workers)
+        @foreach (var worker in Model.Masters)
         {
             string SelectedValue = "";
             if (worker.IsSelected)
@@ -122,59 +122,76 @@
         <div>
             <select class="chosen-select" multiple data-placeholder="Улица" id="street_select" tabindex="-1" style="width: 280px; height: 25px;">
                 @foreach (var street in Model.Streets)
-                {
-                    string SelectedValue = "";
-                    if (street.IsSelected)
-                    {
-                        SelectedValue = "selected='selected'";
-                    }
-                    <option @SelectedValue id='@street.Id'>@street.Name</option>
-                }
+        {
+            string SelectedValue = "";
+            if (street.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@street.Id'>@street.Name</option>
+}
             </select>
             <select class="chosen-select" multiple data-placeholder="Дом" id="house_select" tabindex="-1" style="width: 180px; height: 25px;">
                 @foreach (var house in Model.Houses)
-                {
-                    string SelectedValue = "";
-                    if (house.IsSelected)
-                    {
-                        SelectedValue = "selected='selected'";
-                    }
-                    <option @SelectedValue id='@house.Id'>@house.Name</option>
-                }
+        {
+            string SelectedValue = "";
+            if (house.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@house.Id'>@house.Name</option>
+}
             </select>
             <select class="chosen-select" multiple data-placeholder="Адреса" id="address_select" tabindex="-1" style="width: 180px; height: 25px;">
                 @foreach (var address in Model.Addresses)
-                {
-                    string SelectedValue = "";
-                    if (address.IsSelected)
-                    {
-                        SelectedValue = "selected='selected'";
-                    }
-                    <option @SelectedValue id='@address.Id'>@address.Name</option>
-                }
+        {
+            string SelectedValue = "";
+            if (address.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@address.Id'>@address.Name</option>
+}
             </select>
+            <select class="chosen-select" multiple data-placeholder="Исполнитель" id="executer_select" tabindex="-1" style="width: 180px; height: 25px;">
+                @foreach (var executor in Model.Executers)
+        {
+            string SelectedValue = "";
+            if (executor.IsSelected)
+            {
+                SelectedValue = "selected='selected'";
+            }
+            <option @SelectedValue id='@executor.Id'>@executor.Name</option>
+}
+            </select>
+
         </div>
         <div style="margin-top: 10px">
             <select class="chosen-select" multiple data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
-                @foreach (var parentService in Model.ParentServices)
-                {
-                    string SelectedValue = "";
-                    if (parentService.IsSelected)
+                    @foreach (var parentService in Model.ParentServices)
                     {
-                        SelectedValue = "selected='selected'";
+                        string SelectedValue = "";
+                        if (parentService.IsSelected)
+                        {
+                            SelectedValue = "selected='selected'";
+                        }
+                        <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
                     }
-                    <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
-                }
             </select>
             <select class="chosen-select" multiple data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
-                @foreach (var service in Model.Services)
+                @foreach (var parrent in Model.Services)
                 {
-                    string SelectedValue = "";
-                    if (service.IsSelected)
-                    {
-                        SelectedValue = "selected='selected'";
-                    }
-                    <option @SelectedValue id='@service.Id'>@service.Name</option>
+                    <optgroup label=@parrent.Name>
+                        @foreach (var service in parrent.Children)
+                        {
+                            string SelectedValue = "";
+                            if (service.IsSelected)
+                            {
+                                SelectedValue = "selected='selected'";
+                            }
+                            <option @SelectedValue id='@service.Id'>@service.Name</option>
+                        }
+                    </optgroup>
                 }
             </select>
             @Html.Label("Оценка:", new { @class = "control-label mr-sm-2" })
@@ -278,7 +295,7 @@
     </table>
 }
 </div>
-<script type="text/javascript">
+    <script type="text/javascript">
     $(function () {
         $(".chosen-select").chosen({
             disable_search_threshold: 0,
@@ -310,10 +327,39 @@
     $("#" + id).trigger("chosen:updated");
     }
 
-    function GetWorkers() {
+    function SetSelectsWithParrent(mass, id, arr) {
+        var str = "";
+        var s = "1";
+        for (var i = 0; i < mass.length; i++) {
+            str += "<optgroup label=" + mass[i].Name + ">";
+
+            for (var j = 0; j < mass[i].Children.length; j++) {
+                str += "<option id='" + mass[i].Children[j][arr["id"]] + "' >";
+                arr["text"].forEach(function (item, k) {
+                    str += mass[i].Children[j][item] + " ";
+                });
+                str += "</option>";
+            }
+
+            str += "</optgroup >";
+        }
+
+
+        $("#" + id).empty();
+        $("#" + id).append(str);
+        $("#" + id).chosen({
+            disable_search_threshold: 0,
+            no_results_text: "Нет совпадений!",
+            width: "90%",
+            search_contains: true,
+        });
+        $("#" + id).trigger("chosen:updated");
+    }
+
+    function GetMasters() {
         $.ajax({
             type: "POST",
-            url: '/Requests/GetWorkers',
+            url: '/Requests/GetMasters',
             contentType: "application/json; charset=utf-8",
             data: '{}',
             dataType: "json",
@@ -368,7 +414,7 @@
                 type: "POST",
                 url: '/Requests/GetServicesByParent',
                 contentType: "application/json; charset=utf-8",
-                data: '{parentServiceNum:' + parentServiceId + '}',
+                data: '{parentServiceNum:"' + parentServiceId + '"}',
                 dataType: "json",
                 success: function(data) {
                     var mass = JSON.parse(data);
@@ -376,7 +422,7 @@
                         id: "Id",
                         text: ["Name"]
                     };
-                    SetSelects(mass, "service_select", arr);
+                    SetSelectsWithParrent(mass, "service_select", arr);
                 }
             });
     }
@@ -389,13 +435,13 @@
             $('#AdditionParameters').hide();
         }
     });
-    
+
     $("#status_select").chosen().change(function (event,data) {
         var values = $("#status_select").val();
 
         if (data.selected === "Все")
         { $("#status_select").val([data.selected]).trigger('chosen:updated'); }
-        if (data.selected !== "Все" && $.inArray("Все", values) !== -1) 
+        if (data.selected !== "Все" && $.inArray("Все", values) !== -1)
         { $("#status_select").val([data.selected]).trigger('chosen:updated'); }
 
     });
@@ -420,15 +466,13 @@
         }
     });
     $("#parrent_service_select").chosen().change(function (event, data) {
-        var len = $("#parrent_service_select :selected").length;
-        if (len === 1) {
-            var id = $("#parrent_service_select :selected")[0].id;
-            GetServices(id);
-        } else {
-            GetServices(0);
-        }
-    });
-    
+        var parrent_services = "";
+        $("#parrent_service_select :selected").each(function () {
+            parrent_services += $(this)[0].id + ",";
+        });
+        GetServices(parrent_services);
+       });
+
     //$(".chosen-select").chosen().change(function() {
     //    $(this).closest('form').submit();
     //});
@@ -468,6 +512,11 @@
                 workerIds += $(this)[0].id + ",";
             });
             form["SelectedWorker"].value = workerIds;
+            var executerIds = "";
+            $("#executer_select :selected").each(function () {
+                executerIds += $(this)[0].id + ",";
+            });
+            form["SelectedExecuter"].value = executerIds;
 
             var streetIds = "";
             $("#street_select :selected").each(function () {
@@ -510,9 +559,9 @@
                 ratingIds += $(this)[0].id + ",";
             });
             form["SelectedRating"].value = ratingIds;
-            
+
             form.submit();
         });
 
-</script>
+    </script>
 

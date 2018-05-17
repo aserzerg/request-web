@@ -2657,6 +2657,7 @@ namespace request_web.WebService {
                     System.DateTime fromDate, 
                     System.DateTime toDate, 
                     int[] filterWorkerIds, 
+                    int[] filterExecuterIds, 
                     int[] filterStreetIds, 
                     int[] filterHouseIds, 
                     int[] filterAddressIds, 
@@ -2676,6 +2677,7 @@ namespace request_web.WebService {
                     System.DateTime fromDate, 
                     System.DateTime toDate, 
                     int[] filterWorkerIds, 
+                    int[] filterExecuterIds, 
                     int[] filterStreetIds, 
                     int[] filterHouseIds, 
                     int[] filterAddressIds, 
@@ -2711,6 +2713,12 @@ namespace request_web.WebService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetWorkersByPeriod", ReplyAction="http://tempuri.org/IRequestWebService/GetWorkersByPeriodResponse")]
         System.Threading.Tasks.Task<request_web.WebService.WorkerDto[]> GetWorkersByPeriodAsync(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetExecutersByPeriod", ReplyAction="http://tempuri.org/IRequestWebService/GetExecutersByPeriodResponse")]
+        request_web.WebService.WorkerDto[] GetExecutersByPeriod(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetExecutersByPeriod", ReplyAction="http://tempuri.org/IRequestWebService/GetExecutersByPeriodResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.WorkerDto[]> GetExecutersByPeriodAsync(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetStreetListByWorker", ReplyAction="http://tempuri.org/IRequestWebService/GetStreetListByWorkerResponse")]
         request_web.WebService.StreetDto[] GetStreetListByWorker(int workerId);
@@ -2981,6 +2989,7 @@ namespace request_web.WebService {
                     System.DateTime fromDate, 
                     System.DateTime toDate, 
                     int[] filterWorkerIds, 
+                    int[] filterExecuterIds, 
                     int[] filterStreetIds, 
                     int[] filterHouseIds, 
                     int[] filterAddressIds, 
@@ -2992,7 +3001,7 @@ namespace request_web.WebService {
                     string clientPhone, 
                     int[] ratingIds, 
                     bool filterByCreateDate) {
-            return base.Channel.RequestListArrayParams(workerId, requestId, fromDate, toDate, filterWorkerIds, filterStreetIds, filterHouseIds, filterAddressIds, filterStatusIds, filterParrentServiceIds, filterServiceIds, badWork, garanty, clientPhone, ratingIds, filterByCreateDate);
+            return base.Channel.RequestListArrayParams(workerId, requestId, fromDate, toDate, filterWorkerIds, filterExecuterIds, filterStreetIds, filterHouseIds, filterAddressIds, filterStatusIds, filterParrentServiceIds, filterServiceIds, badWork, garanty, clientPhone, ratingIds, filterByCreateDate);
         }
         
         public System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListArrayParamsAsync(
@@ -3001,6 +3010,7 @@ namespace request_web.WebService {
                     System.DateTime fromDate, 
                     System.DateTime toDate, 
                     int[] filterWorkerIds, 
+                    int[] filterExecuterIds, 
                     int[] filterStreetIds, 
                     int[] filterHouseIds, 
                     int[] filterAddressIds, 
@@ -3012,7 +3022,7 @@ namespace request_web.WebService {
                     string clientPhone, 
                     int[] ratingIds, 
                     bool filterByCreateDate) {
-            return base.Channel.RequestListArrayParamsAsync(workerId, requestId, fromDate, toDate, filterWorkerIds, filterStreetIds, filterHouseIds, filterAddressIds, filterStatusIds, filterParrentServiceIds, filterServiceIds, badWork, garanty, clientPhone, ratingIds, filterByCreateDate);
+            return base.Channel.RequestListArrayParamsAsync(workerId, requestId, fromDate, toDate, filterWorkerIds, filterExecuterIds, filterStreetIds, filterHouseIds, filterAddressIds, filterStatusIds, filterParrentServiceIds, filterServiceIds, badWork, garanty, clientPhone, ratingIds, filterByCreateDate);
         }
         
         public request_web.WebService.RequestForListDto GetRequestById(int requestId) {
@@ -3045,6 +3055,14 @@ namespace request_web.WebService {
         
         public System.Threading.Tasks.Task<request_web.WebService.WorkerDto[]> GetWorkersByPeriodAsync(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId) {
             return base.Channel.GetWorkersByPeriodAsync(filterByCreateDate, fromDate, toDate, executeFromDate, executeToDate, workerId);
+        }
+        
+        public request_web.WebService.WorkerDto[] GetExecutersByPeriod(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId) {
+            return base.Channel.GetExecutersByPeriod(filterByCreateDate, fromDate, toDate, executeFromDate, executeToDate, workerId);
+        }
+        
+        public System.Threading.Tasks.Task<request_web.WebService.WorkerDto[]> GetExecutersByPeriodAsync(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId) {
+            return base.Channel.GetExecutersByPeriodAsync(filterByCreateDate, fromDate, toDate, executeFromDate, executeToDate, workerId);
         }
         
         public request_web.WebService.StreetDto[] GetStreetListByWorker(int workerId) {
