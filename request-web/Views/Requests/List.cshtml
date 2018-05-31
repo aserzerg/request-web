@@ -62,113 +62,112 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(false, "Пожалуйста, укажите коррекные даты!")
 
-<div class="form-inline pull-right" style="margin-bottom: 15px; horiz-align: center; position: relative">
-    @*; z-index: 9999">*@
-    @*<b style="vertical-align: middle;">Период выполнения</b>*@
-    @Html.Label("№:", new { @class = "control-label mr-sm-2" })
-    @Html.TextBoxFor(m => m.RequestId, new { @class = "form-control", style = "height: 25px; width: 80px ", placeholder = Html.DisplayName("№ заявки") })
 
-    <select class="chosen-select" data-placeholder="Фильтр" id="filter_select" tabindex="-1" style="width: 160px; height: 25px;">
-        @foreach (var filter in Model.FilterByDate)
-        {
-            string SelectedValue = "";
-            if (filter.IsSelected)
+    <table style="width: 100%;">
+    <tbody>
+            <tr>
+                <td>
+                    <div class="form-inline" style="margin-bottom: 15px; horiz-align: center; position: relative">
+                        @*; z-index: 9999">*@
+                        @*<b style="vertical-align: middle;">Период выполнения</b>*@
+                        @Html.Label("№:", new { @class = "control-label mr-sm-2" })
+                        @Html.TextBoxFor(m => m.RequestId, new { @class = "form-control", style = "height: 25px; width: 80px ", placeholder = Html.DisplayName("№ заявки") })
+
+                        <select class="chosen-select" data-placeholder="Фильтр" id="filter_select" tabindex="-1" style="width: 160px; height: 25px;">
+                            @foreach (var filter in Model.FilterByDate)
             {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@filter.Id'>@filter.Name</option>
-        }
-    </select>
+                string SelectedValue = "";
+                if (filter.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
+                }
+                <option @SelectedValue id='@filter.Id'>@filter.Name</option>
+}
+                        </select>
 
-    @Html.TextBoxFor(m => m.FromDate, new { @class = "datepicker form-control", style = "height: 25px; width: 100px", placeholder = Html.DisplayName("Введите дату") })
+                        @Html.TextBoxFor(m => m.FromDate, new { @class = "datepicker form-control", style = "height: 25px; width: 100px", placeholder = Html.DisplayName("Введите дату") })
 
-    @Html.Label("-", new { @class = "control-label mr-sm-2" })
-    @Html.TextBoxFor(m => m.ToDate, new { @class = "datepicker form-control", style = "height: 25px; width: 100px ", placeholder = Html.DisplayName("Введите дату") })
+                        @Html.Label("-", new { @class = "control-label mr-sm-2" })
+                        @Html.TextBoxFor(m => m.ToDate, new { @class = "datepicker form-control", style = "height: 25px; width: 100px ", placeholder = Html.DisplayName("Введите дату") })
 
-    <select class="chosen-select" multiple data-placeholder="Мастер" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;">
-        @foreach (var worker in Model.Masters)
-        {
-            string SelectedValue = "";
-            if (worker.IsSelected)
+                        <select class="chosen-select" multiple data-placeholder="Мастер" id="worker_select" tabindex="-1" style="width: 180px; height: 25px;">
+                            @foreach (var worker in Model.Masters)
             {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@worker.Id'>@worker.Name</option>
-        }
-    </select>
+                string SelectedValue = "";
+                if (worker.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
+                }
+                <option @SelectedValue id='@worker.Id'>@worker.Name</option>
+}
+                        </select>
 
-    <select class="chosen-select" multiple data-placeholder="Статус" id="status_select" tabindex="-1" style="width: 160px; height: 25px;">
-        @foreach (var status in Model.Statuses)
-        {
-            string SelectedValue = "";
-            if (status.IsSelected)
+                        <select class="chosen-select" multiple data-placeholder="Статус" id="status_select" tabindex="-1" style="width: 160px; height: 25px;">
+                            @foreach (var status in Model.Statuses)
             {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@status.Id'>@status.Name</option>
-        }
-    </select>
+                string SelectedValue = "";
+                if (status.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
+                }
+                <option @SelectedValue id='@status.Id'>@status.Name</option>
+}
+                        </select>
+                        <br/>
+                        @Html.CheckBoxFor(m => m.AdditionFiltering, new { @class = "checkbox", style = "height: 25px" })
+                        @Html.LabelFor(m => m.AdditionFiltering, new { @class = "control-label mr-sm-2" })
 
-    @Html.CheckBoxFor(m => m.AdditionFiltering, new { @class = "checkbox", style = "height: 25px" })
-    @Html.LabelFor(m => m.AdditionFiltering, new { @class = "control-label mr-sm-2" })
-    <button type="button" id="Refresh" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;background: mediumseagreen">Применить</button>
-    <button type="button" id="PrintActs" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin-left:10px; padding: 0;">Печать</button>
-    @if (Model.UserInfo.CanCreateRequestInWeb)
-    {
-        <button type="button" id="CreateNew" class="btn form-group btn-primary pull-right" style="width: 100px; height: 25px; margin-left: 10px; padding: 0;">Создать</button>
+                        <div id="AdditionParameters" style="margin-top: 10px;">
+                            <div>
+                                <select class="chosen-select" multiple data-placeholder="Улица" id="street_select" tabindex="-1" style="width: 280px; height: 25px;">
+                                    @foreach (var street in Model.Streets)
+                    {
+                        string SelectedValue = "";
+                        if (street.IsSelected)
+                        {
+                            SelectedValue = "selected='selected'";
+                        }
+                        <option @SelectedValue id='@street.Id'>@street.Name</option>
     }
+                                </select>
+                                <select class="chosen-select" multiple data-placeholder="Дом" id="house_select" tabindex="-1" style="width: 180px; height: 25px;">
+                                    @foreach (var house in Model.Houses)
+                    {
+                        string SelectedValue = "";
+                        if (house.IsSelected)
+                        {
+                            SelectedValue = "selected='selected'";
+                        }
+                        <option @SelectedValue id='@house.Id'>@house.Name</option>
+    }
+                                </select>
+                                <select class="chosen-select" multiple data-placeholder="Адреса" id="address_select" tabindex="-1" style="width: 180px; height: 25px;">
+                                    @foreach (var address in Model.Addresses)
+                    {
+                        string SelectedValue = "";
+                        if (address.IsSelected)
+                        {
+                            SelectedValue = "selected='selected'";
+                        }
+                        <option @SelectedValue id='@address.Id'>@address.Name</option>
+    }
+                                </select>
+                                <select class="chosen-select" multiple data-placeholder="Исполнитель" id="executer_select" tabindex="-1" style="width: 180px; height: 25px;">
+                                    @foreach (var executor in Model.Executers)
+                    {
+                        string SelectedValue = "";
+                        if (executor.IsSelected)
+                        {
+                            SelectedValue = "selected='selected'";
+                        }
+                        <option @SelectedValue id='@executor.Id'>@executor.Name</option>
+    }
+                                </select>
 
-    <div id="AdditionParameters" style="margin-top: 10px;">
-        <div>
-            <select class="chosen-select" multiple data-placeholder="Улица" id="street_select" tabindex="-1" style="width: 280px; height: 25px;">
-                @foreach (var street in Model.Streets)
-        {
-            string SelectedValue = "";
-            if (street.IsSelected)
-            {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@street.Id'>@street.Name</option>
-}
-            </select>
-            <select class="chosen-select" multiple data-placeholder="Дом" id="house_select" tabindex="-1" style="width: 180px; height: 25px;">
-                @foreach (var house in Model.Houses)
-        {
-            string SelectedValue = "";
-            if (house.IsSelected)
-            {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@house.Id'>@house.Name</option>
-}
-            </select>
-            <select class="chosen-select" multiple data-placeholder="Адреса" id="address_select" tabindex="-1" style="width: 180px; height: 25px;">
-                @foreach (var address in Model.Addresses)
-        {
-            string SelectedValue = "";
-            if (address.IsSelected)
-            {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@address.Id'>@address.Name</option>
-}
-            </select>
-            <select class="chosen-select" multiple data-placeholder="Исполнитель" id="executer_select" tabindex="-1" style="width: 180px; height: 25px;">
-                @foreach (var executor in Model.Executers)
-        {
-            string SelectedValue = "";
-            if (executor.IsSelected)
-            {
-                SelectedValue = "selected='selected'";
-            }
-            <option @SelectedValue id='@executor.Id'>@executor.Name</option>
-}
-            </select>
-
-        </div>
-        <div style="margin-top: 10px">
-            <select class="chosen-select" multiple data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
-                    @foreach (var parentService in Model.ParentServices)
+                            </div>
+                            <div style="margin-top: 10px">
+                                <select class="chosen-select" multiple data-placeholder="Услуга" id="parrent_service_select" tabindex="-1" style="width: 280px; height: 25px;">
+                                    @foreach (var parentService in Model.ParentServices)
                     {
                         string SelectedValue = "";
                         if (parentService.IsSelected)
@@ -176,48 +175,66 @@
                             SelectedValue = "selected='selected'";
                         }
                         <option @SelectedValue id='@parentService.Id'>@parentService.Name</option>
-                    }
-            </select>
-            <select class="chosen-select" multiple data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
-                @foreach (var parrent in Model.Services)
-                {
-                    <optgroup label=@parrent.Name>
-                        @foreach (var service in parrent.Children)
-                        {
-                            string SelectedValue = "";
-                            if (service.IsSelected)
-                            {
-                                SelectedValue = "selected='selected'";
-                            }
-                            <option @SelectedValue id='@service.Id'>@service.Name</option>
-                        }
-                    </optgroup>
-                }
-            </select>
-            @Html.Label("Оценка:", new { @class = "control-label mr-sm-2" })
-            <select class="chosen-select" multiple data-placeholder="Оценка" id="rating_select" tabindex="-1" style="width: 120px; height: 25px;">
-                @foreach (var rating in Model.Ratings)
-                {
-                    string SelectedValue = "";
-                    if (rating.IsSelected)
+    }
+                                </select>
+                                <select class="chosen-select" multiple data-placeholder="Причина" id="service_select" tabindex="-1" style="width: 280px; height: 25px;">
+                                    @foreach (var parrent in Model.Services)
                     {
-                        SelectedValue = "selected='selected'";
-                    }
-                    <option @SelectedValue id='@rating.Id'>@rating.Name</option>
+                        <optgroup label=@parrent.Name>
+                            @foreach (var service in parrent.Children)
+            {
+                string SelectedValue = "";
+                if (service.IsSelected)
+                {
+                    SelectedValue = "selected='selected'";
                 }
-            </select>
-        </div>
-        <div style="margin-top: 10px">
-            @Html.Label("Телефон абонента:", new { @class = "control-label mr-sm-2" })
-            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", style = "height: 25px; width: 180px ", placeholder = Html.DisplayName("Введите номер телефона") })
-            @Html.CheckBoxFor(m => m.IsBadWork, new { @class = "checkbox", style = "margin-left:50px; height: 25px" })
-            @Html.LabelFor(m => m.IsBadWork, new { @class = "control-label mr-sm-2", style = "color: red;" })
-            @Html.CheckBoxFor(m => m.Garanty, new { @class = "checkbox", style = "margin-left:50px; height: 25px" })
-            @Html.LabelFor(m => m.Garanty, new { @class = "control-label mr-sm-2", style = "color: red;" })
+                <option @SelectedValue id='@service.Id'>@service.Name</option>
+}
+                        </optgroup>
+    }
+                                </select>
+                                @Html.Label("Оценка:", new { @class = "control-label mr-sm-2" })
+                                <select class="chosen-select" multiple data-placeholder="Оценка" id="rating_select" tabindex="-1" style="width: 120px; height: 25px;">
+                                    @foreach (var rating in Model.Ratings)
+                    {
+                        string SelectedValue = "";
+                        if (rating.IsSelected)
+                        {
+                            SelectedValue = "selected='selected'";
+                        }
+                        <option @SelectedValue id='@rating.Id'>@rating.Name</option>
+    }
+                                </select>
+                            </div>
+                            <div style="margin-top: 10px">
+                                @Html.Label("Телефон абонента:", new { @class = "control-label mr-sm-2" })
+                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", style = "height: 25px; width: 180px ", placeholder = Html.DisplayName("Введите номер телефона") })
+                                @Html.CheckBoxFor(m => m.IsBadWork, new { @class = "checkbox", style = "margin-left:50px; height: 25px" })
+                                @Html.LabelFor(m => m.IsBadWork, new { @class = "control-label mr-sm-2", style = "color: red;" })
+                                @Html.CheckBoxFor(m => m.Garanty, new { @class = "checkbox", style = "margin-left:50px; height: 25px" })
+                                @Html.LabelFor(m => m.Garanty, new { @class = "control-label mr-sm-2", style = "color: red;" })
 
-        </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td style="width: 220px;">
+                    <button type="button" id="ExportToExcel" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin:2px; padding: 0;">Экпорт в Excel</button>
+                    <button type="button" id="Refresh" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin:2px; padding: 0;background: mediumseagreen">Применить</button>
+                    @if (Model.UserInfo.CanCreateRequestInWeb)
+                    {
+                    <button type="button" id="CreateNew" class="btn form-group btn-primary pull-right" style="width: 100px; height: 25px; margin: 2px; padding: 0;background: mediumseagreen">Создать</button>
+                     }
+                    <button type="button" id="PrintActs" class="btn form-group btn-primary pull-right" style="width:100px; height:25px; margin:2px; padding: 0;">Печать</button>
+                </td>
+            </tr>
+    </tbody>
+</table>
+    <div style="text-align: right;">
+        @Html.Label("Итого заявок:", new { @class = "control-label mr-sm-2" })
+        @Html.Label(@Model.Requests.Length.ToString(), new { @class = "control-label mr-sm-2" })
     </div>
-</div>
+
 }
 @*@Html.TextBoxFor(m => m.FromDate, new { @class = "datepicker form-control", style = "height: 30px", placeholder = Html.DisplayName("Введите дату") })*@
 @using (Html.BeginForm("Details", "Requests", FormMethod.Post))
@@ -495,6 +512,12 @@
             var url = '/Requests/PrintActs';
             window.open(url, '_blank');
             });
+        $('#ExportToExcel').on('click',
+            function () {
+                var url = '/Requests/ExportRequests';
+                window.open(url, '_blank');
+            });
+
         $('#CreateNew').on('click',
         function() {
             var url = '/Requests/CreateNew';

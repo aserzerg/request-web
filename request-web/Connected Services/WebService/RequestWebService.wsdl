@@ -33,6 +33,12 @@
   <wsdl:message name="IRequestWebService_RequestList_OutputMessage">
     <wsdl:part name="parameters" element="tns:RequestListResponse" />
   </wsdl:message>
+  <wsdl:message name="IRequestWebService_ExportToExcel_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExportToExcel" />
+  </wsdl:message>
+  <wsdl:message name="IRequestWebService_ExportToExcel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExportToExcelResponse" />
+  </wsdl:message>
   <wsdl:message name="IRequestWebService_RequestListArrayParams_InputMessage">
     <wsdl:part name="parameters" element="tns:RequestListArrayParams" />
   </wsdl:message>
@@ -247,6 +253,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/RequestList" message="tns:IRequestWebService_RequestList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/RequestListResponse" message="tns:IRequestWebService_RequestList_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ExportToExcel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/ExportToExcel" message="tns:IRequestWebService_ExportToExcel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/ExportToExcelResponse" message="tns:IRequestWebService_ExportToExcel_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="RequestListArrayParams">
       <wsdl:input wsaw:Action="http://tempuri.org/IRequestWebService/RequestListArrayParams" message="tns:IRequestWebService_RequestListArrayParams_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRequestWebService/RequestListArrayParamsResponse" message="tns:IRequestWebService_RequestListArrayParams_OutputMessage" />
@@ -407,6 +417,15 @@
     </wsdl:operation>
     <wsdl:operation name="RequestList">
       <soap:operation soapAction="http://tempuri.org/IRequestWebService/RequestList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportToExcel">
+      <soap:operation soapAction="http://tempuri.org/IRequestWebService/ExportToExcel" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

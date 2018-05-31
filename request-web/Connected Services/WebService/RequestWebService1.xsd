@@ -70,7 +70,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RequestListArrayParams">
+  <xs:element name="ExportToExcel">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="workerId" type="xs:int" />
@@ -93,10 +93,40 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ExportToExcelResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ExportToExcelResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestListArrayParams">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="workerId" type="xs:int" />
+        <xs:element minOccurs="0" name="requestId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="fromDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="toDate" type="xs:dateTime" />
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterWorkerIds" nillable="true" type="q13:ArrayOfint" />
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterExecuterIds" nillable="true" type="q14:ArrayOfint" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterStreetIds" nillable="true" type="q15:ArrayOfint" />
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterHouseIds" nillable="true" type="q16:ArrayOfint" />
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterAddressIds" nillable="true" type="q17:ArrayOfint" />
+        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterStatusIds" nillable="true" type="q18:ArrayOfint" />
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterParrentServiceIds" nillable="true" type="q19:ArrayOfint" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterServiceIds" nillable="true" type="q20:ArrayOfint" />
+        <xs:element minOccurs="0" name="badWork" type="xs:boolean" />
+        <xs:element minOccurs="0" name="garanty" type="xs:boolean" />
+        <xs:element minOccurs="0" name="clientPhone" nillable="true" type="xs:string" />
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ratingIds" nillable="true" type="q21:ArrayOfint" />
+        <xs:element minOccurs="0" name="filterByCreateDate" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RequestListArrayParamsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="RequestListArrayParamsResult" nillable="true" type="q13:ArrayOfRequestForListDto" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="RequestListArrayParamsResult" nillable="true" type="q22:ArrayOfRequestForListDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -110,7 +140,7 @@
   <xs:element name="GetRequestByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestByIdResult" nillable="true" type="q14:RequestForListDto" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestByIdResult" nillable="true" type="q23:RequestForListDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -125,7 +155,7 @@
   <xs:element name="GetRequestByWorkerAndIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestByWorkerAndIdResult" nillable="true" type="q15:RequestForListDto" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestByWorkerAndIdResult" nillable="true" type="q24:RequestForListDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -139,7 +169,7 @@
   <xs:element name="GetWorkersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWorkersResult" nillable="true" type="q16:ArrayOfWorkerDto" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWorkersResult" nillable="true" type="q25:ArrayOfWorkerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -158,7 +188,7 @@
   <xs:element name="GetWorkersByPeriodResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWorkersByPeriodResult" nillable="true" type="q17:ArrayOfWorkerDto" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWorkersByPeriodResult" nillable="true" type="q26:ArrayOfWorkerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -177,7 +207,7 @@
   <xs:element name="GetExecutersByPeriodResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetExecutersByPeriodResult" nillable="true" type="q18:ArrayOfWorkerDto" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetExecutersByPeriodResult" nillable="true" type="q27:ArrayOfWorkerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -191,7 +221,7 @@
   <xs:element name="GetStreetListByWorkerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetStreetListByWorkerResult" nillable="true" type="q19:ArrayOfStreetDto" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetStreetListByWorkerResult" nillable="true" type="q28:ArrayOfStreetDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -203,7 +233,7 @@
   <xs:element name="GetWebStatusesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWebStatusesResult" nillable="true" type="q20:ArrayOfWebStatusDto" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWebStatusesResult" nillable="true" type="q29:ArrayOfWebStatusDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -218,7 +248,7 @@
   <xs:element name="GetHousesByStreetAndWorkerIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetHousesByStreetAndWorkerIdResult" nillable="true" type="q21:ArrayOfWebHouseDto" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetHousesByStreetAndWorkerIdResult" nillable="true" type="q30:ArrayOfWebHouseDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -232,7 +262,7 @@
   <xs:element name="GetFlatByHouseIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetFlatByHouseIdResult" nillable="true" type="q22:ArrayOfWebFlatDto" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetFlatByHouseIdResult" nillable="true" type="q31:ArrayOfWebFlatDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -246,7 +276,7 @@
   <xs:element name="GetServicesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetServicesResult" nillable="true" type="q23:ArrayOfServiceDto" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetServicesResult" nillable="true" type="q32:ArrayOfServiceDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -286,7 +316,7 @@
   <xs:element name="GetRequestByUsersInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestByUsersInfoResult" nillable="true" type="q24:ArrayOfStatInfoDto" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestByUsersInfoResult" nillable="true" type="q33:ArrayOfStatInfoDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -300,7 +330,7 @@
   <xs:element name="GetWebCallsByRequestIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWebCallsByRequestIdResult" nillable="true" type="q25:ArrayOfWebCallsDto" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWebCallsByRequestIdResult" nillable="true" type="q34:ArrayOfWebCallsDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -312,7 +342,7 @@
   <xs:element name="GetRequestByWorkersInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestByWorkersInfoResult" nillable="true" type="q26:ArrayOfStatInfoDto" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestByWorkersInfoResult" nillable="true" type="q35:ArrayOfStatInfoDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -324,7 +354,7 @@
   <xs:element name="GetStatusesAllowedInWebResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetStatusesAllowedInWebResult" nillable="true" type="q27:ArrayOfStatusDto" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetStatusesAllowedInWebResult" nillable="true" type="q36:ArrayOfStatusDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -353,7 +383,7 @@
   <xs:element name="GetAttachmentListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetAttachmentListResult" nillable="true" type="q28:ArrayOfAttachmentDto" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetAttachmentListResult" nillable="true" type="q37:ArrayOfAttachmentDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -381,7 +411,7 @@
   <xs:element name="GetNotesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetNotesResult" nillable="true" type="q29:ArrayOfNoteDto" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetNotesResult" nillable="true" type="q38:ArrayOfNoteDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -423,7 +453,7 @@
   <xs:element name="GetRequestsByPhoneResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestsByPhoneResult" nillable="true" type="q30:ArrayOfAppRequestDto" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetRequestsByPhoneResult" nillable="true" type="q39:ArrayOfAppRequestDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -438,7 +468,7 @@
   <xs:element name="GetTypesByPhoneResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetTypesByPhoneResult" nillable="true" type="q31:ArrayOfAppTypeDto" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetTypesByPhoneResult" nillable="true" type="q40:ArrayOfAppTypeDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -453,7 +483,7 @@
   <xs:element name="GetAddressesByPhoneResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetAddressesByPhoneResult" nillable="true" type="q32:ArrayOfAppAddressDto" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetAddressesByPhoneResult" nillable="true" type="q41:ArrayOfAppAddressDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -518,7 +548,7 @@
   <xs:element name="GetWorkerStatResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWorkerStatResult" nillable="true" type="q33:ArrayOfStatInfoDto" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/RequestServiceImpl.Dto" minOccurs="0" name="GetWorkerStatResult" nillable="true" type="q42:ArrayOfStatInfoDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -526,15 +556,22 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="workerId" type="xs:int" />
+        <xs:element minOccurs="0" name="requestId" nillable="true" type="xs:int" />
         <xs:element minOccurs="0" name="fromDate" type="xs:dateTime" />
         <xs:element minOccurs="0" name="toDate" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="FirlerWorkerId" nillable="true" type="xs:int" />
-        <xs:element minOccurs="0" name="FilterStreetId" nillable="true" type="xs:int" />
-        <xs:element minOccurs="0" name="FilterHouseId" nillable="true" type="xs:int" />
-        <xs:element minOccurs="0" name="FilterAddressId" nillable="true" type="xs:int" />
-        <xs:element minOccurs="0" name="FilterStatusId" nillable="true" type="xs:int" />
-        <xs:element minOccurs="0" name="FilterParrentServiceId" nillable="true" type="xs:int" />
-        <xs:element minOccurs="0" name="FilterServiceId" nillable="true" type="xs:int" />
+        <xs:element xmlns:q43="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterWorkerIds" nillable="true" type="q43:ArrayOfint" />
+        <xs:element xmlns:q44="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterExecuterIds" nillable="true" type="q44:ArrayOfint" />
+        <xs:element xmlns:q45="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterStreetIds" nillable="true" type="q45:ArrayOfint" />
+        <xs:element xmlns:q46="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterHouseIds" nillable="true" type="q46:ArrayOfint" />
+        <xs:element xmlns:q47="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterAddressIds" nillable="true" type="q47:ArrayOfint" />
+        <xs:element xmlns:q48="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterStatusIds" nillable="true" type="q48:ArrayOfint" />
+        <xs:element xmlns:q49="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterParrentServiceIds" nillable="true" type="q49:ArrayOfint" />
+        <xs:element xmlns:q50="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filterServiceIds" nillable="true" type="q50:ArrayOfint" />
+        <xs:element minOccurs="0" name="badWork" type="xs:boolean" />
+        <xs:element minOccurs="0" name="garanty" type="xs:boolean" />
+        <xs:element minOccurs="0" name="clientPhone" nillable="true" type="xs:string" />
+        <xs:element xmlns:q51="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ratingIds" nillable="true" type="q51:ArrayOfint" />
+        <xs:element minOccurs="0" name="filterByCreateDate" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -548,7 +585,7 @@
   <xs:element name="FileUploadRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.microsoft.com/Message" name="FileStream" type="q34:StreamBody" />
+        <xs:element xmlns:q52="http://schemas.microsoft.com/Message" name="FileStream" type="q52:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -2650,6 +2650,46 @@ namespace request_web.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/RequestList", ReplyAction="http://tempuri.org/IRequestWebService/RequestListResponse")]
         System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> firlerWorkerId, System.Nullable<int> filterStreetId, System.Nullable<int> filterHouseId, System.Nullable<int> filterAddressId, System.Nullable<int> filterStatusId, System.Nullable<int> filterParrentServiceId, System.Nullable<int> filterServiceId, bool badWork, bool garanty, string clientPhone, System.Nullable<int> rating, bool filterByCreateDate);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/ExportToExcel", ReplyAction="http://tempuri.org/IRequestWebService/ExportToExcelResponse")]
+        byte[] ExportToExcel(
+                    int workerId, 
+                    System.Nullable<int> requestId, 
+                    System.DateTime fromDate, 
+                    System.DateTime toDate, 
+                    int[] filterWorkerIds, 
+                    int[] filterExecuterIds, 
+                    int[] filterStreetIds, 
+                    int[] filterHouseIds, 
+                    int[] filterAddressIds, 
+                    int[] filterStatusIds, 
+                    int[] filterParrentServiceIds, 
+                    int[] filterServiceIds, 
+                    bool badWork, 
+                    bool garanty, 
+                    string clientPhone, 
+                    int[] ratingIds, 
+                    bool filterByCreateDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/ExportToExcel", ReplyAction="http://tempuri.org/IRequestWebService/ExportToExcelResponse")]
+        System.Threading.Tasks.Task<byte[]> ExportToExcelAsync(
+                    int workerId, 
+                    System.Nullable<int> requestId, 
+                    System.DateTime fromDate, 
+                    System.DateTime toDate, 
+                    int[] filterWorkerIds, 
+                    int[] filterExecuterIds, 
+                    int[] filterStreetIds, 
+                    int[] filterHouseIds, 
+                    int[] filterAddressIds, 
+                    int[] filterStatusIds, 
+                    int[] filterParrentServiceIds, 
+                    int[] filterServiceIds, 
+                    bool badWork, 
+                    bool garanty, 
+                    string clientPhone, 
+                    int[] ratingIds, 
+                    bool filterByCreateDate);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/RequestListArrayParams", ReplyAction="http://tempuri.org/IRequestWebService/RequestListArrayParamsResponse")]
         request_web.WebService.RequestForListDto[] RequestListArrayParams(
                     int workerId, 
@@ -2865,10 +2905,44 @@ namespace request_web.WebService {
         System.Threading.Tasks.Task<request_web.WebService.StatInfoDto[]> GetWorkerStatAsync(int currentWorkerId, System.DateTime fromDate, System.DateTime toDate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestActs", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestActsResponse")]
-        byte[] GetRequestActs(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId);
+        byte[] GetRequestActs(
+                    int workerId, 
+                    System.Nullable<int> requestId, 
+                    System.DateTime fromDate, 
+                    System.DateTime toDate, 
+                    int[] filterWorkerIds, 
+                    int[] filterExecuterIds, 
+                    int[] filterStreetIds, 
+                    int[] filterHouseIds, 
+                    int[] filterAddressIds, 
+                    int[] filterStatusIds, 
+                    int[] filterParrentServiceIds, 
+                    int[] filterServiceIds, 
+                    bool badWork, 
+                    bool garanty, 
+                    string clientPhone, 
+                    int[] ratingIds, 
+                    bool filterByCreateDate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetRequestActs", ReplyAction="http://tempuri.org/IRequestWebService/GetRequestActsResponse")]
-        System.Threading.Tasks.Task<byte[]> GetRequestActsAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId);
+        System.Threading.Tasks.Task<byte[]> GetRequestActsAsync(
+                    int workerId, 
+                    System.Nullable<int> requestId, 
+                    System.DateTime fromDate, 
+                    System.DateTime toDate, 
+                    int[] filterWorkerIds, 
+                    int[] filterExecuterIds, 
+                    int[] filterStreetIds, 
+                    int[] filterHouseIds, 
+                    int[] filterAddressIds, 
+                    int[] filterStatusIds, 
+                    int[] filterParrentServiceIds, 
+                    int[] filterServiceIds, 
+                    bool badWork, 
+                    bool garanty, 
+                    string clientPhone, 
+                    int[] ratingIds, 
+                    bool filterByCreateDate);
         
         // CODEGEN: Generating message contract since the wrapper name (FileUploadRequest) of message FileUploadRequest does not match the default value (UploadFile)
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/UploadFile", ReplyAction="http://tempuri.org/IRequestWebService/UploadFileResponse")]
@@ -2981,6 +3055,48 @@ namespace request_web.WebService {
         
         public System.Threading.Tasks.Task<request_web.WebService.RequestForListDto[]> RequestListAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> firlerWorkerId, System.Nullable<int> filterStreetId, System.Nullable<int> filterHouseId, System.Nullable<int> filterAddressId, System.Nullable<int> filterStatusId, System.Nullable<int> filterParrentServiceId, System.Nullable<int> filterServiceId, bool badWork, bool garanty, string clientPhone, System.Nullable<int> rating, bool filterByCreateDate) {
             return base.Channel.RequestListAsync(workerId, fromDate, toDate, firlerWorkerId, filterStreetId, filterHouseId, filterAddressId, filterStatusId, filterParrentServiceId, filterServiceId, badWork, garanty, clientPhone, rating, filterByCreateDate);
+        }
+        
+        public byte[] ExportToExcel(
+                    int workerId, 
+                    System.Nullable<int> requestId, 
+                    System.DateTime fromDate, 
+                    System.DateTime toDate, 
+                    int[] filterWorkerIds, 
+                    int[] filterExecuterIds, 
+                    int[] filterStreetIds, 
+                    int[] filterHouseIds, 
+                    int[] filterAddressIds, 
+                    int[] filterStatusIds, 
+                    int[] filterParrentServiceIds, 
+                    int[] filterServiceIds, 
+                    bool badWork, 
+                    bool garanty, 
+                    string clientPhone, 
+                    int[] ratingIds, 
+                    bool filterByCreateDate) {
+            return base.Channel.ExportToExcel(workerId, requestId, fromDate, toDate, filterWorkerIds, filterExecuterIds, filterStreetIds, filterHouseIds, filterAddressIds, filterStatusIds, filterParrentServiceIds, filterServiceIds, badWork, garanty, clientPhone, ratingIds, filterByCreateDate);
+        }
+        
+        public System.Threading.Tasks.Task<byte[]> ExportToExcelAsync(
+                    int workerId, 
+                    System.Nullable<int> requestId, 
+                    System.DateTime fromDate, 
+                    System.DateTime toDate, 
+                    int[] filterWorkerIds, 
+                    int[] filterExecuterIds, 
+                    int[] filterStreetIds, 
+                    int[] filterHouseIds, 
+                    int[] filterAddressIds, 
+                    int[] filterStatusIds, 
+                    int[] filterParrentServiceIds, 
+                    int[] filterServiceIds, 
+                    bool badWork, 
+                    bool garanty, 
+                    string clientPhone, 
+                    int[] ratingIds, 
+                    bool filterByCreateDate) {
+            return base.Channel.ExportToExcelAsync(workerId, requestId, fromDate, toDate, filterWorkerIds, filterExecuterIds, filterStreetIds, filterHouseIds, filterAddressIds, filterStatusIds, filterParrentServiceIds, filterServiceIds, badWork, garanty, clientPhone, ratingIds, filterByCreateDate);
         }
         
         public request_web.WebService.RequestForListDto[] RequestListArrayParams(
@@ -3257,12 +3373,46 @@ namespace request_web.WebService {
             return base.Channel.GetWorkerStatAsync(currentWorkerId, fromDate, toDate);
         }
         
-        public byte[] GetRequestActs(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId) {
-            return base.Channel.GetRequestActs(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId);
+        public byte[] GetRequestActs(
+                    int workerId, 
+                    System.Nullable<int> requestId, 
+                    System.DateTime fromDate, 
+                    System.DateTime toDate, 
+                    int[] filterWorkerIds, 
+                    int[] filterExecuterIds, 
+                    int[] filterStreetIds, 
+                    int[] filterHouseIds, 
+                    int[] filterAddressIds, 
+                    int[] filterStatusIds, 
+                    int[] filterParrentServiceIds, 
+                    int[] filterServiceIds, 
+                    bool badWork, 
+                    bool garanty, 
+                    string clientPhone, 
+                    int[] ratingIds, 
+                    bool filterByCreateDate) {
+            return base.Channel.GetRequestActs(workerId, requestId, fromDate, toDate, filterWorkerIds, filterExecuterIds, filterStreetIds, filterHouseIds, filterAddressIds, filterStatusIds, filterParrentServiceIds, filterServiceIds, badWork, garanty, clientPhone, ratingIds, filterByCreateDate);
         }
         
-        public System.Threading.Tasks.Task<byte[]> GetRequestActsAsync(int workerId, System.DateTime fromDate, System.DateTime toDate, System.Nullable<int> FirlerWorkerId, System.Nullable<int> FilterStreetId, System.Nullable<int> FilterHouseId, System.Nullable<int> FilterAddressId, System.Nullable<int> FilterStatusId, System.Nullable<int> FilterParrentServiceId, System.Nullable<int> FilterServiceId) {
-            return base.Channel.GetRequestActsAsync(workerId, fromDate, toDate, FirlerWorkerId, FilterStreetId, FilterHouseId, FilterAddressId, FilterStatusId, FilterParrentServiceId, FilterServiceId);
+        public System.Threading.Tasks.Task<byte[]> GetRequestActsAsync(
+                    int workerId, 
+                    System.Nullable<int> requestId, 
+                    System.DateTime fromDate, 
+                    System.DateTime toDate, 
+                    int[] filterWorkerIds, 
+                    int[] filterExecuterIds, 
+                    int[] filterStreetIds, 
+                    int[] filterHouseIds, 
+                    int[] filterAddressIds, 
+                    int[] filterStatusIds, 
+                    int[] filterParrentServiceIds, 
+                    int[] filterServiceIds, 
+                    bool badWork, 
+                    bool garanty, 
+                    string clientPhone, 
+                    int[] ratingIds, 
+                    bool filterByCreateDate) {
+            return base.Channel.GetRequestActsAsync(workerId, requestId, fromDate, toDate, filterWorkerIds, filterExecuterIds, filterStreetIds, filterHouseIds, filterAddressIds, filterStatusIds, filterParrentServiceIds, filterServiceIds, badWork, garanty, clientPhone, ratingIds, filterByCreateDate);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

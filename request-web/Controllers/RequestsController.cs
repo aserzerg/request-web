@@ -185,7 +185,7 @@ namespace request_web.Controllers
                 var statuses = GetStatusList(requestService);
                 if (!statuses.Any(w => selectedStatusIds.Contains(w.Id)))
                 {
-                    selectedStatusIds = new[] {2};
+                    selectedStatusIds = new[] {3};
                 }
                 foreach (var status in statuses.Where(w => selectedStatusIds.Contains(w.Id)))
                 {
@@ -213,7 +213,7 @@ namespace request_web.Controllers
 
                 #endregion
                 #region Requests
-                RequestForListDto[] requests = requestService.RequestListArrayParams(workerId, requestId, fromDate, toDate.AddDays(1),
+                RequestForListDto[] requests = requestService.RequestListArrayParams(workerId, requestId, fromDate, toDate,
             selectedWorkerIds, selectedExecutersIds,selectedStreetIds, selectedHouseIds,selectedAddressIds,selectedStatusIds,selectedParServIds,selectedServiceIds,
             isBadWork,garanty,phoneNumber,ratingIds,filterByExec == 2).OrderByDescending(r=>r.CreateTime).ToArray();
                 var currentDate = requestService.GetCurrentDate();
@@ -621,33 +621,73 @@ namespace request_web.Controllers
         }
 
         [Authorize]
-        public ActionResult PrintActs()
+        public ActionResult ExportRequests()
         {
-            var fromDate = (DateTime?)Session[FromDateSessionName] ?? DateTime.Now.Date.AddDays(-30);
-            var toDate = (DateTime?)Session[ToDateSessionName] ?? DateTime.Now.Date;
-            var selectedWorkerId = (int?)Session[WorkerSessionName] ?? 0;
-            var selectedStreetId = (int?)Session[StreetSessionName] ?? 0;
-            var selectedStatusId = (int?)Session[StatusSessionName] ?? 0;
-            var selectedFilterId = (int?)Session[FilterSessionName] ?? 0;
-            var selectedHouseId = (int?)Session[HouseSessionName] ?? 0;
-            var selectedAddressId = (int?)Session[AddressSessionName] ?? 0;
-            var selectedParServId = (int?)Session[ParServSessionName] ?? 0;
-            var selectedServiceId = (int?)Session[ServSessionName] ?? 0;
-            var selectedRatungId = (int?)Session[RatingSessionName] ?? 0;
             var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
             var workerId = currentUser.WorkerId;
 
+            var fromDate = (DateTime?)Session[FromDateSessionName] ?? DateTime.Now.Date.AddDays(-30);
+            var toDate = (DateTime?)Session[ToDateSessionName] ?? DateTime.Now.Date;
+            var selectedWorkerIds = (int[])Session[WorkerSessionName] ?? new int[0];
+            var selectedExecuterIds = (int[])Session[ExecuterSessionName] ?? new int[0];
+            var selectedStreetIds = (int[])Session[StreetSessionName] ?? new int[0];
+            var selectedStatusIds = (int[])Session[StatusSessionName] ?? new int[0];
+            var selectedFilterId = (int?)Session[FilterSessionName] ?? 0;
+            var selectedHouseIds = (int[])Session[HouseSessionName] ?? new int[0];
+            var selectedAddressIds = (int[])Session[AddressSessionName] ?? new int[0];
+            var selectedParServIds = (int[])Session[ParServSessionName] ?? new int[0];
+            var selectedServiceIds = (int[])Session[ServSessionName] ?? new int[0];
+            var selectedRatingIds = (int[])Session[RatingSessionName] ?? new int[0];
+            var filterIsChecked = (bool?)Session[FilteringSessionName] ?? false;
+            var phoneNumber = (string)Session[PhoneSessionName];
+            var requestId = (int?)Session[IdSessionName];
+            var isBadWork = (bool?)Session[IsBadWorkSessionName] ?? false;
+            var garanty = (bool?)Session[GarantySessionName] ?? false;
+
+
+
             using (var requestService = new RequestWebServiceClient())
             {
-                var t = requestService.GetRequestActs(workerId, fromDate, toDate.AddDays(1),
-                    selectedWorkerId > 0 ? selectedWorkerId : (int?)null,
-                    selectedStreetId > 0 ? selectedStreetId : (int?)null,
-                    selectedHouseId > 0 ? selectedHouseId : (int?)null,
-                    selectedAddressId > 0 ? selectedAddressId : (int?)null,
-                    selectedStatusId > 0 ? selectedStatusId : 2,
-                    selectedParServId > 0 ? selectedParServId : (int?)null,
-                    selectedServiceId > 0 ? selectedServiceId : (int?)null);
-                return File(t, "application/pdf");
+
+                var file = requestService.ExportToExcel(workerId, requestId, fromDate, toDate,
+selectedWorkerIds, selectedExecuterIds, selectedStreetIds, selectedHouseIds, selectedAddressIds, selectedStatusIds, selectedParServIds, selectedServiceIds,
+isBadWork, garanty, phoneNumber, selectedRatingIds, selectedFilterId == 2);
+
+                return File(file, "application/vnd.ms-excel","Заявки.xlsx");
+            }
+        }
+
+        [Authorize]
+        public ActionResult PrintActs()
+        {
+            var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
+            var workerId = currentUser.WorkerId;
+
+            var fromDate = (DateTime?)Session[FromDateSessionName] ?? DateTime.Now.Date.AddDays(-30);
+            var toDate = (DateTime?)Session[ToDateSessionName] ?? DateTime.Now.Date;
+            var selectedWorkerIds = (int[])Session[WorkerSessionName] ?? new int[0];
+            var selectedExecuterIds = (int[])Session[ExecuterSessionName] ?? new int[0];
+            var selectedStreetIds = (int[])Session[StreetSessionName] ?? new int[0];
+            var selectedStatusIds = (int[])Session[StatusSessionName] ?? new int[0];
+            var selectedFilterId = (int?)Session[FilterSessionName] ?? 0;
+            var selectedHouseIds = (int[])Session[HouseSessionName] ?? new int[0];
+            var selectedAddressIds = (int[])Session[AddressSessionName] ?? new int[0];
+            var selectedParServIds = (int[])Session[ParServSessionName] ?? new int[0];
+            var selectedServiceIds = (int[])Session[ServSessionName] ?? new int[0];
+            var selectedRatingIds = (int[])Session[RatingSessionName] ?? new int[0];
+            var filterIsChecked = (bool?)Session[FilteringSessionName] ?? false;
+            var phoneNumber = (string)Session[PhoneSessionName];
+            var requestId = (int?)Session[IdSessionName];
+            var isBadWork = (bool?)Session[IsBadWorkSessionName] ?? false;
+            var garanty = (bool?)Session[GarantySessionName] ?? false;
+
+            using (var requestService = new RequestWebServiceClient())
+            {
+                var file = requestService.GetRequestActs(workerId, requestId, fromDate, toDate,
+selectedWorkerIds, selectedExecuterIds, selectedStreetIds, selectedHouseIds, selectedAddressIds, selectedStatusIds, selectedParServIds, selectedServiceIds,
+isBadWork, garanty, phoneNumber, selectedRatingIds, selectedFilterId == 2);
+
+                return File(file, "application/pdf", "Acts.pdf");
             }
         }
     }
