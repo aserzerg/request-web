@@ -334,7 +334,7 @@ namespace request_web.Controllers
                 var streets = GetStreetList(requestService, currentUser.WorkerId, false);
                 var parentServices = GetServices(requestService, null, false).ToArray();
                 var model = new RequestCreateNewModel();
-                model.Workers = workers;
+                model.Workers = new WorkerShortDto[0];
                 model.Executers = workers;
                 model.Streets = streets;
                 model.ParentServices = parentServices;
@@ -545,6 +545,17 @@ namespace request_web.Controllers
             }
         }
         [HttpPost]
+        public JsonResult GetMastersByHouse(string houseNum, string serviceNum)
+        {
+            Int32.TryParse(houseNum, out int houseId);
+            Int32.TryParse(serviceNum, out int serviceId);
+            using (var requestService = new RequestWebServiceClient())
+            {
+                var t = requestService.GetMastersByHouseAndService(houseId, serviceId).Select(w => new { id = w.Id, Name = $"{w.SurName} {w.FirstName} {w.PatrName}" });
+                return Json(JsonConvert.SerializeObject(t));
+            }
+        }
+        [HttpPost]
         public JsonResult GetHouses(string streetNum)
         {
             var currentUser = JsonConvert.DeserializeObject<WebUserDto>(HttpContext.User.Identity.Name);
@@ -615,7 +626,7 @@ namespace request_web.Controllers
             using (var requestService = new RequestWebServiceClient())
             {
                 var mainServices = GetServices(requestService, parentServiceId);
-                services = withAll ? mainServices.ToArray() : new[] { new ServiceShortDto { Id = 0, Name = "Выберите причину" } }.Concat(mainServices).ToArray();
+                services = withAll ? new[] { new ServiceShortDto { Id = 0, Name = "" } }.Concat(mainServices).ToArray() : new[] { new ServiceShortDto { Id = 0, Name = "Выберите причину" } }.Concat(mainServices).ToArray();
             }
             return Json(JsonConvert.SerializeObject(services));
         }

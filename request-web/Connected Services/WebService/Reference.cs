@@ -2754,6 +2754,12 @@ namespace request_web.WebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetWorkersByPeriod", ReplyAction="http://tempuri.org/IRequestWebService/GetWorkersByPeriodResponse")]
         System.Threading.Tasks.Task<request_web.WebService.WorkerDto[]> GetWorkersByPeriodAsync(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetMastersByHouseAndService", ReplyAction="http://tempuri.org/IRequestWebService/GetMastersByHouseAndServiceResponse")]
+        request_web.WebService.WorkerDto[] GetMastersByHouseAndService(int houseId, int parentServiceTypeId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetMastersByHouseAndService", ReplyAction="http://tempuri.org/IRequestWebService/GetMastersByHouseAndServiceResponse")]
+        System.Threading.Tasks.Task<request_web.WebService.WorkerDto[]> GetMastersByHouseAndServiceAsync(int houseId, int parentServiceTypeId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRequestWebService/GetExecutersByPeriod", ReplyAction="http://tempuri.org/IRequestWebService/GetExecutersByPeriodResponse")]
         request_web.WebService.WorkerDto[] GetExecutersByPeriod(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId);
         
@@ -3171,6 +3177,14 @@ namespace request_web.WebService {
         
         public System.Threading.Tasks.Task<request_web.WebService.WorkerDto[]> GetWorkersByPeriodAsync(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId) {
             return base.Channel.GetWorkersByPeriodAsync(filterByCreateDate, fromDate, toDate, executeFromDate, executeToDate, workerId);
+        }
+        
+        public request_web.WebService.WorkerDto[] GetMastersByHouseAndService(int houseId, int parentServiceTypeId) {
+            return base.Channel.GetMastersByHouseAndService(houseId, parentServiceTypeId);
+        }
+        
+        public System.Threading.Tasks.Task<request_web.WebService.WorkerDto[]> GetMastersByHouseAndServiceAsync(int houseId, int parentServiceTypeId) {
+            return base.Channel.GetMastersByHouseAndServiceAsync(houseId, parentServiceTypeId);
         }
         
         public request_web.WebService.WorkerDto[] GetExecutersByPeriod(bool filterByCreateDate, System.DateTime fromDate, System.DateTime toDate, System.DateTime executeFromDate, System.DateTime executeToDate, int workerId) {
