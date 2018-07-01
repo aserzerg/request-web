@@ -252,6 +252,7 @@
                 <th style="vertical-align: middle;">Описание</th>
                 <th style="vertical-align: middle;">Статус</th>
                 <th style="vertical-align: middle;">Дата выполнения</th>
+                <th style="vertical-align: middle;">Срок исполнения</th>
                 <th style="vertical-align: middle;">Мастер</th>
                 <th style="vertical-align: middle;">Исполнитель</th>
                 <th style="vertical-align: middle;">Оценка</th>
@@ -302,6 +303,9 @@
                     <br>
                     @request.ExecutePeriod
                 </td>
+                <td>
+                    @(request.TermOfExecution.HasValue ? request.TermOfExecution.Value.ToString("dd.MM.yyyy") : "")
+                </td>
 
                 <td>@(request.Master != null ? request.Master.SurName : "")</td>
                 <td>@(request.Executer != null ? request.Executer.SurName : "")</td>
@@ -311,7 +315,6 @@
         </tbody>
     </table>
 }
-</div>
     <script type="text/javascript">
     $(function () {
         $(".chosen-select").chosen({

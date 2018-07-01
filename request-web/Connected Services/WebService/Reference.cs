@@ -346,6 +346,9 @@ namespace request_web.WebService {
         private string StreetPrefixField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> TermOfExecutionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.DateTime> ToTimeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -809,6 +812,19 @@ namespace request_web.WebService {
                 if ((object.ReferenceEquals(this.StreetPrefixField, value) != true)) {
                     this.StreetPrefixField = value;
                     this.RaisePropertyChanged("StreetPrefix");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> TermOfExecution {
+            get {
+                return this.TermOfExecutionField;
+            }
+            set {
+                if ((this.TermOfExecutionField.Equals(value) != true)) {
+                    this.TermOfExecutionField = value;
+                    this.RaisePropertyChanged("TermOfExecution");
                 }
             }
         }

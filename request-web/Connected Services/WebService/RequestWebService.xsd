@@ -69,6 +69,7 @@
       <xs:element minOccurs="0" name="StatusId" type="xs:int" />
       <xs:element minOccurs="0" name="StreetName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="StreetPrefix" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TermOfExecution" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ToTime" nillable="true" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>

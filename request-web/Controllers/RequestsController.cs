@@ -404,6 +404,7 @@ namespace request_web.Controllers
                     Worker = worker,
                     Executer = executer,
                     CreateTime = request.CreateTime,
+                    TermOfExecution = request.TermOfExecution,
                     ParentService = request.ParentService,
                     Service = request.Service,
                     Description = request.Description,

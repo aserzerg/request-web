@@ -12,6 +12,7 @@ namespace request_web.Models
         public string Executer { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime? WorkDate { get; set; }
+        public DateTime? TermOfExecution { get; set; }
         public string WorkPeriod { get; set; }
         public string ParentService { get; set; }
         public string Service { get; set; }

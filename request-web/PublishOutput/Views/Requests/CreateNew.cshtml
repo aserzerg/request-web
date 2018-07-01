@@ -126,7 +126,7 @@
         $(".chosen-select").chosen({
             disable_search_threshold: 0,
             no_results_text: "Нет совпадений!",
-            search_contains: true,
+            search_contains: true
         });
         GetServices(0);
     });
@@ -197,12 +197,12 @@
         $("#" + id).trigger("chosen:updated");
     }
 
-    function GetMasters() {
+    function GetMasters(houseId, serviceId) {
         $.ajax({
             type: "POST",
-            url: '/Requests/GetMasters',
+            url: '/Requests/GetMastersByHouse',
             contentType: "application/json; charset=utf-8",
-            data: '{}',
+            data: '{houseNum:' + houseId + ', serviceNum:'+serviceId+ '}',
             dataType: "json",
             success: function(data) {
                 var mass = JSON.parse(data);
@@ -210,7 +210,7 @@
                     id: "Id",
                     text: ["Name"]
                 };
-                SetSelects(mass, "worker_select", arr);
+                SetSelects(mass, "master_select", arr);
             }
         });
     }
@@ -275,12 +275,20 @@
     });
     $("#house_select").change(function () {
         var id = $("#house_select :selected")[0].id;
+        var serviceId = $("#service_select :selected")[0].id;
         GetAddresses(id);
+        GetMasters(id, serviceId);
     });
+    $("#service_select").change(function () {
+        var id = $("#house_select :selected")[0].id;
+        var serviceId = $("#service_select :selected")[0].id;
+        GetMasters(id, serviceId);
+    });
+
     $("#parrent_service_select").change(function () {
         var id = $("#parrent_service_select :selected")[0].id;
         GetServices(id);
     });
-
+    $('#service_select').trigger('chosen:updated');
 
 </script>
