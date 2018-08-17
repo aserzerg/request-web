@@ -8,6 +8,7 @@ namespace request_web.Models
     {
         public int RequestId { get; set; }
         public int CurrentStatus { get; set; }
+        public string Status { get; set; }
         public StatusShortDto[] Statuses { get; set; }
         public IEnumerable<SelectListItem> StatusList { get; set; }
     }

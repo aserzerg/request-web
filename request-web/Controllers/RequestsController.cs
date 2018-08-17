@@ -185,7 +185,7 @@ namespace request_web.Controllers
                 var statuses = GetStatusList(requestService);
                 if (!statuses.Any(w => selectedStatusIds.Contains(w.Id)))
                 {
-                    selectedStatusIds = new[] {3};
+                    selectedStatusIds = new[] {3, 4};
                 }
                 foreach (var status in statuses.Where(w => selectedStatusIds.Contains(w.Id)))
                 {
@@ -361,7 +361,7 @@ namespace request_web.Controllers
             using (var requestService = new RequestWebServiceClient())
             {
                 var result = requestService.CreateRequest(currentUser.WorkerId, model.PhoneNumber, model.Fio, addressId,
-                    serviceId, masterId==0 ? (int?)null : masterId, executerId == 0 ? (int?)null : executerId, model.Description);
+                    serviceId, masterId==0 ? (int?)null : masterId == 0? (int?)null: masterId, executerId == 0 ? (int?)null : executerId, model.Description);
                 return Redirect(Url.Action("SaveDone", "Requests") + $"?RequestId={result}");
             }
         }
@@ -476,14 +476,16 @@ namespace request_web.Controllers
             ViewBag.Processed = true;
             StatusDto[] webStatuses;
             int currentStatus = 0;
+            string curStatusStr;
             using (var requestService = new RequestWebServiceClient())
             {
                 webStatuses = requestService.GetStatusesAllowedInWeb();
                 var request = requestService.GetRequestByWorkerAndId(currentUser.WorkerId,Convert.ToInt32(requestId));
                 currentStatus = request.StatusId;
+                curStatusStr = request.Status;
             }
 
-            var model = new ChangeStatusModel { RequestId = Convert.ToInt32(requestId), CurrentStatus = webStatuses.FirstOrDefault(s => s.Id == currentStatus)?.Id ?? 0, StatusList = new SelectList(webStatuses, "Id", "Description") };
+            var model = new ChangeStatusModel { Status = curStatusStr, RequestId = Convert.ToInt32(requestId), CurrentStatus = webStatuses.FirstOrDefault(s => s.Id == currentStatus)?.Id ?? 0, StatusList = new SelectList(webStatuses, "Id", "Description") };
 
             if (HttpContext.Request.RequestType.ToUpper() == "POST")
                 return View("Close");

@@ -133,11 +133,17 @@
     $('#SaveRequest').on('click', function () {
         const form = $(this).closest('form')[0];
 
+        if ($("#master_select :selected")[0] != null)
+        {
         var masterId = $("#master_select :selected")[0].id;
         form["SelectedMaster"].value = masterId;
+        }
 
+        if ($("#executer_select :selected")[0] != null)
+        {
         var executerId = $("#executer_select :selected")[0].id;
         form["SelectedExecuter"].value = executerId;
+        }
 
         var streetId = $("#street_select :selected")[0].id;
         form["SelectedStreet"].value = streetId;
